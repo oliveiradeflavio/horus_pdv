@@ -1,0 +1,9 @@
+@import url("estilo_principal.css");
+@import url("index.css");
+
+.img_produto{
+    width: 200px;
+    height: 200px;
+    border: 1px solid #c8c8c8;
+    cursor: pointer;
+}

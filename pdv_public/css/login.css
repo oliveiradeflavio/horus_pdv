@@ -1,0 +1,87 @@
+@import url("estilo_principal.css");
+
+html, body{
+    height: 100%;
+}
+
+/* .conteudo{
+    
+} */
+
+.conteudo .form-group {
+    overflow: hidden;
+    margin-bottom: 0;
+    padding: 15px 15px;
+    border-bottom: none;
+    position: relative;
+    background: #edf2f5;
+    border-bottom: 1px solid #e6edf1;
+ }
+
+.conteudo .form-group input {
+    background: transparent;
+}
+
+.conteudo .form-group label{
+    font-size: 12px;
+    display: block;
+    margin-bottom: 0;
+    color: #b3b3b3; 
+}
+.conteudo .form-group.focus {
+    background: #fff; 
+}
+
+.conteudo .form-control {
+    border: 1px solid #e6edf1;
+    padding: 2px;
+    font-size: 20px;
+    border-radius: 0;
+ }
+
+.conteudo .form-control:active, .conteudo .form-control:focus {
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none; 
+}
+
+.btn {
+    height: 54px;
+    width: 200px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 10px;
+}
+
+.btn-primary{
+    background-color: #6c66aa ;
+    border: #6c66aa;
+}
+
+.btn-primary:hover{
+    background-color: #8c84da ;
+}
+ 
+.transparencia{
+    opacity: 0.75;
+}
+
+#preview{
+   border-radius: 50%; 
+   width: 400px;
+   height: 400px;
+}
+
+#preview:hover{
+    border: 1px solid #fff;
+}
+
+
+a{
+    color: #b3b3b3;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #8c84da;
+}

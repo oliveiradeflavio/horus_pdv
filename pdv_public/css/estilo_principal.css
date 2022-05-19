@@ -1,0 +1,74 @@
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #ffffff; 
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Roboto", sans-serif; }
+
+a {
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease; 
+}
+
+a:hover {
+      text-decoration: none !important; }
+
+p {
+  color: #b3b3b3;
+  font-weight: 300; 
+}
+
+.btn {
+  height: 54px;
+  width: 200px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 10px;
+}
+
+.btn:disabled{
+    background-color: #d3cccc;
+    border: #6c66aa;
+}
+
+.btn-primary{
+  background-color: #6c66aa ;
+  border: #6c66aa;
+  color: #ffffff;
+}
+
+.btn-primary:hover{
+  background-color: #8c84da ;
+  color: #ffffff;
+}
+
+
+.navbar-nav .nav-link {
+  font-size: 18px;
+  margin: 10px;
+  margin-right: 40px;
+  
+}
+
+.navbar-nav .nav-link:hover {
+  transform: scale(1.1);
+}
+
+a{
+  color: #ffffff;
+}
+
+a:hover{
+  color: #ffffff;
+}
+
+.menu-ativo{
+  background-color: #8c84da;
+}
+
+.menu-desativo{
+  background-color: #6c66aa ;
+}
