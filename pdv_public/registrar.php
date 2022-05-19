@@ -25,6 +25,16 @@
 
 <body>
 
+<div class="container">
+        <div class="row">
+            <div class='col-md-12'>
+            <a href="login.php" alt="voltar">
+            <i class="fas fa-home-lg icone"></i>
+            </a>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="container">
             <div class="row">
@@ -34,7 +44,7 @@
                         <div class="col-md-8">
                             <div class="mb-4">
                                 <h3>Criar uma nova conta</h3>
-                                <p class="mb-4"> Preencha os campos abaixo</p>
+                                <p class="mb-4"> Preencha todos os campos abaixo</p>
                             </div>
                             <form action="registra_controller.php" method="post" enctype="multipart/form-data">
                                 <div class="form-floating">
@@ -67,15 +77,19 @@
 
 
                                 <?php
-                                if (isset($_GET['registrar']) && $_GET['registrar'] == 1) { ?>
-                                    <div class="alert alert-danger mt-3" role="alert">
-                                        Dados já existentes.
+                                
+                                if (isset($_GET['erro']) && $_GET['erro'] == 2) { ?>
+                                    <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                                    <strong>Atenção</strong> CPF já cadastrado!
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
                                 <?php
                                 }
-                                if (isset($_GET['registrar']) && $_GET['registrar'] == 2) { ?>
-                                    <div class="alert alert-danger mt-3" role="alert">
-                                        Você não tem permissão para acessar o sistema.
+                                
+                                if (isset($_GET['erro']) && $_GET['erro'] == 3) { ?>
+                                    <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                                    <strong>Atenção</strong> Username já cadastrado!
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
                                 <?php
                                 }

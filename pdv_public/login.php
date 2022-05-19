@@ -23,7 +23,7 @@
     <title>Hórus PDV</title>
 </head>
 
-<body>
+<body>   
     <div class="container">
         <div class="container">
             <div class="row">
@@ -64,7 +64,16 @@
                                 </div>
                             <?php
                             }
-                            ?>
+                            
+                            if (isset($_GET['sucesso']) && $_GET['sucesso'] == 1) { ?>
+                                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                                 <strong>Sucesso</strong> Faça login para continuar.
+                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                 </div>
+                             <?php
+                             }
+                             ?>
+                            
                         </div>
 
 

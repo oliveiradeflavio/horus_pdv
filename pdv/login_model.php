@@ -8,6 +8,7 @@
         private $password_usuario;
         private $email_usuario;
         private $foto_usuario;
+        private $perfil_usuario;
 
         public function __get($atributo){
             return $this->$atributo;

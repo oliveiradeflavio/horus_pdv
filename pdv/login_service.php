@@ -10,16 +10,25 @@
         }
 
         public function inserir(){
-            $query = "INSERT INTO tb_usuarios (cpf_usuario, nome_usuario, email_usuario, username_usuario, password_usuario) VALUES (:cpf, :nome, :email, :usuario, :senha)";
+            $query = "INSERT INTO tb_usuarios (cpf_usuario, nome_usuario, email_usuario, username_usuario, password_usuario, foto_usuario) VALUES (:cpf, :nome, :email, :usuario, :senha, :foto)";
             $stmt = $this->conexao->prepare($query);
             $stmt->bindValue(':cpf', $this->login->__get('cpf'));
             $stmt->bindValue(':nome', $this->login->__get('nome'));
             $stmt->bindValue(':email', $this->login->__get('email'));
             $stmt->bindValue(':usuario', $this->login->__get('usuario'));
             $stmt->bindValue(':senha', $this->login->__get('senha'));
+            $stmt->bindValue(':foto', $this->login->__get('foto'));
             $stmt->execute();
         }
     
+        public function consultaUsuario(){
+            $query = "SELECT * FROM tb_usuarios WHERE cpf_usuario = :cpf OR username_usuario = :usuario";
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':cpf', $this->login->__get('cpf'));
+            $stmt->bindValue(':usuario', $this->login->__get('usuario'));
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
 
         public function recuperar(){
 

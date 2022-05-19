@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
+        header("Location: login.php?login=2");
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -27,31 +35,33 @@
 
 <body>
 <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light">
            
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" >
-                <i class="fa-solid fa-ellipsis"></i>
-                </button>
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" >
+           <i class="fa-solid fa-ellipsis"></i>
+           </button>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                    <div class="dropdown">                           
-                            <img src="img/logo.png" alt="" width="50" height="50" class="img-circulo"> 
-                            <div class="dropdown-content mr-5">
-                                <a>usuario logado</a>
-                                <div class="dropdown-divider"></div>                              
-                                <a href="perfil_usuario.php">Meu Perfil</a>
-                                <a href="#">Configurações</a>
-                                <a href="logout.php">Sair</a>
-                            </div>
-                            </div> 
-                        
-                    </ul>
-                  
-                </div>
-            </div>
-        </nav>
-
+           <div class="collapse navbar-collapse" id="navbarNav">
+               <ul class="navbar-nav ml-auto">
+                
+                       <div class="dropdown">                           
+                       <img src="../pdv/img/usuarios/<?= $_SESSION['foto_usuario'] ?>" alt="" width="50" height="50" class="img-circulo"> 
+                       <div class="dropdown-content mr-5">
+                           <a><?php echo $_SESSION['nome_usuario'] ?></a>
+                           <div class="dropdown-divider"></div>                              
+                           <a href="perfil_usuario.php">Meu Perfil</a>
+                           <?php if($_SESSION['perfil_usuario'] == 1): ?>
+                               <a href="#">Configurações</a>
+                           <?php endif; ?>
+                           <a href="logout.php">Sair</a>
+                       </div>
+                       </div> 
+                
+               </ul>
+             
+           </div>
+       </div>
+   </nav>
  
 
      </header>

@@ -24,6 +24,11 @@ $(document).ready(function () {
         e.preventDefault();
         return false;
     });
+    $('#usuario').on('keyup', function (e) {
+        let username = $('#usuario').val();
+        username = username.toLowerCase();
+        $('#usuario').val(username);
+    });
 
 });
 

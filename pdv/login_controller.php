@@ -32,6 +32,7 @@
             $_SESSION['email_usuario'] = $login->email_usuario;
             $_SESSION['foto_usuario'] = $login->foto_usuario;
             $_SESSION['senha_usuario'] = $login->password_usuario;
+            $_SESSION['perfil_usuario'] = $login->perfil_usuario; // 1 - ADMIN, 2 - USER
 
             header('Location: index.php');
         

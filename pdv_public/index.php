@@ -47,7 +47,9 @@
                                 <a><?php echo $_SESSION['nome_usuario'] ?></a>
                                 <div class="dropdown-divider"></div>                              
                                 <a href="perfil_usuario.php">Meu Perfil</a>
-                                <a href="#">Configurações</a>
+                                <?php if($_SESSION['perfil_usuario'] == 1): ?>
+                                    <a href="#">Configurações</a>
+                                <?php endif; ?>
                                 <a href="logout.php">Sair</a>
                             </div>
                             </div> 

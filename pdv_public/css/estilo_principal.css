@@ -30,8 +30,10 @@ p {
 }
 
 .btn:disabled{
-    background-color: #d3cccc;
+    background-color: #a1a1a1;
     border: #6c66aa;
+    cursor: not-allowed;
+    pointer-events: all !important; 
 }
 
 .btn-primary{
@@ -71,4 +73,9 @@ a:hover{
 
 .menu-desativo{
   background-color: #6c66aa ;
+}
+
+.icone{
+  font-size: 30px;
+  padding: 10px;
 }
