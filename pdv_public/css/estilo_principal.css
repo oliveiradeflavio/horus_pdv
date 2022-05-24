@@ -79,3 +79,10 @@ a:hover{
   font-size: 30px;
   padding: 10px;
 }
+
+.centro{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}

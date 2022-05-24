@@ -1,8 +1,11 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
-        header("Location: login.php?login=2");
-    }
+session_start();
+if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
+    header("Location: login.php?login=2");
+}
+
+$acao = 'consultarTabelaClientes';
+require 'cad_cliente_controller.php';
 
 ?>
 
@@ -34,41 +37,64 @@
 </head>
 
 <body>
-<header>
-<nav class="navbar navbar-expand-lg navbar-light">
-           
-           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" >
-           <i class="fa-solid fa-ellipsis"></i>
-           </button>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
 
-           <div class="collapse navbar-collapse" id="navbarNav">
-               <ul class="navbar-nav ml-auto">
-                
-                       <div class="dropdown">                           
-                       <img src="../pdv/img/usuarios/<?= $_SESSION['foto_usuario'] ?>" alt="" width="50" height="50" class="img-circulo"> 
-                       <div class="dropdown-content mr-5">
-                           <a><?php echo $_SESSION['nome_usuario'] ?></a>
-                           <div class="dropdown-divider"></div>                              
-                           <a href="perfil_usuario.php">Meu Perfil</a>
-                           <?php if($_SESSION['perfil_usuario'] == 1): ?>
-                               <a href="#">Configurações</a>
-                           <?php endif; ?>
-                           <a href="logout.php">Sair</a>
-                       </div>
-                       </div> 
-                
-               </ul>
-             
-           </div>
-       </div>
-   </nav>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <i class="fa-solid fa-ellipsis"></i>
+            </button>
 
- 
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
 
-     </header>
+                    <div class="dropdown">
+                        <img src="../pdv/img/usuarios/<?= $_SESSION['foto_usuario'] ?>" alt="" width="50" height="50" class="img-circulo">
+                        <div class="dropdown-content mr-5">
+                            <a><?php echo $_SESSION['nome_usuario'] ?></a>
+                            <div class="dropdown-divider"></div>
+                            <a href="perfil_usuario.php">Meu Perfil</a>
+                            <?php if ($_SESSION['perfil_usuario'] == 1) : ?>
+                                <a href="#">Configurações</a>
+                            <?php endif; ?>
+                            <a href="logout.php">Sair</a>
+                        </div>
+                    </div>
+
+                </ul>
+
+            </div>
+            </div>
+        </nav>
+
+
+
+    </header>
+
+    <section class="container row col-md-12 centro">
+        <!-- msg de retorno -->
+        <?php
+        if (isset($_GET['sucesso']) && $_GET['sucesso'] == '1') { ?>
+            <div class='alert alert-success mt-2' role='alert'>
+                <strong>Sucesso!</strong> Cliente cadastrado com sucesso!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '2') { ?>
+            <div class='alert alert-warning mt-2' role='alert'>
+                <strong>Atenção</strong> CPF já cadastrado!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+        }
+        ?>
+    </section>
 
     <section>
-    <div class="container mb-5">
+        <div class="container mb-5">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -82,14 +108,14 @@
                                 Cadastros
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a href="cad_clientes.php" class="dropdown-item">Cadastrar Clientes</a>
-                            <a href="cad_fornecedores.php" class="dropdown-item">Cadastrar Fornecedores</a>
-                            <a href="cad_produtos.php" class="dropdown-item">Cadastrar Produtos</a>
+                                <a href="cad_clientes.php" class="dropdown-item">Cadastrar Clientes</a>
+                                <a href="cad_fornecedores.php" class="dropdown-item">Cadastrar Fornecedores</a>
+                                <a href="cad_produtos.php" class="dropdown-item">Cadastrar Produtos</a>
                             </div>
-                          
-                            
+
+
                             <button onclick="location.href='#'" class="btn btn-primary">Histórico</button>
-                            <button onclick="location.href='#'" class="btn btn-primary">Venda</button>
+                            <button onclick="window.open('venda.php', '_blank')" class="btn btn-primary">Iniciar Venda</button>
                         </div>
                     </div>
                 </div>
@@ -99,31 +125,31 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
-                    <form id="formCadCliente" >
+                    <form action='cad_cliente_controller.php' method="post" id="formCadCliente">
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="inputCPF">CPF</label>
-                                <input type="text" class="form-control" id="inputCPF" onblur='testaCPF(this.value)' required>
+                                <input type="text" class="form-control" id="inputCPF" name='inputCPF' onblur='testaCPF(this.value)' required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputDtNascimento">Data de Nascimento</label>
-                                <input type="date" class="form-control" id="inputDtNascimento" onblur="validaDataNascimento()" required>
+                                <input type="date" class="form-control" id="inputDtNascimento" name='inputDtNascimento' onblur="validaDataNascimento(this.value)" required>
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="inputNome">Nome</label>
-                                <input type="text" class="form-control" id="inputNome" required>
+                                <input type="text" class="form-control" id="inputNome" name="inputNome" required>
                             </div>
 
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="inputCEP">CEP</label>
-                                <input type="text" class="form-control" id="inputCEP" onblur="pesquisaCEP(this.value)"  required>
+                                <input type="text" class="form-control" id="inputCEP" name='inputCEP' onblur="pesquisaCEP(this.value)" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEstado">Estado</label>
-                                <select id="inputEstado" class="form-control" >
+                                <select id="inputEstado" name="inputEstado" class="form-control">
                                     <option selected>Selecionar...</option>
                                     <option value="AC">Acre</option>
                                     <option value="AL">Alagoas</option>
@@ -158,7 +184,7 @@
 
                             <div class="form-group col-md-5">
                                 <label for="inputCidade">Cidade</label>
-                                <input type="text" class="form-control" id="inputCidade" required>
+                                <input type="text" class="form-control" id="inputCidade" name="inputCidade" required>
                             </div>
 
                         </div>
@@ -166,67 +192,98 @@
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <label for="inputEndereco">Endereço</label>
-                                <input type="text" class="form-control" id="inputEndereco"  required>
+                                <input type="text" class="form-control" id="inputEndereco" name="inputEndereco" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputNumero">Número</label>
-                                <input type="number" class="form-control" id="inputNumero"  required>
+                                <input type="number" class="form-control" id="inputNumero" name='inputNumero' required>
                             </div>
                             <div class="form-group col-md-5">
                                 <label for="inputEnderecoComplemento">Complemento</label>
-                                <input type="text" class="form-control" id="inputEnderecoComplemento" >
+                                <input type="text" class="form-control" id="inputEnderecoComplemento" name="inputEnderecoComplemento">
                             </div>
 
                             <div class="form-group col-md-5">
                                 <label for="inputBairro">Bairro</label>
-                                <input type="text" class="form-control" id="inputBairro" required>
+                                <input type="text" class="form-control" id="inputBairro" name="inputBairro" required>
                             </div>
 
                             <div class="form-group col-md-2">
-                                <label for="inputCelular">Celular</label>
-                                <input type="text" class="form-control" id="inputCelular" required>
+                                <label for="inputCelular">Celular/WhatsApp</label>
+                                <input type="text" class="form-control" id="inputCelular" name="inputCelular" required>
                             </div>
 
                         </div>
 
-                        <button type="submit" onclick="validaCampos()" class="btn btn-primary">Cadastrar</button>
+                        <button type="button" onclick="validaCampos()" class="btn btn-primary">Cadastrar</button>
                         <button type="reset" class="btn btn-danger">Cancelar</button>
+
                     </form>
                 </div>
 
-            </div>
+            </div>        
+
+            <h5 class="card-title mt-5" style="cursor: pointer" onclick="mostrarTabelaCadClientes()" id="txt_consultar">Consultar Clientes Cadastrados</h5>
+
+            <table class="table table-hover table-responsive" style="display: none" id="tabela_cad_clientes">
+                <thead>
+                    <tr>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Data de Nascimento</th>
+                    <th scope="col">CEP</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Bairro</th>
+                    <th scope="col">Complemento</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Celular/WhatsApp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach($cadClientes as $indice => $cadCliente){
+                    ?>
+                    <tr>
+                        <td><?php echo $cadCliente->cpf_cliente; ?></td>
+                        <td><?php echo $cadCliente->nome_cliente; ?></td>
+                        <td><?php echo date('d/m/Y', strtotime($cadCliente->dt_nascimento_cliente)); ?></td>
+                        <td><?php echo $cadCliente->cep_cliente; ?></td>
+                        <td><?php echo $cadCliente->endereco_cliente; ?></td>
+                        <td><?php echo $cadCliente->numero_cliente; ?></td>
+                        <td><?php echo $cadCliente->bairro_cliente; ?></td>
+                        <td><?php echo $cadCliente->complemento_cliente; ?></td>
+                        <td><?php echo $cadCliente->estado_cliente; ?></td>
+                        <td><?php echo $cadCliente->cidade_cliente; ?></td>
+                        <td><?php echo $cadCliente->celular_cliente; ?></td>    
+                        
+                        <td> <i class="fas fa-user-edit" style='cursor: pointer'></i> </td>
+                        <td> <i class="fas fa-trash-alt" style='cursor: pointer'></i> </td>
+                        
+
+                       
+                    
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                   
+                </tbody>
+                </table>
+                        
+           
         </div>
+
+        
 
 
 
     </section>
 
 
-<!-- <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-</script> -->
-
-<script src="js/pdv.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/pdv.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

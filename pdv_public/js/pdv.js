@@ -1,6 +1,6 @@
 //mascaras input
 $(document).ready(function () {
-    $('#inputCelular').mask('(00) 00000-0000');
+    $('#inputCelular').mask('(00)00000-0000');
     $('#inputCEP').mask('00000-000');
     $('#inputCPF').mask('000.000.000-00');
     $('#inputTelefone').mask('(00) 0000-0000');
@@ -8,7 +8,7 @@ $(document).ready(function () {
     $('#inputNome').on('keypress', function (e) {
         //let regex = new RegExp("^[a-zA-Z ]+$");
         let str = (e.keyCode ? e.keyCode : e.which);
-        if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255 )  {
+        if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255) {
             return true;
         }
 
@@ -19,7 +19,7 @@ $(document).ready(function () {
     $('#inputCidade').on('keypress', function (e) {
         //let regex = new RegExp("^[a-zA-Z ]+$");
         let str = (e.keyCode ? e.keyCode : e.which);
-        if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255 )  {
+        if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255) {
             return true;
         }
 
@@ -30,7 +30,7 @@ $(document).ready(function () {
     $('#inputBairro').on('keypress', function (e) {
         //let regex = new RegExp("^[a-zA-Z ]+$");
         let str = (e.keyCode ? e.keyCode : e.which);
-        if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255 )  {
+        if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255) {
             return true;
         }
 
@@ -45,7 +45,7 @@ $(document).ready(function () {
     $('#inputRazaoSocial').on('keypress', function (e) {
         //let regex = new RegExp("^[a-zA-Z ]+$");
         let str = (e.keyCode ? e.keyCode : e.which);
-        if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255 )  {
+        if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255) {
             return true;
         }
 
@@ -56,7 +56,7 @@ $(document).ready(function () {
     $('#inputNomeFantasia').on('keypress', function (e) {
         //let regex = new RegExp("^[a-zA-Z ]+$");
         let str = (e.keyCode ? e.keyCode : e.which);
-        if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255 )  {
+        if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255) {
             return true;
         }
 
@@ -185,10 +185,10 @@ function pesquisaCEP(valor) {
 
 }
 
-function validaDataNascimento() {
+function validaDataNascimento(dtnascimento) {
     inputDtNascimento = document.getElementById('inputDtNascimento')
-    if (inputDtNascimento.value) {
-        let data = inputDtNascimento.value
+    if (dtnascimento) {
+        let data = dtnascimento
         data = data.replace(/\//g, "-"); // substitui eventuais barras (ex. IE) "/" por hífen "-"
         let data_array = data.split("-"); // quebra a data em array
 
@@ -206,11 +206,12 @@ function validaDataNascimento() {
 
         if (idade < 18) {
             Swal.fire('Oops...', 'Idade mínima de 18 anos!', 'error');
+            inputDtNascimento.placeholder = dtnascimento + ', idade mínima de 18 anos!';
+            inputDtNascimento.value = "";
             return false;
         }
 
         return true;
-
     }
 }
 
@@ -218,54 +219,74 @@ function validaDataNascimento() {
 function validaCampos() {
     let inputNome = document.getElementById('inputNome');
     let inputCPF = document.getElementById('inputCPF');
+    let inputDtNascimento = document.getElementById('inputDtNascimento');
     let inputCEP = document.getElementById('inputCEP');
     let inputEndereco = document.getElementById('inputEndereco');
+    let inputNumero = document.getElementById('inputNumero');
     let inputBairro = document.getElementById('inputBairro');
     let inputCidade = document.getElementById('inputCidade');
     let inputEstado = document.getElementById('inputEstado');
     let inputCelular = document.getElementById('inputCelular');
+    let formCadCliente = document.getElementById('formCadCliente');
 
-    document.querySelector('#formCadCliente').addEventListener(
-        'submit', function (event) {
+    if (inputNome.value == "") {
+        Swal.fire('Oops...', 'Nome não informado!', 'error');
 
-            if (inputNome.value == "") {
-                Swal.fire('Oops...', 'Nome não informado!', 'error');
-                return false;
-            }
-            else if (inputCPF.value == "") {
-                Swal.fire('Oops...', 'CPF não informado!', 'error');
-                return false;
-            }
-            else if (inputCEP.value == "") {
-                Swal.fire('Oops...', 'CEP não informado!', 'error');
-                return false;
-            }
-            else if (inputEndereco.value == "") {
-                Swal.fire('Oops...', 'Endereço não informado!', 'error');
-                return false;
-            }
-            else if (inputBairro.value == "") {
-                Swal.fire('Oops...', 'Bairro não informado!', 'error');
-                return false;
-            }
-            else if (inputCidade.value == "") {
-                Swal.fire('Oops...', 'Cidade não informada!', 'error');
-                return false;
-            }
-            else if (inputEstado.value == "") {
-                Swal.fire('Oops...', 'Estado não informado!', 'error');
-                return false;
-            }
-            else if (inputCelular.value == "") {
-                Swal.fire('Oops...', 'Celular não informado!', 'error');
-                return false;
-            }
+    }
+    else if (inputCPF.value == "") {
+        Swal.fire('Oops...', 'CPF não informado!', 'error');
+
+    }
+    else if (inputDtNascimento.value == "") {
+        Swal.fire('Oops...', 'Data de nascimento não informada!', 'error');
+    
+    }
+    else if (inputCEP.value == "") {
+        Swal.fire('Oops...', 'CEP não informado!', 'error');
+
+    }
+    else if (inputEndereco.value == "") {
+        Swal.fire('Oops...', 'Endereço não informado!', 'error');
+
+    }
+    else if(inputNumero.value == "" || inputNumero.value == "0"){
+        Swal.fire('Oops...', 'Número do endereço não informado!', 'error');
+    }
+    else if (inputBairro.value == "" || inputBairro.value.length < 3) {
+        Swal.fire('Oops...', 'Bairro não informado!', 'error');
+
+    }
+    else if (inputCidade.value == "" || inputCidade.value.length < 3) {
+        Swal.fire('Oops...', 'Cidade não informada!', 'error');
+
+    }
+    else if (inputEstado.value == "") {
+        Swal.fire('Oops...', 'Estado não informado!', 'error');
+
+    }
+    else if (inputCelular.value == "" || inputCelular.value.length < 14) {
+        Swal.fire('Oops...', 'Verifique o campo celular!', 'error');
+
+    }
+    else{
+        formCadCliente.method = "POST";
+        formCadCliente.action = "cad_cliente_controller.php";
+        formCadCliente.submit();
+    }
+
+    
+
+}
+
+function mostrarTabelaCadClientes(){
+    let el = document.getElementById('tabela_cad_clientes');
+    if (el.style.display == 'none'){
+        el.style.display = '';
+        document.getElementById('txt_consultar').innerHTML = 'Ocultar tabela';
+       
         
-            event.preventDefault();
-            document.getElementById('formCadCliente').submit();
-            console.log('cadastro com sucesso');
-            return true;
-
-        });
-
+    }else {
+        el.style.display = 'none';
+        document.getElementById('txt_consultar').innerHTML = 'Consultar Clientes Cadastrados'
+    }
 }
