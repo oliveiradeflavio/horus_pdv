@@ -283,10 +283,49 @@ function mostrarTabelaCadClientes(){
     if (el.style.display == 'none'){
         el.style.display = '';
         document.getElementById('txt_consultar').innerHTML = 'Ocultar tabela';
-       
-        
+
     }else {
         el.style.display = 'none';
         document.getElementById('txt_consultar').innerHTML = 'Consultar Clientes Cadastrados'
     }
 }
+
+function excluirCliente(id){
+    Swal.fire({
+        title: 'Você tem certeza?',
+        text: "Você não poderá reverter isso!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Não, cancelar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Insir a senha master para confirmar a exclusão!',
+                input: 'password',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Confirmar',
+            })
+            .then((result) => {
+            
+                if (result.value) {
+                    let pass = result.value;
+                    location.href = "cad_cliente_controller.php?acao=excluir&id=" + id + "&p=" + pass;
+                } 
+            })            
+        }
+    })
+}
+
+function editarCliente(id, cpf, nome, dt_nascimento, cep, endereco, numero, bairro, complemento, estado, cidade, celular){
+    
+    console.log(id + " - " + cpf + " - " + nome + " - " + dt_nascimento + " - " + cep + " - " + endereco + " - " + numero + " - " + bairro + " - " + complemento + " - " + estado + " - " + cidade + " - " + celular);
+    alert("em desenvolvimento ...");
+
+}
+    

@@ -4,9 +4,10 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-require "conexao.php";
+require_once "conexao.php";
 require "cad_cliente_model.php";
 require "cad_cliente_service.php";
+require "configuracoes_controller.php";
 
 //capturar o parametro ação que esta sendo passado como parametro via GET
 $acao = isset($_GET['acao']) ? $_GET['acao'] : $acao;
@@ -19,6 +20,28 @@ $cadClienteService = new CadClienteService($conexao, $cadCliente);
 if ($acao == 'consultarTabelaClientes') {
     $cadClientes = $cadClienteService->mostrarTodosClientes();
     // header('Location: cad_clientes.php');
+
+}else if ($acao == 'excluir'){
+    /* 
+    Quando o usuário com nível padrão for fazer algo que não tem acesso, por exemplo
+    excluir um cliente, o sistema irá pedir uma senha master que na teoria somente as pessoas de nível 
+    master tem acesso a essa função.
+    */
+    $pass = isset($_GET['p']) ? $_GET['p'] : $pass;
+    $pass = md5($pass);    
+    $configuracoes = $configuracoesService->consultaConfiguracoes();
+    foreach($configuracoes as $i => $config){
+        if($config->senha_master_configuracoes == $pass){
+            $id = $_GET['id'];
+            $cadCliente->__set('id', $id);
+            $cadClienteService->excluirCliente();
+            header('Location: cad_clientes.php?sucesso=2');
+           
+        }else{
+            header('Location: cad_clientes.php?erro=3');
+            
+        }
+    }   
 
 } else {
 

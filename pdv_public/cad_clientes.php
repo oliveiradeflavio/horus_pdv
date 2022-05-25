@@ -80,6 +80,13 @@ require 'cad_cliente_controller.php';
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+        <?php } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == '2') { ?>
+            <div class='alert alert-success mt-2' role='alert'>
+                <strong>Sucesso!</strong> Cliente removido com sucesso!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
 
         <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '2') { ?>
             <div class='alert alert-warning mt-2' role='alert'>
@@ -88,9 +95,16 @@ require 'cad_cliente_controller.php';
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        <?php
-        }
-        ?>
+
+        <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '3') { ?>
+            <div class='alert alert-danger mt-2' role='alert'>
+                <strong>Erro</strong> Senha master incorreta!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>   
+        <?php } ?>
+       
     </section>
 
     <section>
@@ -258,8 +272,21 @@ require 'cad_cliente_controller.php';
                         <td><?php echo $cadCliente->cidade_cliente; ?></td>
                         <td><?php echo $cadCliente->celular_cliente; ?></td>    
                         
-                        <td> <i class="fas fa-user-edit" style='cursor: pointer'></i> </td>
-                        <td> <i class="fas fa-trash-alt" style='cursor: pointer'></i> </td>
+                        <td> <i class="fas fa-user-edit" onclick="editarCliente(<?= $cadCliente->id_cliente ?>,
+                                                                                '<?= $cadCliente->cpf_cliente ?>',
+                                                                                '<?= $cadCliente->nome_cliente ?>',                                                                              
+                                                                                '<?= date('d/m/Y', strtotime($cadCliente->dt_nascimento_cliente)); ?>',
+                                                                                '<?= $cadCliente->cep_cliente ?>',
+                                                                                '<?= $cadCliente->endereco_cliente ?>',
+                                                                                '<?= $cadCliente->numero_cliente ?>',
+                                                                                '<?= $cadCliente->bairro_cliente ?>',
+                                                                                '<?= $cadCliente->complemento_cliente ?>',
+                                                                                '<?= $cadCliente->estado_cliente ?>',
+                                                                                '<?= $cadCliente->cidade_cliente ?>',
+                                                                                '<?= $cadCliente->celular_cliente ?>')"                                                                               
+                                                                                
+                                                                                style='cursor: pointer'></i> </td>
+                        <td> <i class="fas fa-trash-alt" onclick="excluirCliente(<?= $cadCliente->id_cliente ?>)" style='cursor: pointer'></i> </td>
                         
 
                        

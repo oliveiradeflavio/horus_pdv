@@ -36,6 +36,13 @@
 
         }
 
+        public function excluirCliente(){
+            $query = 'DELETE FROM tb_clientes WHERE id_cliente = :id';
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':id', $this->cliente->__get('id'));
+            $stmt->execute();
+        }
+
         public function mostrarTodosClientes(){
             $query = 'SELECT * FROM tb_clientes ORDER BY nome_cliente';
             $stmt = $this->conexao->prepare($query);
