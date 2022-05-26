@@ -36,6 +36,24 @@
 
         }
 
+        public function alterarCliente(){
+            $query = 'UPDATE tb_clientes SET cpf_cliente = :cpf, dt_nascimento_cliente = :dt_nascimento, nome_cliente = :nome, cep_cliente = :cep, estado_cliente = :estado, cidade_cliente = :cidade, endereco_cliente = :endereco, numero_cliente = :numero, complemento_cliente = :complemento, bairro_cliente = :bairro, celular_cliente = :celular WHERE id_cliente = :id';
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':cpf', $this->cliente->__get('cpf'));
+            $stmt->bindValue(':dt_nascimento', $this->cliente->__get('dt_nascimento'));
+            $stmt->bindValue(':nome', $this->cliente->__get('nome'));
+            $stmt->bindValue(':cep', $this->cliente->__get('cep'));
+            $stmt->bindValue(':estado', $this->cliente->__get('estado'));
+            $stmt->bindValue(':cidade', $this->cliente->__get('cidade'));
+            $stmt->bindValue(':endereco', $this->cliente->__get('endereco'));
+            $stmt->bindValue(':numero', $this->cliente->__get('numero'));
+            $stmt->bindValue(':complemento', $this->cliente->__get('complemento'));
+            $stmt->bindValue(':bairro', $this->cliente->__get('bairro'));
+            $stmt->bindValue(':celular', $this->cliente->__get('celular'));
+            $stmt->bindValue(':id', $this->cliente->__get('id'));
+            $stmt->execute();
+        }
+
         public function excluirCliente(){
             $query = 'DELETE FROM tb_clientes WHERE id_cliente = :id';
             $stmt = $this->conexao->prepare($query);

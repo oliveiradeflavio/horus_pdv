@@ -19,7 +19,6 @@ $cadClienteService = new CadClienteService($conexao, $cadCliente);
 
 if ($acao == 'consultarTabelaClientes') {
     $cadClientes = $cadClienteService->mostrarTodosClientes();
-    // header('Location: cad_clientes.php');
 
 }else if ($acao == 'excluir'){
     /* 
@@ -43,8 +42,37 @@ if ($acao == 'consultarTabelaClientes') {
         }
     }   
 
-} else {
+}else if ($acao == 'alterar'){
+    $id = $_GET['id'];
+    $cpf = $_POST['inputCPF'];
+    $dt_nascimento = $_POST['inputDtNascimento'];
+    $nome = $_POST['inputNome'];
+    $cep = $_POST['inputCEP'];
+    $estado = $_POST['inputEstado'];
+    $cidade = $_POST['inputCidade'];
+    $endereco = $_POST['inputEndereco'];
+    $numero = $_POST['inputNumero'];
+    $complemento = $_POST['inputEnderecoComplemento'];
+    $bairro = $_POST['inputBairro'];
+    $celular = $_POST['inputCelular'];
 
+    $cadCliente->__set('id', $id);
+    $cadCliente->__set('cpf', $cpf);
+    $cadCliente->__set('dt_nascimento', $dt_nascimento);
+    $cadCliente->__set('nome', $nome);
+    $cadCliente->__set('cep', $cep);
+    $cadCliente->__set('estado', $estado);
+    $cadCliente->__set('cidade', $cidade);
+    $cadCliente->__set('endereco', $endereco);
+    $cadCliente->__set('numero', $numero);
+    $cadCliente->__set('complemento', $complemento);
+    $cadCliente->__set('bairro', $bairro);
+    $cadCliente->__set('celular', $celular);
+    
+    $cadCliente = $cadClienteService->alterarCliente();
+    header('Location: cad_clientes.php?sucesso=3');
+}
+else {
 
     $cpf = $_POST['inputCPF'];
     $dt_nascimento = $_POST['inputDtNascimento'];

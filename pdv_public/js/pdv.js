@@ -185,6 +185,7 @@ function pesquisaCEP(valor) {
 
 }
 
+//validando a data de nascimento, pegando no formato aaaa/mm/dd e transformando para o formato dd/mm/aaaa. Precisa ser maior de 18 anos
 function validaDataNascimento(dtnascimento) {
     inputDtNascimento = document.getElementById('inputDtNascimento')
     if (dtnascimento) {
@@ -215,7 +216,7 @@ function validaDataNascimento(dtnascimento) {
     }
 }
 
-
+//Validação de campos no momento de cadastro de cliente. Se todos os campos estiverem preenchidos, o form será disparado para o controller.
 function validaCampos() {
     let inputNome = document.getElementById('inputNome');
     let inputCPF = document.getElementById('inputCPF');
@@ -278,6 +279,75 @@ function validaCampos() {
 
 }
 
+//Função para validar a alteração do cliente. Basicamente é a mesma função da validação do cadastro
+function validaAlteracao() {
+    let inputNome = document.getElementById('inputNome');
+    let inputCPF = document.getElementById('inputCPF');
+    let inputDtNascimento = document.getElementById('inputDtNascimento');
+    let inputCEP = document.getElementById('inputCEP');
+    let inputEndereco = document.getElementById('inputEndereco');
+    let inputNumero = document.getElementById('inputNumero');
+    let inputBairro = document.getElementById('inputBairro');
+    let inputCidade = document.getElementById('inputCidade');
+    let inputEstado = document.getElementById('inputEstado');
+    let inputCelular = document.getElementById('inputCelular');
+
+    if (inputNome.value == "") {
+        Swal.fire('Oops...', 'Nome não informado!', 'error');
+        return false;
+
+    }
+    else if (inputCPF.value == "") {
+        Swal.fire('Oops...', 'CPF não informado!', 'error');
+        return false;
+
+    }
+    else if (inputDtNascimento.value == "") {
+        Swal.fire('Oops...', 'Data de nascimento não informada!', 'error');
+        return false;
+    
+    }
+    else if (inputCEP.value == "") {
+        Swal.fire('Oops...', 'CEP não informado!', 'error');
+        return false;
+
+    }
+    else if (inputEndereco.value == "") {
+        Swal.fire('Oops...', 'Endereço não informado!', 'error');
+        return false;
+
+    }
+    else if(inputNumero.value == "" || inputNumero.value == "0"){
+        Swal.fire('Oops...', 'Número do endereço não informado!', 'error');
+        return false;
+    }
+    else if (inputBairro.value == "" || inputBairro.value.length < 3) {
+        Swal.fire('Oops...', 'Bairro não informado!', 'error');
+        return false;
+
+    }
+    else if (inputCidade.value == "" || inputCidade.value.length < 3) {
+        Swal.fire('Oops...', 'Cidade não informada!', 'error');
+        return false;
+
+    }
+    else if (inputEstado.value == "") {
+        Swal.fire('Oops...', 'Estado não informado!', 'error');
+        return false;
+
+    }
+    else if (inputCelular.value == "" || inputCelular.value.length < 14) {
+        Swal.fire('Oops...', 'Verifique o campo celular!', 'error');
+        return false;
+
+    }
+    else{
+       return true; 
+    }
+
+}
+
+//Função para mostrar os clientes cadastrados no banco de dados na página de cadastro de clientes. 
 function mostrarTabelaCadClientes(){
     let el = document.getElementById('tabela_cad_clientes');
     if (el.style.display == 'none'){
@@ -290,6 +360,8 @@ function mostrarTabelaCadClientes(){
     }
 }
 
+//Função para excluir o cliente já cadastrado, passando o id do cliente como parâmetro e chamando o controller para excluir o cliente
+//A função também é responsável por exibir um alerta de confirmação para o usuário antes de excluir o cliente pedindo uma senha master
 function excluirCliente(id){
     Swal.fire({
         title: 'Você tem certeza?',
@@ -303,7 +375,7 @@ function excluirCliente(id){
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire({
-                title: 'Insir a senha master para confirmar a exclusão!',
+                title: 'Insira senha master para confirmar a exclusão!',
                 input: 'password',
                 inputAttributes: {
                     autocapitalize: 'off'
@@ -322,10 +394,38 @@ function excluirCliente(id){
     })
 }
 
+//Excluindo o cliente da tabela de cadastro de clientes. Será acionado o botão Alterar e irá aparecer na página de cadastro de clientes
 function editarCliente(id, cpf, nome, dt_nascimento, cep, endereco, numero, bairro, complemento, estado, cidade, celular){
+
+    let btnCadastrarCliente = document.getElementById('btnCadastrarCliente');
+    btnCadastrarCliente.disabled = true;
     
-    console.log(id + " - " + cpf + " - " + nome + " - " + dt_nascimento + " - " + cep + " - " + endereco + " - " + numero + " - " + bairro + " - " + complemento + " - " + estado + " - " + cidade + " - " + celular);
-    alert("em desenvolvimento ...");
+    let btnAlterarCliente = document.getElementById('btnAlterarCliente');
+    btnAlterarCliente.style.display = 'inline';
+    
+    let formCadCliente = document.getElementById('formCadCliente');
+    formCadCliente.setAttribute('action', 'cad_cliente_controller.php?acao=alterar&id=' + id);
+
+    $('#inputCPF').val(cpf);
+    $('#inputNome').val(nome);
+    $('#inputDtNascimento').val(dt_nascimento);
+    $('#inputCEP').val(cep);
+    $('#inputEndereco').val(endereco);
+    $('#inputNumero').val(numero);
+    $('#inputBairro').val(bairro);
+    $('#inputComplemento').val(complemento);
+    $('#inputEstado').val(estado);
+    $('#inputCidade').val(cidade);
+    $('#inputCelular').val(celular);
+
+    btnAlterarCliente.onclick = function(){
+        if(validaAlteracao()){
+            formCadCliente.submit();
+        }else{
+            return false;
+        }
+    }
 
 }
+
     

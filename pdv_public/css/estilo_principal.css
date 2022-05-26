@@ -80,9 +80,26 @@ a:hover{
   padding: 10px;
 }
 
+.icone_fontawesome{
+  color: #6c66aa;
+
+}
+.icone_fontawesome:hover{
+  transform: scale(1.1);
+}
+
 .centro{
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+}
+
+.table td{
+   font-size: 1.0rem;
+   padding: 10px;
+}
+
+.table th{
+   font-size: 1.0rem;
 }

@@ -88,6 +88,14 @@ require 'cad_cliente_controller.php';
                 </button>
         </div>
 
+        <?php } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == '3') { ?>
+            <div class='alert alert-success mt-2' role='alert'>
+                <strong>Sucesso!</strong> Cliente alterado com sucesso!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+
         <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '2') { ?>
             <div class='alert alert-warning mt-2' role='alert'>
                 <strong>Atenção</strong> CPF já cadastrado!
@@ -229,9 +237,10 @@ require 'cad_cliente_controller.php';
 
                         </div>
 
-                        <button type="button" onclick="validaCampos()" class="btn btn-primary">Cadastrar</button>
-                        <button type="reset" class="btn btn-danger">Cancelar</button>
-
+                        <button type="button" onclick="validaCampos()" id='btnCadastrarCliente' class="btn btn-primary">Cadastrar</button>
+                        <button id="btnAlterarCliente" style="display: none" class="btn btn-secondary">Alterar</button>
+                        <button type="reset" class="btn btn-danger" id='btnCancelarCliente'>Cancelar</button>
+                        
                     </form>
                 </div>
 
@@ -239,7 +248,13 @@ require 'cad_cliente_controller.php';
 
             <h5 class="card-title mt-5" style="cursor: pointer" onclick="mostrarTabelaCadClientes()" id="txt_consultar">Consultar Clientes Cadastrados</h5>
 
-            <table class="table table-hover table-responsive" style="display: none" id="tabela_cad_clientes">
+           
+                        
+           
+        </div>
+
+
+        <table class="table table-sm table-hover table-responsive p-3" style="display: none" id="tabela_cad_clientes">
                 <thead>
                     <tr>
                     <th scope="col">CPF</th>
@@ -272,10 +287,10 @@ require 'cad_cliente_controller.php';
                         <td><?php echo $cadCliente->cidade_cliente; ?></td>
                         <td><?php echo $cadCliente->celular_cliente; ?></td>    
                         
-                        <td> <i class="fas fa-user-edit" onclick="editarCliente(<?= $cadCliente->id_cliente ?>,
+                        <td> <i class="fa-regular fa-pen-to-square icone_fontawesome" onclick="editarCliente(<?= $cadCliente->id_cliente ?>,
                                                                                 '<?= $cadCliente->cpf_cliente ?>',
                                                                                 '<?= $cadCliente->nome_cliente ?>',                                                                              
-                                                                                '<?= date('d/m/Y', strtotime($cadCliente->dt_nascimento_cliente)); ?>',
+                                                                                '<?= $cadCliente->dt_nascimento_cliente ?>',
                                                                                 '<?= $cadCliente->cep_cliente ?>',
                                                                                 '<?= $cadCliente->endereco_cliente ?>',
                                                                                 '<?= $cadCliente->numero_cliente ?>',
@@ -286,7 +301,7 @@ require 'cad_cliente_controller.php';
                                                                                 '<?= $cadCliente->celular_cliente ?>')"                                                                               
                                                                                 
                                                                                 style='cursor: pointer'></i> </td>
-                        <td> <i class="fas fa-trash-alt" onclick="excluirCliente(<?= $cadCliente->id_cliente ?>)" style='cursor: pointer'></i> </td>
+                        <td> <i class="fas fa-trash-alt icone_fontawesome" onclick="excluirCliente(<?= $cadCliente->id_cliente ?>)" style='cursor: pointer'></i> </td>
                         
 
                        
@@ -298,9 +313,6 @@ require 'cad_cliente_controller.php';
                    
                 </tbody>
                 </table>
-                        
-           
-        </div>
 
         
 
