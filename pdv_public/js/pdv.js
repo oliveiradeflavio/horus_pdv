@@ -413,7 +413,7 @@ function editarCliente(id, cpf, nome, dt_nascimento, cep, endereco, numero, bair
     $('#inputEndereco').val(endereco);
     $('#inputNumero').val(numero);
     $('#inputBairro').val(bairro);
-    $('#inputComplemento').val(complemento);
+    $('#inputEnderecoComplemento').val(complemento);
     $('#inputEstado').val(estado);
     $('#inputCidade').val(cidade);
     $('#inputCelular').val(celular);
@@ -425,7 +425,52 @@ function editarCliente(id, cpf, nome, dt_nascimento, cep, endereco, numero, bair
             return false;
         }
     }
+}
 
+//Função para limpar os campos quando o botão Cancelar é acionado, porém se o o usuário estiver alterando ele também irá limpar
+// os campos e irá fazer um reload da página
+function resetaCampos(){
+    limpaCampos();
+    if (document.getElementById('btnAlterarCliente').style.display == 'inline' || document.getElementById('btnCadastrarCliente'.disabled = true)){
+        document.location.reload();
+    }
+}
+
+//Funcão irá limpar os campos do formulário de cadastro de clientes
+function limpaCampos(){
+    let inputCPF = document.getElementById('inputCPF');
+    let inputNome = document.getElementById('inputNome');
+    let inputDtNascimento = document.getElementById('inputDtNascimento');
+    let inputCEP = document.getElementById('inputCEP');
+    let inputEndereco = document.getElementById('inputEndereco');
+    let inputNumero = document.getElementById('inputNumero');
+    let inputBairro = document.getElementById('inputBairro');
+    let inputComplemento = document.getElementById('inputEnderecoComplemento');
+    let inputEstado = document.getElementById('inputEstado');
+    let inputCidade = document.getElementById('inputCidade');
+    let inputCelular = document.getElementById('inputCelular');
+
+    inputCPF.value = "";
+    inputNome.value = "";
+    inputDtNascimento.value = "";
+    inputCEP.value = "";
+    inputEndereco.value = "";
+    inputNumero.value = "";
+    inputBairro.value = "";
+    inputComplemento.value = "";
+    inputEstado.value = "";
+    inputCidade.value = "";
+    inputCelular.value = "";
+}
+
+//Função de ajuda de como preencher os campos do cadadastro de clientes (crud) e também fazer a consulta. Para não dizer que não tem algo explicado
+function ajuda_cad_cliente(){
+    Swal.fire({
+        title: 'Ajuda',
+        text: 'Para cadastrar um novo cliente, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um cliente, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um cliente, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os clientes cadastrados clicando no texto Consultar.',
+        icon: 'info',
+        confirmButtonText: 'Fechar'
+    })
 }
 
     

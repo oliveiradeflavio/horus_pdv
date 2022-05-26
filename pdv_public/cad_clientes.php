@@ -239,7 +239,8 @@ require 'cad_cliente_controller.php';
 
                         <button type="button" onclick="validaCampos()" id='btnCadastrarCliente' class="btn btn-primary">Cadastrar</button>
                         <button id="btnAlterarCliente" style="display: none" class="btn btn-secondary">Alterar</button>
-                        <button type="reset" class="btn btn-danger" id='btnCancelarCliente'>Cancelar</button>
+                        <button type="button" onclick="resetaCampos()" class="btn btn-danger" id='btnCancelarCliente'>Cancelar</button>
+                        <i class="fa-solid fa-circle-question icone_fontawesome ml-3" style="cursor: pointer" onclick="ajuda_cad_cliente()"></i>
                         
                     </form>
                 </div>
