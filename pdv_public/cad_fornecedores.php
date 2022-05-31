@@ -4,6 +4,9 @@
         header("Location: login.php?login=2");
     }
 
+   // $acao = 'consultarTabelaFornecedores';
+   // require 'cad_fornecedor_controller.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +69,51 @@
 
      </header>
 
+     <section class="container row col-md-12 centro">
+        <!-- msg de retorno -->
+        <?php
+        if (isset($_GET['sucesso']) && $_GET['sucesso'] == '1') { ?>
+            <div class='alert alert-success mt-2' role='alert'>
+                <strong>Sucesso!</strong> Fornecedor cadastrado com sucesso!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == '2') { ?>
+            <div class='alert alert-success mt-2' role='alert'>
+                <strong>Sucesso!</strong> Fornecedor removido com sucesso!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+
+        <?php } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == '3') { ?>
+            <div class='alert alert-success mt-2' role='alert'>
+                <strong>Sucesso!</strong> Fornecedor alterado com sucesso!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+
+        <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '2') { ?>
+            <div class='alert alert-warning mt-2' role='alert'>
+                <strong>Atenção</strong> CNPJ já cadastrado!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '3') { ?>
+            <div class='alert alert-danger mt-2' role='alert'>
+                <strong>Erro</strong> Senha master incorreta!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>   
+        <?php } ?>
+       
+    </section>
+
     <section>
     <div class="container mb-5">
             <div class="row">
@@ -98,31 +146,31 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
-                    <form id="formCadCliente" >
+                    <form id="formCadFornecedor" method="post" action="cad_fornecedor_controller.php" >
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="inputCNPJ">CNPJ</label>
-                                <input type="text" class="form-control" id="inputCNPJ" onblur='testaCPF(this.value)' required>
+                                <input type="text" class="form-control" id="inputCNPJ" name="inputCNPJ" onblur='validarCNPJ(this.value)' required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputRazaoSocial">Razão Social</label>
-                                <input type="text" class="form-control" id="inputRazaoSocial" onblur="validaDataNascimento()" required>
+                                <input type="text" class="form-control" id="inputRazaoSocial" name="inputRazaoSocial" onblur="validaDataNascimento()" required>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="inputNomeFantasia">Nome Fantasia</label>
-                                <input type="text" class="form-control" id="inputNomeFantasia" required>
+                                <input type="text" class="form-control" id="inputNomeFantasia" name="inputNomeFantasia" required>
                             </div>
 
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="inputCEP">CEP</label>
-                                <input type="text" class="form-control" id="inputCEP" onblur="pesquisaCEP(this.value)"  required>
+                                <input type="text" class="form-control" id="inputCEP" name="inputCEP" onblur="pesquisaCEP(this.value)"  required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEstado">Estado</label>
-                                <select id="inputEstado" class="form-control" >
+                                <select id="inputEstado" class="form-control" name="inputEstado">
                                     <option selected>Selecionar...</option>
                                     <option value="AC">Acre</option>
                                     <option value="AL">Alagoas</option>
@@ -157,7 +205,7 @@
 
                             <div class="form-group col-md-5">
                                 <label for="inputCidade">Cidade</label>
-                                <input type="text" class="form-control" id="inputCidade" required>
+                                <input type="text" class="form-control" id="inputCidade" name="inputCidade" required>
                             </div>
 
                         </div>
@@ -165,43 +213,43 @@
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <label for="inputEndereco">Endereço</label>
-                                <input type="text" class="form-control" id="inputEndereco"  required>
+                                <input type="text" class="form-control" id="inputEndereco" name="inputEndereco"  required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputNumero">Número</label>
-                                <input type="number" class="form-control" id="inputNumero"  required>
+                                <input type="number" class="form-control" id="inputNumero" name="inputNumero"  required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputEnderecoComplemento">Complemento</label>
-                                <input type="text" class="form-control" id="inputEnderecoComplemento" >
+                                <input type="text" class="form-control" id="inputEnderecoComplemento" name="inputEnderecoComplemento" >
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="inputBairro">Bairro</label>
-                                <input type="text" class="form-control" id="inputBairro" required>
+                                <input type="text" class="form-control" id="inputBairro" name="inputBairro" required>
                             </div>
                         </div>
 
                         <div class='form-row'>
                             <div class="form-group col-md-4">
                                     <label for="inputTelefone">Telefone</label>
-                                    <input type="text" class="form-control" id="inputTelefone" required>
+                                    <input type="text" class="form-control" id="inputTelefone" name="inputTelefone">
                                 </div>
                             
                             <div class="form-group col-md-4">
                                 <label for="inputCelular">Celular</label>
-                                <input type="text" class="form-control" id="inputCelular" required>
+                                <input type="text" class="form-control" id="inputCelular" name="inputCelular" required>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="inputEmail">E-mail</label>
-                                <input type="email" class="form-control" id="inputEmail" required>
+                                <input type="email" class="form-control" id="inputEmail" name="inputEmail" required>
                             </div>
 
                           
                         </div>
 
-                        <button type="submit" onclick="validaCampos()" class="btn btn-primary">Cadastrar</button>
+                        <button type="button" onclick="validaCamposFornecedor()" class="btn btn-primary">Cadastrar</button>
                         <button type="reset" class="btn btn-danger">Cancelar</button>
                     </form>
                 </div>

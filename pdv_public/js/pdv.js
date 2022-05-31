@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#inputCelular').mask('(00)00000-0000');
     $('#inputCEP').mask('00000-000');
     $('#inputCPF').mask('000.000.000-00');
-    $('#inputTelefone').mask('(00) 0000-0000');
+    $('#inputTelefone').mask('(00)0000-0000');
 
     $('#inputNome').on('keypress', function (e) {
         //let regex = new RegExp("^[a-zA-Z ]+$");
@@ -122,6 +122,85 @@ function testaCPF(cpf) {
     return true
 }
 
+//Verifica se CNPJ é válido
+function validarCNPJ(cnpj) {
+
+    let inputCNPJ = document.getElementById('inputCNPJ');
+ 
+    cnpj = cnpj.replace(/[^\d]+/g,'');
+ 
+    if(cnpj == '') return false;
+     
+    if (cnpj.length != 14){
+        inputCNPJ.placeholder = 'CNPJ inválido!';
+        inputCNPJ.value = "";
+        return false;
+    }
+    // Elimina CNPJs invalidos conhecidos
+    if (cnpj == "00000000000000" || 
+        cnpj == "11111111111111" || 
+        cnpj == "22222222222222" || 
+        cnpj == "33333333333333" || 
+        cnpj == "44444444444444" || 
+        cnpj == "55555555555555" || 
+        cnpj == "66666666666666" || 
+        cnpj == "77777777777777" || 
+        cnpj == "88888888888888" || 
+        cnpj == "99999999999999"){
+        
+        inputCNPJ.placeholder = 'CNPJ inválido!';
+        inputCNPJ.value = "";
+        return false;
+     }
+    // Valida DVs
+    tamanho = cnpj.length - 2
+    numeros = cnpj.substring(0,tamanho);
+    digitos = cnpj.substring(tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2){
+            pos = 9;
+      }
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(0)){
+        inputCNPJ.placeholder = 'CNPJ inválido!';
+        inputCNPJ.value = "";
+        return false;
+    }
+         
+    tamanho = tamanho + 1;
+    numeros = cnpj.substring(0,tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2){
+            pos = 9;
+      }
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(1)){
+          inputCNPJ.placeholder = 'CNPJ inválido!';
+          inputCNPJ.value = "";
+          return false;
+    }      
+    return true;
+}
+
+//Verifica se o email é válido
+function validaEmail(){
+    let email = document.getElementById("inputEmail").value;
+    let reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    if(reg.test(email) == false) {
+        return false;
+    }else{
+        return true;
+    }
+}
+
 
 //Função para preencher os campos com os valores do CEP.
 function meu_callback(conteudo) {
@@ -133,6 +212,7 @@ function meu_callback(conteudo) {
         document.getElementById('inputEstado').value = (conteudo.uf);
         document.getElementById('inputEnderecoComplemento').value = (conteudo.complemento);
         document.getElementById('inputCelular').value = (conteudo.ddd);
+        document.getElementById('inputTelefone').value = (conteudo.ddd);
 
     } else {
         Swal.fire('Oops...', 'CEP não encontrado!', 'error');
@@ -164,6 +244,7 @@ function pesquisaCEP(valor) {
             document.getElementById('inputEstado').value = "...";
             document.getElementById('inputEnderecoComplemento').value = "...";
             document.getElementById('inputCelular').value = "...";
+            document.getElementById('inputTelefone').value = "...";
 
             //Cria um elemento javascript.
             let script = document.createElement('script');
@@ -274,8 +355,65 @@ function validaCampos() {
         formCadCliente.action = "cad_cliente_controller.php";
         formCadCliente.submit();
     }
+}
 
-    
+function validaCamposFornecedor(){
+    let inputCNPJ = document.getElementById('inputCNPJ');
+    let inputRazaoSocial = document.getElementById('inputRazaoSocial');
+    let inputNomeFantasia = document.getElementById('inputNomeFantasia');
+    let inputCEP = document.getElementById('inputCEP');
+    let inputEndereco = document.getElementById('inputEndereco');
+    let inputNumero = document.getElementById('inputNumero');
+    let inputBairro = document.getElementById('inputBairro');
+    let inputCidade = document.getElementById('inputCidade');
+    let inputEstado = document.getElementById('inputEstado');
+    let inputTelefone = document.getElementById('inputTelefone');
+    let inputCelular = document.getElementById('inputCelular'); 
+    let inputEmail = document.getElementById('inputEmail');
+    let formCadFornecedor = document.getElementById('formCadFornecedor');
+
+    if (inputCNPJ.value == "") {
+        Swal.fire('Oops...', 'CNPJ não informado!', 'error');
+    }
+    else if (inputRazaoSocial.value == "") {
+        Swal.fire('Oops...', 'Razão social não informada!', 'error');
+    }
+    else if (inputNomeFantasia.value == "") {
+        Swal.fire('Oops...', 'Nome fantasia não informado!', 'error');
+    }
+    else if (inputCEP.value == "") {
+        Swal.fire('Oops...', 'CEP não informado!', 'error');
+    }
+    else if (inputEndereco.value == "") {
+        Swal.fire('Oops...', 'Endereço não informado!', 'error');
+    }
+    else if(inputNumero.value == "" || inputNumero.value == "0"){
+        Swal.fire('Oops...', 'Número do endereço não informado!', 'error');
+    }
+    else if (inputBairro.value == "" || inputBairro.value.length < 3) {
+        Swal.fire('Oops...', 'Bairro não informado!', 'error');
+    }
+    else if (inputCidade.value == "" || inputCidade.value.length < 3) {
+        Swal.fire('Oops...', 'Cidade não informada!', 'error');
+    }
+    else if (inputEstado.value == "") {
+        Swal.fire('Oops...', 'Estado não informado!', 'error');
+    }
+    else if (inputTelefone.value == "" || inputTelefone.value.length < 13) {
+        Swal.fire('Oops...', 'Verifique o campo telefone!', 'error');
+    }
+    else if (inputCelular.value == "" || inputCelular.value.length < 14) {
+        Swal.fire('Oops...', 'Verifique o campo celular!', 'error');
+    }
+    else if (!validaEmail()) {
+        Swal.fire('Oops...', 'Verifique o campo email!', 'error');
+    }
+    else{
+        formCadFornecedor.method = "POST";
+        formCadFornecedor.action = "cad_fornecedor_controller.php?acao=inserir";
+        formCadFornecedor.submit();
+    }
+
 
 }
 
