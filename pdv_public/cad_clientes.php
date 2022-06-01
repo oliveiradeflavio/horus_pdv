@@ -247,11 +247,7 @@ require 'cad_cliente_controller.php';
 
             </div>        
 
-            <h5 class="card-title mt-5" style="cursor: pointer" onclick="mostrarTabelaCadClientes()" id="txt_consultar">Consultar Clientes Cadastrados</h5>
-
-           
-                        
-           
+            <h5 class="card-title mt-5" style="cursor: pointer" onclick="mostrarTabelaCadastros()" id="txt_consultar">Consultar Clientes Cadastrados</h5>
         </div>
 
 

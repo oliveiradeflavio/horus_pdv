@@ -4,8 +4,8 @@
         header("Location: login.php?login=2");
     }
 
-   // $acao = 'consultarTabelaFornecedores';
-   // require 'cad_fornecedor_controller.php';
+   $acao = 'consultarTabelaFornecedores';
+   require 'cad_fornecedor_controller.php';
 
 ?>
 
@@ -104,14 +104,23 @@
             </div>
 
         <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '3') { ?>
+            <div class='alert alert-warning mt-2' role='alert'>
+                <strong>Atenção</strong> Razão Social já cadastrada!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>   
+        <?php } 
+
+            else if (isset($_GET['erro']) && $_GET['erro'] == '4') { ?>
             <div class='alert alert-danger mt-2' role='alert'>
                 <strong>Erro</strong> Senha master incorreta!
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>   
+            </div>
         <?php } ?>
-       
+
     </section>
 
     <section>
@@ -249,13 +258,75 @@
                           
                         </div>
 
-                        <button type="button" onclick="validaCamposFornecedor()" class="btn btn-primary">Cadastrar</button>
-                        <button type="reset" class="btn btn-danger">Cancelar</button>
+                        <button type="button" onclick="validaCamposFornecedor()" class="btn btn-primary" id="btnCadastrarFornecedor">Cadastrar</button>
+                        <button id="btnAlterarFornecedor" style="display: none" class="btn btn-secondary">Alterar</button>
+                        <button type="button" onclick="resetaCampos()" class="btn btn-danger" id="btnCancelarFornecedor">Cancelar</button>
                     </form>
                 </div>
-
             </div>
+            
+            <h5 class="card-title mt-5" style="cursor: pointer" id="txt_consultar_fornecedores" onclick="mostrarTabelaCadastros()">Consultar Fornecedores Cadastrados</h5>
         </div>
+
+        <table class="table table-sm table-hover table-responsive p-3" style="display: none" id="tabela_cad_fornecedores">
+                <thead>
+                    <tr>
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">Razão Social</th>
+                    <th scope="col">Nome Fantasia</th>
+                    <th scope="col">CEP</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Bairro</th>
+                    <th scope="col">Complemento</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Celular/WhatsApp</th>
+                    <th scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach($cadFornecedores as $indice => $cadFornecedor){ ?>
+
+                    <tr>
+                        <td><?php echo $cadFornecedor->cnpj_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->razao_social_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->nome_fantasia_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->cep_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->endereco_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->numero_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->bairro_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->complemento_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->estado_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->cidade_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->telefone_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->celular_fornecedor; ?></td>
+                        <td><?php echo $cadFornecedor->email_fornecedor; ?></td>
+
+                        <td><i class="fa-regular fa-pen-to-square icone_fontawesome" onclick="editarFornecedor(<?= $cadFornecedor->id_fornecedor ?>,
+                                                                                    '<?= $cadFornecedor->cnpj_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->razao_social_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->nome_fantasia_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->cep_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->endereco_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->numero_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->bairro_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->complemento_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->estado_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->cidade_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->telefone_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->celular_fornecedor ?>',
+                                                                                    '<?= $cadFornecedor->email_fornecedor ?>')"                                                                                
+                                                                                    
+                                                                                    style="cursor: pointer"></i></td>
+
+                        <td><i class="fas fa-trash-alt icone_fontawesome" onclick="excluirFornecedor(<?= $cadFornecedor->id_fornecedor ?>)" style="cursor: pointer"></i></td>
+                    </tr>
+                    <?php 
+                    }
+                   ?>
 
 
 

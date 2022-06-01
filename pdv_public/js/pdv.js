@@ -369,7 +369,6 @@ function validaCamposFornecedor(){
     let inputEstado = document.getElementById('inputEstado');
     let inputTelefone = document.getElementById('inputTelefone');
     let inputCelular = document.getElementById('inputCelular'); 
-    let inputEmail = document.getElementById('inputEmail');
     let formCadFornecedor = document.getElementById('formCadFornecedor');
 
     if (inputCNPJ.value == "") {
@@ -485,18 +484,93 @@ function validaAlteracao() {
 
 }
 
-//Função para mostrar os clientes cadastrados no banco de dados na página de cadastro de clientes. 
-function mostrarTabelaCadClientes(){
+//Função para validar a alteração de fornecedor. Basicamente é a mesma função da validação do cadastro
+function validaAlteracaoFornecedores(){
+    let inputCNPJ = document.getElementById('inputCNPJ');
+    let inputRazaoSocial = document.getElementById('inputRazaoSocial');
+    let inputNomeFantasia = document.getElementById('inputNomeFantasia');
+    let inputCEP = document.getElementById('inputCEP');
+    let inputEndereco = document.getElementById('inputEndereco');
+    let inputNumero = document.getElementById('inputNumero');
+    let inputBairro = document.getElementById('inputBairro');
+    let inputCidade = document.getElementById('inputCidade');
+    let inputEstado = document.getElementById('inputEstado');
+    let inputTelefone = document.getElementById('inputTelefone');
+    let inputCelular = document.getElementById('inputCelular'); 
+
+    if (inputCNPJ.value == "") {
+        Swal.fire('Oops...', 'CNPJ não informado!', 'error');
+        return false;
+    }
+    else if (inputRazaoSocial.value == "") {
+        Swal.fire('Oops...', 'Razão social não informada!', 'error');
+        return false;
+    }
+    else if (inputNomeFantasia.value == "") {
+        Swal.fire('Oops...', 'Nome fantasia não informado!', 'error');
+        return false;
+    }
+    else if (inputCEP.value == "") {
+        Swal.fire('Oops...', 'CEP não informado!', 'error');
+        return false;
+    }
+    else if (inputEndereco.value == "") {
+        Swal.fire('Oops...', 'Endereço não informado!', 'error');
+        return false;
+    }
+    else if(inputNumero.value == "" || inputNumero.value == "0"){
+        Swal.fire('Oops...', 'Número do endereço não informado!', 'error');
+        return false;
+    }
+    else if (inputBairro.value == "" || inputBairro.value.length < 3) {
+        Swal.fire('Oops...', 'Bairro não informado!', 'error');
+        return false;
+    }
+    else if (inputCidade.value == "" || inputCidade.value.length < 3) {
+        Swal.fire('Oops...', 'Cidade não informada!', 'error');
+        return false;
+    }
+    else if (inputEstado.value == "") {
+        Swal.fire('Oops...', 'Estado não informado!', 'error');
+        return false;
+    }
+    else if (inputTelefone.value == "" || inputTelefone.value.length < 14) {
+        Swal.fire('Oops...', 'Verifique o campo telefone!', 'error');
+        return false;
+    }
+    else if (inputCelular.value == "" || inputCelular.value.length < 14) {
+        Swal.fire('Oops...', 'Verifique o campo celular!', 'error');
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+//Função para mostrar as tabelas de clientes e fornecedores
+function mostrarTabelaCadastros(){
     let el = document.getElementById('tabela_cad_clientes');
-    if (el.style.display == 'none'){
+    let el_tb_fornecedores = document.getElementById('tabela_cad_fornecedores');
+
+    if (el && el.style.display == 'none'){
         el.style.display = '';
         document.getElementById('txt_consultar').innerHTML = 'Ocultar tabela';
 
-    }else {
+    }else if (el && el.style.display == ''){
         el.style.display = 'none';
-        document.getElementById('txt_consultar').innerHTML = 'Consultar Clientes Cadastrados'
+        document.getElementById('txt_consultar').innerHTML = 'Consultar Clientes Cadastrados';
+
+    }else if (el_tb_fornecedores && el_tb_fornecedores.style.display == 'none'){
+        el_tb_fornecedores.style.display = '';
+        document.getElementById('txt_consultar_fornecedores').innerHTML = 'Ocultar tabela';     
+    }
+    else if (el_tb_fornecedores && el_tb_fornecedores.style.display == ''){
+        el_tb_fornecedores.style.display = 'none';
+        document.getElementById('txt_consultar_fornecedores').innerHTML = 'Consultar Fornecedores Cadastrados';     
     }
 }
+
+
 
 //Função para excluir o cliente já cadastrado, passando o id do cliente como parâmetro e chamando o controller para excluir o cliente
 //A função também é responsável por exibir um alerta de confirmação para o usuário antes de excluir o cliente pedindo uma senha master
@@ -565,11 +639,86 @@ function editarCliente(id, cpf, nome, dt_nascimento, cep, endereco, numero, bair
     }
 }
 
+function excluirFornecedor(id){
+    Swal.fire({
+        title: 'Você tem certeza?',
+        text: "Você não poderá reverter isso!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Não, cancelar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Insira senha master para confirmar a exclusão!',
+                input: 'password',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Confirmar',
+            })
+            .then((result) => {
+            
+                if (result.value) {
+                    let pass = result.value;
+                    location.href = "cad_fornecedor_controller.php?acao=excluir&id=" + id + "&p=" + pass;
+                } 
+            })            
+        }
+    })
+}
+
+function editarFornecedor(id, cnpj, razao_social, nome_fantasia, cep, endereco, numero, bairro, complemtno, estado, cidade, telefone, celular, email){
+
+    let btnCadastrarFornecedor = document.getElementById('btnCadastrarFornecedor');
+    btnCadastrarFornecedor.disabled = true;
+    
+    let btnAlterarFornecedor = document.getElementById('btnAlterarFornecedor');
+    btnAlterarFornecedor.style.display = 'inline';
+
+    let formCadForcenedor = document.getElementById('formCadFornecedor');
+    formCadForcenedor.setAttribute('action', 'cad_fornecedor_controller.php?acao=alterar&id=' + id);
+
+    $('#inputCNPJ').val(cnpj);
+    $('#inputRazaoSocial').val(razao_social);
+    $('#inputNomeFantasia').val(nome_fantasia);
+    $('#inputCEP').val(cep);
+    $('#inputEndereco').val(endereco);
+    $('#inputNumero').val(numero);
+    $('#inputBairro').val(bairro);
+    $('#inputEnderecoComplemento').val(complemtno);
+    $('#inputEstado').val(estado);
+    $('#inputCidade').val(cidade);
+    $('#inputTelefone').val(telefone);
+    $('#inputCelular').val(celular);
+    $('#inputEmail').val(email);
+
+    btnAlterarFornecedor.onclick = function(){
+        if(validaAlteracaoFornecedores()){
+            formCadForcenedor.submit();
+        }else{
+            return false;
+        }
+    }
+}
+
 //Função para limpar os campos quando o botão Cancelar é acionado, porém se o o usuário estiver alterando ele também irá limpar
 // os campos e irá fazer um reload da página
 function resetaCampos(){
     limpaCampos();
-    if (document.getElementById('btnAlterarCliente').style.display == 'inline' || document.getElementById('btnCadastrarCliente'.disabled = true)){
+    let el_alterar_cliente = document.getElementById('btnAlterarCliente');
+    let btn_cadatrar_cliente = document.getElementById('btnCadastrarCliente');
+
+    let el_alterar_fornecedor = document.getElementById('btnAlterarFornecedor');
+    let btn_cadastrar_fornecdor = document.getElementById('btnCadastrarFornecedor');
+
+    if (el_alterar_cliente && el_alterar_cliente.style.display == 'inline' || btn_cadatrar_cliente && btn_cadatrar_cliente.disabled == true){
+        document.location.reload();
+    }
+    if (el_alterar_fornecedor && el_alterar_fornecedor.style.display == 'inline' || btn_cadastrar_fornecdor && btn_cadastrar_fornecdor.disabled == true){
         document.location.reload();
     }
 }
@@ -587,18 +736,62 @@ function limpaCampos(){
     let inputEstado = document.getElementById('inputEstado');
     let inputCidade = document.getElementById('inputCidade');
     let inputCelular = document.getElementById('inputCelular');
+    
+    let inputCNPJ = document.getElementById('inputCNPJ');
+    let inputRazaoSocial = document.getElementById('inputRazaoSocial');
+    let inputNomeFantasia = document.getElementById('inputNomeFantasia');
+    let inputTelefone = document.getElementById('inputTelefone');
+    let inputEmail = document.getElementById('inputEmail');
 
-    inputCPF.value = "";
-    inputNome.value = "";
-    inputDtNascimento.value = "";
-    inputCEP.value = "";
-    inputEndereco.value = "";
-    inputNumero.value = "";
-    inputBairro.value = "";
-    inputComplemento.value = "";
-    inputEstado.value = "";
-    inputCidade.value = "";
-    inputCelular.value = "";
+    if (inputCPF){
+        inputCPF.value = '';
+    }
+    if (inputNome){
+        inputNome.value = '';
+    }
+    if (inputDtNascimento){
+        inputDtNascimento.value = '';
+    }
+    if (inputCEP){
+        inputCEP.value = '';
+    }
+    if (inputEndereco){
+        inputEndereco.value = '';
+    }
+    if (inputNumero){
+        inputNumero.value = '';
+    }
+    if (inputBairro){
+        inputBairro.value = '';
+    }
+    if (inputComplemento){
+        inputComplemento.value = '';
+    }
+    if (inputEstado){
+        inputEstado.value = '';
+    }
+    if (inputCidade){
+        inputCidade.value = '';
+    }
+    if (inputCelular){
+        inputCelular.value = '';
+    }
+    if (inputCNPJ){
+        inputCNPJ.value = '';
+    }
+    if (inputRazaoSocial){
+        inputRazaoSocial.value = '';
+    }
+    if (inputNomeFantasia){
+        inputNomeFantasia.value = '';
+    }
+    if (inputTelefone){
+        inputTelefone.value = '';
+    }
+    if (inputEmail){
+        inputEmail.value = '';
+    }
+
 }
 
 //Função de ajuda de como preencher os campos do cadadastro de clientes (crud) e também fazer a consulta. Para não dizer que não tem algo explicado
