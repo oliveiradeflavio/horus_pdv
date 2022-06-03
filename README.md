@@ -32,7 +32,7 @@ AGUARDE, EM DESENVOLVIMENTO...
 
 Flávio Oliveira - [LinkedIn](https://www.linkedin.com/in/fladoliveira/)
 
-Link do Projeto: [https://github.com/oliveiradeflavio/front-back-end](https://github.com/oliveiradeflavio/horus_pdv)
+Link do Projeto: [https://github.com/oliveiradeflavio/horus_pdv](https://github.com/oliveiradeflavio/horus_pdv)
 
 
 
