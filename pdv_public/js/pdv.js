@@ -6,34 +6,28 @@ $(document).ready(function () {
     $('#inputTelefone').mask('(00)0000-0000');
 
     $('#inputNome').on('keypress', function (e) {
-        //let regex = new RegExp("^[a-zA-Z ]+$");
         let str = (e.keyCode ? e.keyCode : e.which);
         if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255) {
             return true;
         }
-
         e.preventDefault();
         return false;
     });
 
     $('#inputCidade').on('keypress', function (e) {
-        //let regex = new RegExp("^[a-zA-Z ]+$");
         let str = (e.keyCode ? e.keyCode : e.which);
         if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255) {
             return true;
         }
-
         e.preventDefault();
         return false;
     });
 
     $('#inputBairro').on('keypress', function (e) {
-        //let regex = new RegExp("^[a-zA-Z ]+$");
         let str = (e.keyCode ? e.keyCode : e.which);
         if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255) {
             return true;
         }
-
         e.preventDefault();
         return false;
     });
@@ -43,18 +37,15 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#inputCNPJ').mask('00.000.000/0000-00');
     $('#inputRazaoSocial').on('keypress', function (e) {
-        //let regex = new RegExp("^[a-zA-Z ]+$");
         let str = (e.keyCode ? e.keyCode : e.which);
         if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255) {
             return true;
         }
-
         e.preventDefault();
         return false;
     });
 
     $('#inputNomeFantasia').on('keypress', function (e) {
-        //let regex = new RegExp("^[a-zA-Z ]+$");
         let str = (e.keyCode ? e.keyCode : e.which);
         if (str > 64 && str < 91 || str > 96 && str < 123 || str == 32 || str > 192 && str < 223 || str > 224 && str < 255) {
             return true;
@@ -65,7 +56,52 @@ $(document).ready(function () {
     });
 
 });
+
+//PÁGINA DE PRODUTOS
+$(document).ready(function () {
+    //campo somente numeros
+    $('#inputQuantidade').on('keypress', function (e) {
+        let str = (e.keyCode ? e.keyCode : e.which);
+        if (str > 47 && str < 58) {
+            return true;
+        }else{
+            return (str == 8 || str == 0)?true:false;
+        }
+    });
+
+    $('#inputPrecoUnitario').mask('R$ #.##0,00', {reverse: true});
+    $('#inputPrecoTotal').mask('R$ #.##0,00');
+
+});  
 //fim mascaras input
+
+//Quando os campos quantidade e preço unitário for preenchidos, o valor total será calculado automaticamente e atribuido no campo preço total.
+function somaPrecoTotalCadastro(){
+
+    let inputPrecoUnitario = document.getElementById("inputPrecoUnitario").value;
+    let inputQuantidade = document.getElementById('inputQuantidade').value;
+    let inputPrecoTotal = document.getElementById('inputPrecoTotal');
+
+    inputPrecoUnitario = inputPrecoUnitario.replace(/[^0-9]/g, '');
+
+    if (inputPrecoUnitario != '' && inputQuantidade != '') {
+        inputPrecoTotal = parseFloat((inputPrecoUnitario) * inputQuantidade)
+        inputPrecoTotal = inputPrecoTotal + '';
+        inputPrecoTotal = parseInt(inputPrecoTotal.replace(/[\D]+/g, ''));
+        inputPrecoTotal = inputPrecoTotal + '';
+        inputPrecoTotal = inputPrecoTotal.replace(/([0-9]{2})$/g, ",$1");
+
+        if (inputPrecoTotal.length > 6) {
+            inputPrecoTotal = inputPrecoTotal.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+        }
+
+        inputPrecoTotal.value = inputPrecoTotal;
+        if(inputPrecoTotal == 'NaN') inputPrecoTotal.value = ''
+    
+        document.getElementById('inputPrecoTotal').value = inputPrecoTotal;
+
+    }
+}
 
 //Verifica se CPF é válido
 function testaCPF(cpf) {
@@ -222,11 +258,8 @@ function meu_callback(conteudo) {
 //Quando o campo cep perde o foco.
 function pesquisaCEP(valor) {
 
-
     //Nova variável "cep" somente com dígitos.
     let cep = valor.replace(/\D/g, '');
-
-
 
     //Verifica se campo cep possui valor informado.
     if (cep != "") {
@@ -357,6 +390,7 @@ function validaCampos() {
     }
 }
 
+//Validação de campos no cadastro de fornecedores
 function validaCamposFornecedor(){
     let inputCNPJ = document.getElementById('inputCNPJ');
     let inputRazaoSocial = document.getElementById('inputRazaoSocial');
@@ -412,8 +446,42 @@ function validaCamposFornecedor(){
         formCadFornecedor.action = "cad_fornecedor_controller.php?acao=inserir";
         formCadFornecedor.submit();
     }
+}
 
+//Valida campos na página de cadastro de produtos
+function validaCamposProdutos(){
+    let inputNomeProduto = document.getElementById('inputNomeProduto');
+    let inputCodigo = document.getElementById('inputCodigo');
+    let inputDescricao = document.getElementById('inputDescricaoProduto');
+    let inputQuantidade = document.getElementById('inputQuantidade');
+    let inputPrecoUnitario = document.getElementById('inputPrecoUnitario');
+    let inputPrecoTotal = document.getElementById('inputPrecoTotal');
+    let formCadProduto = document.getElementById('formCadProduto');
 
+    if (inputNomeProduto.value == "") {
+        Swal.fire('Oops...', 'Nome do produto não informado!', 'error');
+    }
+    else if (inputCodigo.value == "") {
+        Swal.fire('Oops...', 'Código do produto não informado!', 'error');
+    }
+    else if (inputDescricao.value == "") {
+        Swal.fire('Oops...', 'Descrição do produto não informada!', 'error');
+    }
+    else if (inputQuantidade.value == "") {
+        Swal.fire('Oops...', 'Quantidade do produto não informada!', 'error');
+    }
+    else if (inputPrecoUnitario.value == "") {
+        Swal.fire('Oops...', 'Preço unitário do produto não informado!', 'error');
+    }
+    else if (inputPrecoTotal.value == "") {
+        Swal.fire('Oops...', 'Preço total do produto não informado!', 'error');
+    }
+    else{
+        formCadProduto.method = "POST";
+        formCadProduto.enctype = "multipart/form-data";
+        formCadProduto.action = "cad_produto_controller.php?acao=inserir";
+        formCadProduto.submit();
+    }
 }
 
 //Função para validar a alteração do cliente. Basicamente é a mesma função da validação do cadastro

@@ -95,47 +95,24 @@
 
         <div class="container">
             <div class="row mb-3">
-                <div class='col-md-6'>
+                <div class='col-md-12'>
                     <div class="card">
                         <div class="card-header">
-                            <h5>Clientes Ativos</h5>
+                            <h5>Cadastros Realizados</h5>
                         </div>
-                        <div class="card-body">
-                            794 
-                        </div>
+                        <div class='card-body centro' id="chart_div_cadastros"></div>
+        
                     </div>
-                </div>
-                <div class='col-md-6'>
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Fornecedores Ativos</h5>
-                        </div>
-                        <div class="card-body">
-                            200 
-                        </div>
-                    </div>
-                </div>
-                </div>
+                </div> 
+            </div>
 
-                <div class="row mb-3">
-                <div class='col-md-6'>
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Produtos Ativos</h5>
-                        </div>
-                        <div class="card-body">
-                            3400 
-                        </div>
-                    </div>
-                </div>
-                <div class='col-md-6'>
+             <div class="row mb-3">
+                <div class='col-md-12'>
                     <div class="card">
                         <div class="card-header">
                             <h5>Vendas Realizadas</h5>
                         </div>
-                        <div class="card-body">
-                            1000 
-                        </div>
+                        <div class='card-body centro' id="chart_div_vendas"></div>
                     </div>
                 </div>
                 </div>
@@ -152,6 +129,77 @@
    
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(drawChartVendas);
+
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+    ['Task', 'Registers'],
+    <?php
+       
+        require_once '../pdv/conexao.php';
+       // $conexao = new Conexao();
+        $conexao = new PDO('mysql:host=localhost;dbname=pdv_horus', 'root', '');
+        $query = "SELECT COUNT(*) FROM tb_clientes";
+        $stmt = $conexao->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        foreach($result as $row){
+            echo "['Clientes', ".$row[0]."],";
+        }
+
+        $query = "SELECT COUNT(*) FROM tb_fornecedores";
+        $stmt = $conexao->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        foreach($result as $row){
+            echo "['Fornecedores', ".$row[0]."],";
+        }
+
+        $query =  "SELECT COUNT(*) FROM  tb_usuarios";
+        $stmt = $conexao->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        foreach($result as $row){
+            echo "['Usuários', ".$row[0]."],";
+        }
+    ?>
+  
+  ]);
+
+  var options = {
+    pieHole: 0.3,
+  };
+
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div_cadastros'));
+    chart.draw(data, options);
+}
+
+function drawChartVendas() {
+        var data_vendas = google.visualization.arrayToDataTable([
+          ['Year', 'Vendas'],
+          ['2013',  1000],
+          ['2014',  1170],
+          ['2015',  660],
+          ['2016',  1030]
+        ]);
+
+        var options = {
+          title: 'Performance de Vendas',
+          hAxis: {title: 'Ano',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_vendas'));
+        chart.draw(data_vendas, options);
+      }
+
+</script>
+
+<script src="js/index.js"></script>
 </body>
 
 </html>

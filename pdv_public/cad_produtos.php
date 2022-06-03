@@ -100,51 +100,51 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
-                    <form id="formCadCliente" >
+                    <form id="formCadProduto" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-4">
                             <label for="inputImagemProduto" class="form-label">Carregue uma imagem do produto</label>
-                            <input class="form-control" type="file" id="inputImagemProduto" required>
+                            <input class="form-control" type="file" id="inputImagemProduto" name="inputImagemProduto">
                             </div>
 
                             <div class="form-group col-md-5">
                                 <label for="inputNomeProduto">Nome do Produto</label>
-                                <input type="text" class="form-control" id="inputNomeProduto" required>
+                                <input type="text" class="form-control" id="inputNomeProduto" name="inputNomeProduto" required>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="inputCodigo">Código</label>
-                                <input type="text" class="form-control" id="inputCodigo" required>
+                                <input type="text" class="form-control" id="inputCodigo" name="inputCodigo" required>
                             </div>
 
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="inputDescricaoProduto">Descrição do Produto</label>
-                                <input type="text" class="form-control" id="inputDescricaoProduto"  required>
+                                <input type="text" class="form-control" id="inputDescricaoProduto" name="inputDescricaoProduto"  required>
                             </div>
                         </div>
 
                         <div class='form-row'>
                             <div class="form-group col-md-4">
                                     <label for="inputQuantidade">Quantidade</label>
-                                    <input type="text" class="form-control" id="inputQuantidade" required>
+                                    <input type="number" class="form-control" id="inputQuantidade" name="inputQuantidade" onfocus="somaPrecoTotalCadastro()" required>
                                 </div>
                             
                             <div class="form-group col-md-4">
                                 <label for="inputPrecoUnitario">Preço Unitário</label>
-                                <input type="text" class="form-control" id="inputPrecoUnitario" required>
+                                <input type="text" class="form-control" id="inputPrecoUnitario" name="inputPrecoUnitario" placeholder="R$ 0,00" onblur="somaPrecoTotalCadastro()" required>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="inputPrecoTotal">Preço Total</label>
-                                <input type="email" class="form-control" id="inputPrecoTotal" required>
+                                <input type="text" class="form-control" id="inputPrecoTotal" name="inputPrecoTotal" placeholder="R$ 0,00"   required>
                             </div>
 
                           
                         </div>
 
-                        <button type="submit" onclick="validaCampos()" class="btn btn-primary">Cadastrar</button>
+                        <button type="button" onclick="validaCamposProdutos()" class="btn btn-primary">Cadastrar</button>
                         <button type="reset" class="btn btn-danger">Cancelar</button>
                     </form>
                 </div>
