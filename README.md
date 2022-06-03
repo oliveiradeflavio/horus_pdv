@@ -27,6 +27,12 @@ AGUARDE, EM DESENVOLVIMENTO...
 
 
 
+<!-- USAGE EXAMPLES -->
+## Demo
+
+![Login](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/login.png)
+![Registrar](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/registrar.png)
+
 <!-- CONTACT -->
 ## Contato
 
@@ -40,4 +46,4 @@ Link do Projeto: [https://github.com/oliveiradeflavio/horus_pdv](https://github.
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/fladoliveira/
-[product-screenshot]: https://github.com/oliveiradeflavio/horus_pdv/blob/main/pdv/img/usuarios/logo.png?raw=true
+[product-screenshot]: https://raw.githubusercontent.com/oliveiradeflavio/horus_pdv/main/screen/dashboard.png
