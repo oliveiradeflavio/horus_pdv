@@ -23,6 +23,7 @@ AGUARDE, EM DESENVOLVIMENTO...
 * [Javascript](https://www.javascript.com/)
 * [MySQL](https://www.mysql.com/)
 * [SweetAlert2](https://sweetalert2.github.io/)
+* [GoogleCharts](https://developers.google.com/chart)
 
 
 
