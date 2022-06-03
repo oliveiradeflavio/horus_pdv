@@ -69,8 +69,17 @@ $(document).ready(function () {
         }
     });
 
+    $('#inputPrecoVenda').on('keypress', function (e) {
+        let str = (e.keyCode ? e.keyCode : e.which);
+        if (str > 47 && str < 58 || str == 44 || str == 46) {
+            return true;
+        }else{
+            return (str == 8 || str == 0)?true:false;
+        }
+    });
+
     $('#inputPrecoUnitario').mask('R$ #.##0,00', {reverse: true});
-    $('#inputPrecoTotal').mask('R$ #.##0,00');
+    $('#inputPrecoTotal').mask('R$ #.##0,00');  
 
 });  
 //fim mascaras input
@@ -615,10 +624,11 @@ function validaAlteracaoFornecedores(){
     }
 }
 
-//Função para mostrar as tabelas de clientes e fornecedores
+//Função para mostrar as tabelas de clientes, fornecedores e produtos
 function mostrarTabelaCadastros(){
     let el = document.getElementById('tabela_cad_clientes');
     let el_tb_fornecedores = document.getElementById('tabela_cad_fornecedores');
+    let el_tb_produtos = document.getElementById('tabela_cad_produtos');
 
     if (el && el.style.display == 'none'){
         el.style.display = '';
@@ -635,6 +645,14 @@ function mostrarTabelaCadastros(){
     else if (el_tb_fornecedores && el_tb_fornecedores.style.display == ''){
         el_tb_fornecedores.style.display = 'none';
         document.getElementById('txt_consultar_fornecedores').innerHTML = 'Consultar Fornecedores Cadastrados';     
+    }
+    else if (el_tb_produtos && el_tb_produtos.style.display == 'none'){
+        el_tb_produtos.style.display = '';
+        document.getElementById('txt_consultar_produtos').innerHTML = 'Ocultar tabela';     
+    }
+    else if (el_tb_produtos && el_tb_produtos.style.display == ''){
+        el_tb_produtos.style.display = 'none';
+        document.getElementById('txt_consultar_produtos').innerHTML = 'Consultar Produtos Cadastrados';     
     }
 }
 
@@ -771,6 +789,38 @@ function editarFornecedor(id, cnpj, razao_social, nome_fantasia, cep, endereco, 
             return false;
         }
     }
+}
+
+function excluirProduto(id, foto_produto){
+    Swal.fire({
+        title: 'Você tem certeza?',
+        text: "Você não poderá reverter isso!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, excluir!',
+        cancelButtonText: 'Não, cancelar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Insira senha master para confirmar a exclusão!',
+                input: 'password',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Confirmar',
+            })
+            .then((result) => {
+            
+                if (result.value) {
+                    let pass = result.value;
+                    location.href = "cad_produto_controller.php?acao=excluir&id=" + id + "&img=" + foto_produto + "&p=" + pass;
+                } 
+            })            
+        }
+    })
 }
 
 //Função para limpar os campos quando o botão Cancelar é acionado, porém se o o usuário estiver alterando ele também irá limpar

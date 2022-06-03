@@ -145,7 +145,7 @@
                           
                             
                             <button onclick="location.href='#'" class="btn btn-primary">Histórico</button>
-                            <button onclick="location.href='#'" class="btn btn-primary">Venda</button>
+                            <button onclick="window.open('venda.php', '_blank')" class="btn btn-primary">Iniciar Venda</button>
                         </div>
                     </div>
                 </div>

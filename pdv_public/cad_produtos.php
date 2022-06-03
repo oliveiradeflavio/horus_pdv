@@ -4,6 +4,9 @@
         header("Location: login.php?login=2");
     }
 
+    $acao = 'consultarTabelaProdutos';
+    require 'cad_produto_controller.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -63,10 +66,53 @@
            </div>
        </div>
    </nav>
-
- 
-
      </header>
+
+     <section class="container row col-md-12 centro">
+        <!-- msg de retorno -->
+        <?php
+        if (isset($_GET['sucesso']) && $_GET['sucesso'] == '1') { ?>
+            <div class='alert alert-success mt-2' role='alert'>
+                <strong>Sucesso!</strong> Produto cadastrado com sucesso!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == '2') { ?>
+            <div class='alert alert-success mt-2' role='alert'>
+                <strong>Sucesso!</strong> Produto removido com sucesso!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+
+        <?php } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == '3') { ?>
+            <div class='alert alert-success mt-2' role='alert'>
+                <strong>Sucesso!</strong> Produto alterado com sucesso!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+
+        <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '2') { ?>
+            <div class='alert alert-warning mt-2' role='alert'>
+                <strong>Atenção</strong> Produto já cadastrado!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '3') { ?>
+            <div class='alert alert-danger mt-2' role='alert'>
+                <strong>Erro</strong> Senha master incorreta!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>   
+        <?php } ?>
+       
+    </section>
+
 
     <section>
     <div class="container mb-5">
@@ -90,7 +136,7 @@
                           
                             
                             <button onclick="location.href='#'" class="btn btn-primary">Histórico</button>
-                            <button onclick="location.href='#'" class="btn btn-primary">Venda</button>
+                            <button onclick="window.open('venda.php', '_blank')" class="btn btn-primary">Iniciar Venda</button>
                         </div>
                     </div>
                 </div>
@@ -126,19 +172,24 @@
                         </div>
 
                         <div class='form-row'>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                     <label for="inputQuantidade">Quantidade</label>
-                                    <input type="number" class="form-control" id="inputQuantidade" name="inputQuantidade" onfocus="somaPrecoTotalCadastro()" required>
+                                    <input type="number" class="form-control" id="inputQuantidade" name="inputQuantidade" onfocus="somaPrecoTotalCadastro()" placeholder="0" required>
                                 </div>
                             
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="inputPrecoUnitario">Preço Unitário</label>
                                 <input type="text" class="form-control" id="inputPrecoUnitario" name="inputPrecoUnitario" placeholder="R$ 0,00" onblur="somaPrecoTotalCadastro()" required>
                             </div>
 
-                            <div class="form-group col-md-4">
-                                <label for="inputPrecoTotal">Preço Total</label>
-                                <input type="text" class="form-control" id="inputPrecoTotal" name="inputPrecoTotal" placeholder="R$ 0,00"   required>
+                            <div class="form-group col-md-3">
+                                <label for="inputPrecoVenda">Preço Venda</label>
+                                <input type="text" class="form-control" id="inputPrecoVenda" name="inputPrecoVenda" placeholder="R$ 0,00" required>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="inputPrecoTotal">Total de Produto</label>
+                                <input type="text" class="form-control" id="inputPrecoTotal" name="inputPrecoTotal" placeholder="R$ 0,00" readonly  required>
                             </div>
 
                           
@@ -148,12 +199,44 @@
                         <button type="reset" class="btn btn-danger">Cancelar</button>
                     </form>
                 </div>
-
             </div>
+            <h5 class="card-title mt-5" style="cursor: pointer" id="txt_consultar_produtos" onclick="mostrarTabelaCadastros()">Consultar Produtos Cadastrados</h5>
+            <table class="table table-sm table-hover table-responsive p-3" style="display: none" id="tabela_cad_produtos">
+                <thead>
+                    <tr>
+                        <th scope="col">Imagem</th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Preço Unitário</th>
+                        <th scope="col">Preço Venda</th>
+                        <th scope="col">Total</th>                    
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($cadProdutos as $indice => $cadProduto) {?>
+                        <tr>
+                            <td><img src="../pdv/img/produtos/<?php echo $cadProduto->foto_produto; ?>" width="50" height="50"></td>
+                            <td><?php echo $cadProduto->codigo_produto; ?></td>
+                            <td><?php echo $cadProduto->nome_produto; ?></td>
+                            <td><?php echo $cadProduto->descricao_produto; ?></td>
+                            <td><?php echo $cadProduto->quantidade_produto; ?></td>
+                            <td><?php echo $cadProduto->preco_unitario_produto; ?></td>
+                            <td><?php echo $cadProduto->preco_venda_produto; ?></td>
+                            <td><?php echo $cadProduto->preco_total_produto; ?></td>
+
+                            <td><i class="fa-regular fa-pen-to-square icone_fontawesome" style="cursor:pointer"></i></td>
+                            <td><i class="fas fa-trash-alt icone_fontawesome" onclick="excluirProduto(<?= $cadProduto->id_produto ?>, '<?= $cadProduto->foto_produto ?>')" style="cursor:pointer"></i></td>
+                        </tr>
+                        <?php                   
+                        }
+                    ?>
+        
         </div>
 
-
-
+      
     </section>
 
 <script src="js/pdv.js"></script>
