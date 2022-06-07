@@ -12,8 +12,6 @@
     $senha = md5($_POST['senha']);
     $foto = $_FILES['foto_perfil'];
 
-    
-    
     if(empty($foto['name']))
         {
             $novo_nome = 'logo.png';

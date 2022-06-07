@@ -624,6 +624,45 @@ function validaAlteracaoFornecedores(){
     }
 }
 
+//Função para validar a alteração de produtos. Basicamente é a mesma função da validação do cadastro mas sem o submit do formulário
+function validaAlteracaoProduto(){
+    let inputNomeProduto = document.getElementById('inputNomeProduto');
+    let inputCodigoProduto = document.getElementById('inputCodigo');
+    let inputDescricaoProduto = document.getElementById('inputDescricaoProduto');
+    let inputQuantidade = document.getElementById('inputQuantidade');
+    let inputPrecoUnitario = document.getElementById('inputPrecoUnitario');
+    let inputPrecoVenda = document.getElementById('inputPrecoVenda');
+
+    if (inputNomeProduto.value == "") {
+        Swal.fire('Oops...', 'Nome do produto não informado!', 'error');
+        return false;
+    }
+    else if (inputCodigoProduto.value == "") {
+        Swal.fire('Oops...', 'Código do produto não informado!', 'error');
+        return false;
+    }
+    else if (inputDescricaoProduto.value == "") {
+        Swal.fire('Oops...', 'Descrição do produto não informada!', 'error');
+        return false;
+    }
+    else if (inputQuantidade.value == "") {
+        Swal.fire('Oops...', 'Quantidade do produto não informada!', 'error');
+        return false;
+    }
+    else if (inputPrecoUnitario.value == "") {
+        Swal.fire('Oops...', 'Preço unitário do produto não informado!', 'error');
+        return false;
+    }
+    else if (inputPrecoVenda.value == "") {
+        Swal.fire('Oops...', 'Preço de venda do produto não informado!', 'error');
+        return false;
+    }
+    else{
+        return true;
+    }
+
+}
+
 //Função para mostrar as tabelas de clientes, fornecedores e produtos
 function mostrarTabelaCadastros(){
     let el = document.getElementById('tabela_cad_clientes');
@@ -823,6 +862,37 @@ function excluirProduto(id, foto_produto){
     })
 }
 
+function editarProduto(id, imagem, codigo, produto, descricao, quantidade, preco_unitario, preco_venda, preco_total){
+    
+        let btnCadastrarProduto = document.getElementById('btnCadastrarProduto');
+        btnCadastrarProduto.disabled = true;
+        
+        let btnAlterarProduto = document.getElementById('btnAlterarProduto');
+        btnAlterarProduto.style.display = 'inline';
+    
+        let formCadProduto = document.getElementById('formCadProduto');
+        formCadProduto.method = 'POST';
+        formCadProduto.enctype = 'multipart/form-data';
+        formCadProduto.setAttribute('action', 'cad_produto_controller.php?acao=alterar&id=' + id + '&img=' + imagem);
+    
+        $('#inputCodigo').val(codigo);
+        $('#inputNomeProduto').val(produto);
+        $('#inputDescricaoProduto').val(descricao);
+        $('#inputQuantidade').val(quantidade);
+        $('#inputPrecoUnitario').val(preco_unitario);
+        $('#inputPrecoVenda').val(preco_venda);
+        $('#inputPrecoTotal').val(preco_total);
+        $('#inputImagemProduto').val(imagem);
+    
+        btnAlterarProduto.onclick = function(){
+            if(validaAlteracaoProduto()){
+                formCadProduto.submit();
+            }else{
+                return false;
+            }
+        }
+}
+
 //Função para limpar os campos quando o botão Cancelar é acionado, porém se o o usuário estiver alterando ele também irá limpar
 // os campos e irá fazer um reload da página
 function resetaCampos(){
@@ -833,10 +903,16 @@ function resetaCampos(){
     let el_alterar_fornecedor = document.getElementById('btnAlterarFornecedor');
     let btn_cadastrar_fornecdor = document.getElementById('btnCadastrarFornecedor');
 
+    let el_alterar_produto = document.getElementById('btnAlterarProduto');
+    let btn_cadastrar_produto = document.getElementById('btnCadastrarProduto');
+
     if (el_alterar_cliente && el_alterar_cliente.style.display == 'inline' || btn_cadatrar_cliente && btn_cadatrar_cliente.disabled == true){
         document.location.reload();
     }
     if (el_alterar_fornecedor && el_alterar_fornecedor.style.display == 'inline' || btn_cadastrar_fornecdor && btn_cadastrar_fornecdor.disabled == true){
+        document.location.reload();
+    }
+    if (el_alterar_produto && el_alterar_produto.style.display == 'inline' || btn_cadastrar_produto && btn_cadastrar_produto.disabled == true){
         document.location.reload();
     }
 }
@@ -860,6 +936,15 @@ function limpaCampos(){
     let inputNomeFantasia = document.getElementById('inputNomeFantasia');
     let inputTelefone = document.getElementById('inputTelefone');
     let inputEmail = document.getElementById('inputEmail');
+
+    let inputCodigo = document.getElementById('inputCodigo');
+    let inputNomeProduto = document.getElementById('inputNomeProduto');
+    let inputDescricaoProduto = document.getElementById('inputDescricaoProduto');
+    let inputQuantidade = document.getElementById('inputQuantidade');
+    let inputPrecoUnitario = document.getElementById('inputPrecoUnitario');
+    let inputPrecoVenda = document.getElementById('inputPrecoVenda');
+    let inputPrecoTotal = document.getElementById('inputPrecoTotal');
+    let inputImagemProduto = document.getElementById('inputImagemProduto');
 
     if (inputCPF){
         inputCPF.value = '';
@@ -908,6 +993,30 @@ function limpaCampos(){
     }
     if (inputEmail){
         inputEmail.value = '';
+    }
+    if (inputCodigo){
+        inputCodigo.value = '';
+    }
+    if (inputNomeProduto){
+        inputNomeProduto.value = '';
+    }
+    if (inputDescricaoProduto){
+        inputDescricaoProduto.value = '';
+    }
+    if (inputQuantidade){
+        inputQuantidade.value = '';
+    }
+    if (inputPrecoUnitario){
+        inputPrecoUnitario.value = '';
+    }
+    if (inputPrecoVenda){
+        inputPrecoVenda.value = '';
+    }
+    if (inputPrecoTotal){
+        inputPrecoTotal.value = '';
+    }
+    if (inputImagemProduto){
+        inputImagemProduto.value = '';
     }
 
 }

@@ -109,8 +109,26 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>   
+        <?php }
+         
+        else if (isset($_GET['erro']) && $_GET['erro'] == '4') { ?>
+            <div class='alert alert-danger mt-2' role='alert'>
+                <strong>Erro</strong> Arquivo enviado não corresponde ao formato jpg, jpeg ou png!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>   
+        <?php } 
+
+        else if (isset($_GET['erro']) && $_GET['erro'] == '5') { ?>
+            <div class='alert alert-danger mt-2' role='alert'>
+                <strong>Erro</strong> Já existe uma imagem com esse nome!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>   
         <?php } ?>
-       
+
     </section>
 
 
@@ -195,8 +213,9 @@
                           
                         </div>
 
-                        <button type="button" onclick="validaCamposProdutos()" class="btn btn-primary">Cadastrar</button>
-                        <button type="reset" class="btn btn-danger">Cancelar</button>
+                        <button type="button" onclick="validaCamposProdutos()" id="btnCadastrarProduto" class="btn btn-primary">Cadastrar</button>
+                        <button id="btnAlterarProduto" style="display: none" class="btn btn-secondary">Alterar</button>
+                        <button type="button" onclick="resetaCampos()" class="btn btn-danger">Cancelar</button>
                     </form>
                 </div>
             </div>
@@ -227,7 +246,18 @@
                             <td><?php echo $cadProduto->preco_venda_produto; ?></td>
                             <td><?php echo $cadProduto->preco_total_produto; ?></td>
 
-                            <td><i class="fa-regular fa-pen-to-square icone_fontawesome" style="cursor:pointer"></i></td>
+                            <td><i class="fa-regular fa-pen-to-square icone_fontawesome" style="cursor:pointer" onclick="editarProduto(
+                                '<?php echo $cadProduto->id_produto; ?>',
+                                '<?php echo $cadProduto->foto_produto; ?>',
+                                '<?php echo $cadProduto->codigo_produto; ?>',
+                                '<?php echo $cadProduto->nome_produto; ?>',
+                                '<?php echo $cadProduto->descricao_produto; ?>',
+                                '<?php echo $cadProduto->quantidade_produto; ?>',
+                                '<?php echo $cadProduto->preco_unitario_produto; ?>',
+                                '<?php echo $cadProduto->preco_venda_produto; ?>',
+                                '<?php echo $cadProduto->preco_total_produto; ?>'
+                                )">
+                            </i></td>
                             <td><i class="fas fa-trash-alt icone_fontawesome" onclick="excluirProduto(<?= $cadProduto->id_produto ?>, '<?= $cadProduto->foto_produto ?>')" style="cursor:pointer"></i></td>
                         </tr>
                         <?php                   
