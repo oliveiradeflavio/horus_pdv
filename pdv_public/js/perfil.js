@@ -1,4 +1,8 @@
-//checkbox para habilitar/desabilitar campos de perfil
+/*
+checkbox para habilitar/desabilitar campos de perfil
+se o checkbox estiver marcado, os campos devem ser habilitados para editar e inserir a nova senha e a senha antiga
+se o checkbox estiver desmarcado, os campos devem ser desabilitados.
+*/
 function habilitarTrocaSenha() {
     let checkbox = document.getElementById('checkbox_perfil_alterar_senha');
     let campo_antiga_senha = document.getElementById('antiga_senha_usuario');

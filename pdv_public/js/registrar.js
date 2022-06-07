@@ -1,4 +1,4 @@
-//preview  imagem no input
+//preview  imagem no input, quando o usuário carregar uma image, logo irá aparecer uma prewiew da mesma
 function readImage() {
     if (this.files && this.files[0]) {
         let file = new FileReader();
@@ -9,9 +9,9 @@ function readImage() {
     }
 }
 document.getElementById("img-input").addEventListener("change", readImage, false);
-//preview  imagem no input
+//FIM preview  imagem no input
 
-//mascaras de input
+//mascaras de input 
 $(document).ready(function () {
     $('#cpf').mask('000.000.000-00');
     $('#nome').on('keypress', function (e) {
@@ -77,6 +77,7 @@ function testaCPF(cpf) {
     return true
 }
 
+//verifica o email digitado
 function validaEmail(){
     let email = document.getElementById("email").value;
     let reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
@@ -87,7 +88,7 @@ function validaEmail(){
     }
 }
 
-//validação campos
+//validação campos obrigatórios do formulário
 function validaCampos(){
     let cpf = document.getElementById("cpf").value;
     let nome = document.getElementById("nome").value;

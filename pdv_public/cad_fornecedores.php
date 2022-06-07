@@ -261,6 +261,7 @@
                         <button type="button" onclick="validaCamposFornecedor()" class="btn btn-primary" id="btnCadastrarFornecedor">Cadastrar</button>
                         <button id="btnAlterarFornecedor" style="display: none" class="btn btn-secondary">Alterar</button>
                         <button type="button" onclick="resetaCampos()" class="btn btn-danger" id="btnCancelarFornecedor">Cancelar</button>
+                        <i class="fa-solid fa-circle-question icone_fontawesome ml-3" id="ajuda_cad_fornecedor" style="cursor: pointer" onclick="ajuda_cadastro()"></i>
                     </form>
                 </div>
             </div>

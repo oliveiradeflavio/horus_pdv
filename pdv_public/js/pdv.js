@@ -1,4 +1,4 @@
-//mascaras input
+// PÁGINA PRODUTOS - MÁSCARAS INPUTS
 $(document).ready(function () {
     $('#inputCelular').mask('(00)00000-0000');
     $('#inputCEP').mask('00000-000');
@@ -32,8 +32,9 @@ $(document).ready(function () {
         return false;
     });
 });
+//FIM DA PÁGINA PRODUTOS - MÁSCARAS INPUTS
 
-// ---- PÁGINA FORNECEDOR ----
+// ---- PÁGINA FORNECEDOR - MÁSCARAS INPUTS
 $(document).ready(function () {
     $('#inputCNPJ').mask('00.000.000/0000-00');
     $('#inputRazaoSocial').on('keypress', function (e) {
@@ -56,8 +57,9 @@ $(document).ready(function () {
     });
 
 });
+// FIM PÁGINA FORNECEDOR -  - MÁSCARAS INPUTS
 
-//PÁGINA DE PRODUTOS
+//PÁGINA DE PRODUTOS - MÁSCARAS INPUTS
 $(document).ready(function () {
     //campo somente numeros
     $('#inputQuantidade').on('keypress', function (e) {
@@ -82,7 +84,7 @@ $(document).ready(function () {
     $('#inputPrecoTotal').mask('R$ #.##0,00');  
 
 });  
-//fim mascaras input
+//FIM MÁSCARAS DE INPUT PARA PÁGINA PRODUTOS
 
 //Quando os campos quantidade e preço unitário for preenchidos, o valor total será calculado automaticamente e atribuido no campo preço total.
 function somaPrecoTotalCadastro(){
@@ -246,8 +248,10 @@ function validaEmail(){
     }
 }
 
-
-//Função para preencher os campos com os valores do CEP.
+/*
+Função para preencher os campos com os valores do CEP. Irá pegar o valor do CEP e preencher os campos com os valores do CEP.
+Estou usando uma requisição da api VIACEP.
+*/
 function meu_callback(conteudo) {
     if (!('erro' in conteudo)) {
         //Atualiza os campos com os valores.
@@ -303,9 +307,7 @@ function pesquisaCEP(valor) {
         }
     } else {
         //cep sem valor, limpa formulário.
-
     }
-
 }
 
 //validando a data de nascimento, pegando no formato aaaa/mm/dd e transformando para o formato dd/mm/aaaa. Precisa ser maior de 18 anos
@@ -493,7 +495,7 @@ function validaCamposProdutos(){
     }
 }
 
-//Função para validar a alteração do cliente. Basicamente é a mesma função da validação do cadastro
+//Função para validar a alteração do cliente. Basicamente é a mesma função da validação do cadastro mas sem o submit para enviar o formulário
 function validaAlteracao() {
     let inputNome = document.getElementById('inputNome');
     let inputCPF = document.getElementById('inputCPF');
@@ -558,10 +560,9 @@ function validaAlteracao() {
     else{
        return true; 
     }
-
 }
 
-//Função para validar a alteração de fornecedor. Basicamente é a mesma função da validação do cadastro
+//Função para validar a alteração de fornecedor. Basicamente é a mesma função da validação do cadastro sem o submit do formulário
 function validaAlteracaoFornecedores(){
     let inputCNPJ = document.getElementById('inputCNPJ');
     let inputRazaoSocial = document.getElementById('inputRazaoSocial');
@@ -660,10 +661,9 @@ function validaAlteracaoProduto(){
     else{
         return true;
     }
-
 }
 
-//Função para mostrar as tabelas de clientes, fornecedores e produtos
+//Função para mostrar as tabelas de clientes, fornecedores e produtos nas suas respectivas páginas
 function mostrarTabelaCadastros(){
     let el = document.getElementById('tabela_cad_clientes');
     let el_tb_fornecedores = document.getElementById('tabela_cad_fornecedores');
@@ -695,10 +695,10 @@ function mostrarTabelaCadastros(){
     }
 }
 
-
-
-//Função para excluir o cliente já cadastrado, passando o id do cliente como parâmetro e chamando o controller para excluir o cliente
-//A função também é responsável por exibir um alerta de confirmação para o usuário antes de excluir o cliente pedindo uma senha master
+/*
+Função para excluir o cliente já cadastrado, passando o id do cliente como parâmetro e chamando o controller para excluir o cliente
+A função também é responsável por exibir um alerta de confirmação para o usuário antes de excluir o cliente pedindo uma senha master
+*/
 function excluirCliente(id){
     Swal.fire({
         title: 'Você tem certeza?',
@@ -764,6 +764,7 @@ function editarCliente(id, cpf, nome, dt_nascimento, cep, endereco, numero, bair
     }
 }
 
+//Função para excluir o fornecedor. Irá aparecer um alerta de confirmação para o usuário antes de excluir o fornecedor pedindo uma senha master
 function excluirFornecedor(id){
     Swal.fire({
         title: 'Você tem certeza?',
@@ -796,6 +797,7 @@ function excluirFornecedor(id){
     })
 }
 
+//Função para editar o fornecedor cadastrado no banco de dados. Será acionado o botão Alterar e irá aparecer na página de cadastro de fornecedores
 function editarFornecedor(id, cnpj, razao_social, nome_fantasia, cep, endereco, numero, bairro, complemtno, estado, cidade, telefone, celular, email){
 
     let btnCadastrarFornecedor = document.getElementById('btnCadastrarFornecedor');
@@ -830,6 +832,7 @@ function editarFornecedor(id, cnpj, razao_social, nome_fantasia, cep, endereco, 
     }
 }
 
+//Função para excluir produto irá aparecer um alerta de confirmação para o usuário antes de excluir o produto pedindo uma senha master
 function excluirProduto(id, foto_produto){
     Swal.fire({
         title: 'Você tem certeza?',
@@ -862,6 +865,7 @@ function excluirProduto(id, foto_produto){
     })
 }
 
+//Função para editar o produto que foi cadastrado no banco de dados. Será acionado o botão Alterar e irá aparecer na página de cadastro de produtos
 function editarProduto(id, imagem, codigo, produto, descricao, quantidade, preco_unitario, preco_venda, preco_total){
     
         let btnCadastrarProduto = document.getElementById('btnCadastrarProduto');
@@ -893,8 +897,11 @@ function editarProduto(id, imagem, codigo, produto, descricao, quantidade, preco
         }
 }
 
-//Função para limpar os campos quando o botão Cancelar é acionado, porém se o o usuário estiver alterando ele também irá limpar
-// os campos e irá fazer um reload da página
+/*
+Função para limpar os campos quando o botão Cancelar é acionado, porém se o o usuário estiver alterando ele também irá limpar
+os campos e irá fazer um reload da página.
+Cada página de cadastro tem um botão cancelar que irá chamar essa função.
+*/
 function resetaCampos(){
     limpaCampos();
     let el_alterar_cliente = document.getElementById('btnAlterarCliente');
@@ -917,7 +924,7 @@ function resetaCampos(){
     }
 }
 
-//Funcão irá limpar os campos do formulário de cadastro de clientes
+//Funcão irá limpar os campos do formulário de cadastro de clientes, fornecedores e produtos
 function limpaCampos(){
     let inputCPF = document.getElementById('inputCPF');
     let inputNome = document.getElementById('inputNome');
@@ -1021,14 +1028,36 @@ function limpaCampos(){
 
 }
 
-//Função de ajuda de como preencher os campos do cadadastro de clientes (crud) e também fazer a consulta. Para não dizer que não tem algo explicado
-function ajuda_cad_cliente(){
-    Swal.fire({
-        title: 'Ajuda',
-        text: 'Para cadastrar um novo cliente, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um cliente, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um cliente, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os clientes cadastrados clicando no texto Consultar.',
-        icon: 'info',
-        confirmButtonText: 'Fechar'
-    })
+//Função de ajuda de como preencher os campos do cadadastro de clientes, fornecedores e produtos (crud) e também fazer a consulta.
+function ajuda_cadastro(){
+    let ajuda_cadastro_cliente = document.getElementById('ajuda_cad_cliente');
+    let ajuda_cadastro_fornecedor = document.getElementById('ajuda_cad_fornecedor');
+    let ajuda_cadastro_produto = document.getElementById('ajuda_cad_produto');
+
+    if (ajuda_cadastro_cliente){
+        Swal.fire({
+            title: 'Ajuda',
+            text: 'Para cadastrar um novo cliente, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um cliente, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um cliente, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os clientes cadastrados clicando no texto Consultar.',
+            icon: 'info',
+            confirmButtonText: 'Fechar'
+        })
+    }
+    if (ajuda_cadastro_fornecedor){
+        Swal.fire({
+            title: 'Ajuda',
+            text: 'Para cadastrar um novo fornecedor, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um fornecedor, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um fornecedor, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os fornecedores cadastrados clicando no texto Consultar.',
+            icon: 'info',
+            confirmButtonText: 'Fechar'
+        })
+    }
+    if (ajuda_cadastro_produto){
+        Swal.fire({
+            title: 'Ajuda',
+            text: 'Para cadastrar um novo produto, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um produto, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um produto, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os produtos cadastrados clicando no texto Consultar.',
+            icon: 'info',
+            confirmButtonText: 'Fechar'
+        }) 
+    }   
 }
 
     

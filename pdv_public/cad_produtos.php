@@ -216,6 +216,7 @@
                         <button type="button" onclick="validaCamposProdutos()" id="btnCadastrarProduto" class="btn btn-primary">Cadastrar</button>
                         <button id="btnAlterarProduto" style="display: none" class="btn btn-secondary">Alterar</button>
                         <button type="button" onclick="resetaCampos()" class="btn btn-danger">Cancelar</button>
+                        <i class="fa-solid fa-circle-question icone_fontawesome ml-3" id="ajuda_cad_produto" style="cursor: pointer" onclick="ajuda_cadastro()"></i>
                     </form>
                 </div>
             </div>
