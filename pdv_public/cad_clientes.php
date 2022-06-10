@@ -56,6 +56,7 @@ require 'cad_cliente_controller.php';
                             <?php if ($_SESSION['perfil_usuario'] == 1) : ?>
                                 <a href="#">Configurações</a>
                             <?php endif; ?>
+                            <a href="sobre.php">Sobre</a>
                             <a href="logout.php">Sair</a>
                         </div>
                     </div>
@@ -86,7 +87,7 @@ require 'cad_cliente_controller.php';
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-        </div>
+            </div>
 
         <?php } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == '3') { ?>
             <div class='alert alert-success mt-2' role='alert'>
@@ -94,7 +95,7 @@ require 'cad_cliente_controller.php';
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-        </div>
+            </div>
 
         <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '2') { ?>
             <div class='alert alert-warning mt-2' role='alert'>
@@ -110,9 +111,9 @@ require 'cad_cliente_controller.php';
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>   
+            </div>
         <?php } ?>
-       
+
     </section>
 
     <section>
@@ -241,50 +242,84 @@ require 'cad_cliente_controller.php';
                         <button id="btnAlterarCliente" style="display: none" class="btn btn-secondary">Alterar</button>
                         <button type="button" onclick="resetaCampos()" class="btn btn-danger" id='btnCancelarCliente'>Cancelar</button>
                         <i class="fa-solid fa-circle-question icone_fontawesome ml-3" id="ajuda_cad_cliente" style="cursor: pointer" onclick="ajuda_cadastro()"></i>
-                        
+
                     </form>
                 </div>
 
-            </div>        
+            </div>
 
-            <h5 class="card-title mt-5" style="cursor: pointer" onclick="mostrarTabelaCadastros()" id="txt_consultar">Consultar Clientes Cadastrados</h5>
+            <!-- <h5 class="card-title mt-5" style="cursor: pointer" onclick="mostrarTabelaCadastros()" id="txt_consultar">Consultar Clientes Cadastrados</h5> -->
         </div>
 
+        <div class="container centro mb-2 mt-5" id="campo_pesquisa">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="GET" action="" id='pesquisar_dados'>
+                        <div class="input-group rounded">
+                            <input type="search" class="form-control rounded input_pesquisar" name="buscar" id="inputPesquisa" placeholder="CPF ou Nome a ser pesquisado" onchange="verificarCampoPesquisa()" />
+                            <button type="button" onclick="verificarCampoPesquisa()" class="input-group-text border-0" id="botaoPesquisar">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-        <table class="table table-sm table-hover table-responsive p-3" style="display: none" id="tabela_cad_clientes">
-                <thead>
-                    <tr>
-                    <th scope="col">CPF</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Data de Nascimento</th>
-                    <th scope="col">CEP</th>
-                    <th scope="col">Endereço</th>
-                    <th scope="col">Número</th>
-                    <th scope="col">Bairro</th>
-                    <th scope="col">Complemento</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Celular/WhatsApp</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach($cadClientes as $indice => $cadCliente){
-                    ?>
-                    <tr>
-                        <td><?php echo $cadCliente->cpf_cliente; ?></td>
-                        <td><?php echo $cadCliente->nome_cliente; ?></td>
-                        <td><?php echo date('d/m/Y', strtotime($cadCliente->dt_nascimento_cliente)); ?></td>
-                        <td><?php echo $cadCliente->cep_cliente; ?></td>
-                        <td><?php echo $cadCliente->endereco_cliente; ?></td>
-                        <td><?php echo $cadCliente->numero_cliente; ?></td>
-                        <td><?php echo $cadCliente->bairro_cliente; ?></td>
-                        <td><?php echo $cadCliente->complemento_cliente; ?></td>
-                        <td><?php echo $cadCliente->estado_cliente; ?></td>
-                        <td><?php echo $cadCliente->cidade_cliente; ?></td>
-                        <td><?php echo $cadCliente->celular_cliente; ?></td>    
-                        
-                        <td> <i class="fa-regular fa-pen-to-square icone_fontawesome" onclick="editarCliente(<?= $cadCliente->id_cliente ?>,
+        <?php
+        if (isset($_GET['buscar'])) { ?>
+
+            <?php
+            $conexao = new PDO('mysql:host=localhost;dbname=pdv_horus', 'root', '');
+            $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $buscar = "%" . trim($_GET['buscar']) . "%";
+            $query = "SELECT * FROM tb_clientes WHERE nome_cliente LIKE :buscar OR cpf_cliente LIKE :buscar";
+            $stmt = $conexao->prepare($query);
+            $stmt->bindParam(':buscar', $buscar);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            if (count($resultado) <= 0) {
+            ?>
+                <div class="d-flex justify-content-center col-md-12" role="alert">
+                    <img class="img-fluid" width="400" height="400" src="img/not-found.jpg" id='imagem_arquivo_not_found' alt="">
+                <?php
+            } else {
+                ?>
+                    <table class="table table-sm table-hover table-responsive p-3" id="tabela_cad_clientes">
+                        <thead>
+                            <tr>
+                                <th scope="col">CPF</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Data de Nascimento</th>
+                                <th scope="col">CEP</th>
+                                <th scope="col">Endereço</th>
+                                <th scope="col">Número</th>
+                                <th scope="col">Bairro</th>
+                                <th scope="col">Complemento</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Cidade</th>
+                                <th scope="col">Celular/WhatsApp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($resultado as $key => $cadCliente) { ?>
+
+                                <tr>
+                                    <td><?php echo $cadCliente->cpf_cliente; ?></td>
+                                    <td><?php echo $cadCliente->nome_cliente; ?></td>
+                                    <td><?php echo date('d/m/Y', strtotime($cadCliente->dt_nascimento_cliente)); ?></td>
+                                    <td><?php echo $cadCliente->cep_cliente; ?></td>
+                                    <td><?php echo $cadCliente->endereco_cliente; ?></td>
+                                    <td><?php echo $cadCliente->numero_cliente; ?></td>
+                                    <td><?php echo $cadCliente->bairro_cliente; ?></td>
+                                    <td><?php echo $cadCliente->complemento_cliente; ?></td>
+                                    <td><?php echo $cadCliente->estado_cliente; ?></td>
+                                    <td><?php echo $cadCliente->cidade_cliente; ?></td>
+                                    <td><?php echo $cadCliente->celular_cliente; ?></td>
+
+                                    <td> <i class="fa-regular fa-pen-to-square icone_fontawesome" onclick="editarCliente(<?= $cadCliente->id_cliente ?>,
                                                                                 '<?= $cadCliente->cpf_cliente ?>',
                                                                                 '<?= $cadCliente->nome_cliente ?>',                                                                              
                                                                                 '<?= $cadCliente->dt_nascimento_cliente ?>',
@@ -295,28 +330,18 @@ require 'cad_cliente_controller.php';
                                                                                 '<?= $cadCliente->complemento_cliente ?>',
                                                                                 '<?= $cadCliente->estado_cliente ?>',
                                                                                 '<?= $cadCliente->cidade_cliente ?>',
-                                                                                '<?= $cadCliente->celular_cliente ?>')"                                                                               
-                                                                                
-                                                                                style='cursor: pointer'></i> </td>
-                        <td> <i class="fas fa-trash-alt icone_fontawesome" onclick="excluirCliente(<?= $cadCliente->id_cliente ?>)" style='cursor: pointer'></i> </td>
-                        
+                                                                                '<?= $cadCliente->celular_cliente ?>')" style='cursor: pointer'></i> </td>
+                                    <td> <i class="fas fa-trash-alt icone_fontawesome" onclick="excluirCliente(<?= $cadCliente->id_cliente ?>)" style='cursor: pointer'></i> </td>
+                                </tr>
+                        </tbody>
+                    </table>
 
-                       
-                    
-                    </tr>
-                    <?php
+        <?php
+                            }
+                        }
                     }
-                    ?>
-                   
-                </tbody>
-                </table>
-
-        
-
-
-
+        ?>
     </section>
-
 
     <script src="js/pdv.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

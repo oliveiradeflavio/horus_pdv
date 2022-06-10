@@ -50,6 +50,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                             <?php if ($_SESSION['perfil_usuario'] == 1) : ?>
                                 <a href="#">Configurações</a>
                             <?php endif; ?>
+                            <a href="sobre.php">Sobre</a>
                             <a href="logout.php">Sair</a>
                         </div>
                     </div>
@@ -115,11 +116,17 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             </div>
 
         </div>
-
-
         </div>
-
     </section>
+
+    <footer class="bg-light text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-3">
+            <?= date("Y") ?> <i class="fa-solid fa-code"></i>
+            <a href="sobre.php">Flávio Oliveira</a>
+        </div>
+  <!-- Copyright -->
+    </footer>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -207,7 +214,5 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             chart.draw(data_vendas, options);
         }
     </script>
-
 </body>
-
 </html>

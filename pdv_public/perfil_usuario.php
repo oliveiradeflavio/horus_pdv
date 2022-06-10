@@ -50,6 +50,7 @@
                            <?php if($_SESSION['perfil_usuario'] == 1): ?>
                                <a href="#">Configurações</a>
                            <?php endif; ?>
+                           <a href="sobre.php">Sobre</a>
                            <a href="logout.php">Sair</a>
                        </div>
                        </div> 

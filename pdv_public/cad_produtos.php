@@ -57,6 +57,7 @@
                            <?php if($_SESSION['perfil_usuario'] == 1): ?>
                                <a href="#">Configurações</a>
                            <?php endif; ?>
+                           <a href="sobre.php">Sobre</a>
                            <a href="logout.php">Sair</a>
                        </div>
                        </div> 
@@ -264,15 +265,15 @@
                         <?php                   
                         }
                     ?>
-        
-        </div>
-
-      
+                </tbody>
+        </div>      
     </section>
 
 <script src="js/pdv.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
+
+
 
 </html>

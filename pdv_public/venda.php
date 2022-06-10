@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM'){
+        header("Location: login.php?login=2");
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -24,7 +32,6 @@
 <body>
 <div class="container">
     <div class="row">
-
     <div class='col-md-6'>
         <img src="img/produto_sem_imagem.png" class="imagem_produto" alt="">
 
@@ -154,13 +161,13 @@
 
 <div class="container footer">
     <div class="row">
-       <div class="col-md-6">
-           
+       <div class="col-md-12">
+          
        </div>
 
-       <div class="col-md-6">
+       <!-- <div class="col-md-6">
            
-       </div>
+       </div> -->
     </div>
 
 

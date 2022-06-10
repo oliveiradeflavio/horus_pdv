@@ -2,7 +2,6 @@
 
 .img-circulo:hover {
     transform: scale(1.1);
-
 }
 
 .img-circulo {
@@ -46,6 +45,14 @@
 /* hover do menu */
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+a {
+    color: #000000;
+}
+
+a:hover{
+    color: #8c84da;
 }
 
 @media (max-width: 576px) {

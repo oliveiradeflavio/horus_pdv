@@ -663,35 +663,65 @@ function validaAlteracaoProduto(){
     }
 }
 
-//Função para mostrar as tabelas de clientes, fornecedores e produtos nas suas respectivas páginas
-function mostrarTabelaCadastros(){
-    let el = document.getElementById('tabela_cad_clientes');
-    let el_tb_fornecedores = document.getElementById('tabela_cad_fornecedores');
-    let el_tb_produtos = document.getElementById('tabela_cad_produtos');
+// //Função para mostrar as tabelas de clientes, fornecedores e produtos nas suas respectivas páginas
+// function mostrarTabelaCadastros(){
+//     let el = document.getElementById('tabela_cad_clientes');
+//     let el_tb_fornecedores = document.getElementById('tabela_cad_fornecedores');
+//     let el_tb_produtos = document.getElementById('tabela_cad_produtos');
+//     let campo_pesquisa = document.getElementById('campo_pesquisa');
 
-    if (el && el.style.display == 'none'){
-        el.style.display = '';
-        document.getElementById('txt_consultar').innerHTML = 'Ocultar tabela';
+//     if (el && el.style.display == 'none'){
+//         el.style.display = '';
+//         document.getElementById('txt_consultar').innerHTML = 'Ocultar tabela';
+//         campo_pesquisa.style.display = '';
 
-    }else if (el && el.style.display == ''){
-        el.style.display = 'none';
-        document.getElementById('txt_consultar').innerHTML = 'Consultar Clientes Cadastrados';
+//     }else if (el && el.style.display == ''){
+//         el.style.display = 'none';
+//         document.getElementById('txt_consultar').innerHTML = 'Consultar Clientes Cadastrados';
+//         campo_pesquisa.style.display = 'none';
 
-    }else if (el_tb_fornecedores && el_tb_fornecedores.style.display == 'none'){
-        el_tb_fornecedores.style.display = '';
-        document.getElementById('txt_consultar_fornecedores').innerHTML = 'Ocultar tabela';     
-    }
-    else if (el_tb_fornecedores && el_tb_fornecedores.style.display == ''){
-        el_tb_fornecedores.style.display = 'none';
-        document.getElementById('txt_consultar_fornecedores').innerHTML = 'Consultar Fornecedores Cadastrados';     
-    }
-    else if (el_tb_produtos && el_tb_produtos.style.display == 'none'){
-        el_tb_produtos.style.display = '';
-        document.getElementById('txt_consultar_produtos').innerHTML = 'Ocultar tabela';     
-    }
-    else if (el_tb_produtos && el_tb_produtos.style.display == ''){
-        el_tb_produtos.style.display = 'none';
-        document.getElementById('txt_consultar_produtos').innerHTML = 'Consultar Produtos Cadastrados';     
+//     }else if (el_tb_fornecedores && el_tb_fornecedores.style.display == 'none'){
+//         el_tb_fornecedores.style.display = '';
+//         document.getElementById('txt_consultar_fornecedores').innerHTML = 'Ocultar tabela';     
+//     }
+//     else if (el_tb_fornecedores && el_tb_fornecedores.style.display == ''){
+//         el_tb_fornecedores.style.display = 'none';
+//         document.getElementById('txt_consultar_fornecedores').innerHTML = 'Consultar Fornecedores Cadastrados';     
+//     }
+//     else if (el_tb_produtos && el_tb_produtos.style.display == 'none'){
+//         el_tb_produtos.style.display = '';
+//         document.getElementById('txt_consultar_produtos').innerHTML = 'Ocultar tabela';     
+//     }
+//     else if (el_tb_produtos && el_tb_produtos.style.display == ''){
+//         el_tb_produtos.style.display = 'none';
+//         document.getElementById('txt_consultar_produtos').innerHTML = 'Consultar Produtos Cadastrados';     
+//     }
+// }
+
+//Função para verificar se foi digitado algo no campo de pesquisa.
+function verificarCampoPesquisa(){
+    let inputPesquisar = document.getElementById('inputPesquisa');
+    let botaoPesquisar = document.getElementById('botaoPesquisar');
+    let campo_pesquisa = document.getElementById('pesquisar_dados');
+
+        //Se o valor pesquisado for o cpf (número digitado) sem os pontos e o hífem, formato ele com o Mask para fazer a busca no bd.
+        if (Number(inputPesquisar.value)){
+            $('#inputPesquisa').mask('000.000.000-00');
+        }
+    
+        if (inputPesquisar.value == ""){
+        inputPesquisar.style.borderColor = 'red';
+        inputPesquisar.style.borderWidth = '2px';
+        inputPesquisar.placeholder = 'Digite algo para pesquisar';
+        return false
+        
+        }
+        else{
+        inputPesquisar.style.borderColor = '#ced4da';
+        botaoPesquisar.innerHTML = 'Pesquisando...';
+       
+        campo_pesquisa.submit();
+        return true
     }
 }
 
