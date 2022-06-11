@@ -679,12 +679,26 @@ function verificarCampoPesquisa(){
         $('#inputPesquisarForn').mask('00.000.000/0000-00'); 
     }
     
-        if (inputPesquisar && inputPesquisar.value == "" || inputPesquisarForn && inputPesquisarForn.value == ""){
-        inputPesquisar.style.borderColor = 'red';
-        inputPesquisar.style.borderWidth = '2px';
-        inputPesquisar.placeholder = 'Digite algo para pesquisar';
-        return false
-        
+        if (inputPesquisar && inputPesquisar.value == "" || inputPesquisarForn && inputPesquisarForn.value == "" || inputPesquisarProd && inputPesquisarProd.value == ""){
+                
+            if (inputPesquisar){
+                inputPesquisar.style.borderColor = 'red';
+                inputPesquisar.style.borderWidth = '2px';
+                inputPesquisar.placeholder = 'Digite algo para pesquisar';
+                return false
+            }
+            if(inputPesquisarForn){
+                inputPesquisarForn.style.borderColor = 'red';
+                inputPesquisarForn.style.borderWidth = '2px';
+                inputPesquisarForn.placeholder = 'Digite algo para pesquisar';
+                return false
+            }
+            if(inputPesquisarProd){
+                inputPesquisarProd.style.borderColor = 'red';
+                inputPesquisarProd.style.borderWidth = '2px';
+                inputPesquisarProd.placeholder = 'Digite algo para pesquisar';
+                return false
+            }
         }
         else{
             if (inputPesquisar){
