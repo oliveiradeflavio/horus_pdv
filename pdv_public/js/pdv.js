@@ -612,7 +612,7 @@ function validaAlteracaoFornecedores(){
         Swal.fire('Oops...', 'Estado não informado!', 'error');
         return false;
     }
-    else if (inputTelefone.value == "" || inputTelefone.value.length < 14) {
+    else if (inputTelefone.value == "" || inputTelefone.value.length < 13){
         Swal.fire('Oops...', 'Verifique o campo telefone!', 'error');
         return false;
     }
@@ -663,53 +663,23 @@ function validaAlteracaoProduto(){
     }
 }
 
-// //Função para mostrar as tabelas de clientes, fornecedores e produtos nas suas respectivas páginas
-// function mostrarTabelaCadastros(){
-//     let el = document.getElementById('tabela_cad_clientes');
-//     let el_tb_fornecedores = document.getElementById('tabela_cad_fornecedores');
-//     let el_tb_produtos = document.getElementById('tabela_cad_produtos');
-//     let campo_pesquisa = document.getElementById('campo_pesquisa');
-
-//     if (el && el.style.display == 'none'){
-//         el.style.display = '';
-//         document.getElementById('txt_consultar').innerHTML = 'Ocultar tabela';
-//         campo_pesquisa.style.display = '';
-
-//     }else if (el && el.style.display == ''){
-//         el.style.display = 'none';
-//         document.getElementById('txt_consultar').innerHTML = 'Consultar Clientes Cadastrados';
-//         campo_pesquisa.style.display = 'none';
-
-//     }else if (el_tb_fornecedores && el_tb_fornecedores.style.display == 'none'){
-//         el_tb_fornecedores.style.display = '';
-//         document.getElementById('txt_consultar_fornecedores').innerHTML = 'Ocultar tabela';     
-//     }
-//     else if (el_tb_fornecedores && el_tb_fornecedores.style.display == ''){
-//         el_tb_fornecedores.style.display = 'none';
-//         document.getElementById('txt_consultar_fornecedores').innerHTML = 'Consultar Fornecedores Cadastrados';     
-//     }
-//     else if (el_tb_produtos && el_tb_produtos.style.display == 'none'){
-//         el_tb_produtos.style.display = '';
-//         document.getElementById('txt_consultar_produtos').innerHTML = 'Ocultar tabela';     
-//     }
-//     else if (el_tb_produtos && el_tb_produtos.style.display == ''){
-//         el_tb_produtos.style.display = 'none';
-//         document.getElementById('txt_consultar_produtos').innerHTML = 'Consultar Produtos Cadastrados';     
-//     }
-// }
-
-//Função para verificar se foi digitado algo no campo de pesquisa.
+//Função para verificar se foi digitado algo no campo de pesquisa das páginas de cadatrados (cliente, fornecedor e produto)
 function verificarCampoPesquisa(){
     let inputPesquisar = document.getElementById('inputPesquisa');
+    let inputPesquisarForn = document.getElementById('inputPesquisarForn');
+    let inputPesquisarProd = document.getElementById('inputPesquisarProd');
     let botaoPesquisar = document.getElementById('botaoPesquisar');
     let campo_pesquisa = document.getElementById('pesquisar_dados');
 
-        //Se o valor pesquisado for o cpf (número digitado) sem os pontos e o hífem, formato ele com o Mask para fazer a busca no bd.
-        if (Number(inputPesquisar.value)){
-            $('#inputPesquisa').mask('000.000.000-00');
-        }
+    //verifico se o que foi digitado é número, se for formato de acordo. Cadastro de cliente (cpf), Cad de Fornecedor (cnpj) e Produto (codigo)
+    if (inputPesquisar && Number(inputPesquisar.value)){
+        $('#inputPesquisa').mask('000.000.000-00');
+    }
+    if (inputPesquisarForn && Number(inputPesquisarForn.value)){
+        $('#inputPesquisarForn').mask('00.000.000/0000-00'); 
+    }
     
-        if (inputPesquisar.value == ""){
+        if (inputPesquisar && inputPesquisar.value == "" || inputPesquisarForn && inputPesquisarForn.value == ""){
         inputPesquisar.style.borderColor = 'red';
         inputPesquisar.style.borderWidth = '2px';
         inputPesquisar.placeholder = 'Digite algo para pesquisar';
@@ -717,13 +687,68 @@ function verificarCampoPesquisa(){
         
         }
         else{
-        inputPesquisar.style.borderColor = '#ced4da';
+            if (inputPesquisar){
+                inputPesquisar.style.borderColor = '#ced4da';
+            }
+            if (inputPesquisarForn){
+                inputPesquisarForn.style.borderColor = '#ced4da';
+            }
+            if (inputPesquisarProd){
+                inputPesquisarProd.style.borderColor = '#ced4da';
+            }
         botaoPesquisar.innerHTML = 'Pesquisando...';
-       
         campo_pesquisa.submit();
         return true
     }
 }
+
+//carregando do loading da tabela de dados. Assim que estiver carregado, o loading será removido.
+document.onreadystatechange = function () {
+    let state = document.readyState
+    if (state == 'interactive') {
+         if(document.getElementById('tabela_cad_clientes')){
+         document.getElementById('tabela_cad_clientes').style.visibility="hidden";
+         }
+         if(document.getElementById('tabela_cad_fornecedores')){
+            document.getElementById('tabela_cad_fornecedores').style.visibility="hidden";
+         }
+         if(document.getElementById('tabela_cad_produtos')){
+            document.getElementById('tabela_cad_produtos').style.visibility="hidden";
+         }
+    
+    } else if (state == 'complete') {
+        setTimeout(function(){
+           document.getElementById('interactive');
+           if(document.getElementById('loading')){
+            document.getElementById('loading').remove();
+           }
+
+           if(document.getElementById('imagem_arquivo_not_found')){
+                if(document.getElementById('tabela_cad_clientes')){
+                    document.getElementById('tabela_cad_clientes').remove();
+                }
+                if(document.getElementById('tabela_cad_fornecedores')){
+                    document.getElementById('tabela_cad_fornecedores').remove();
+                }
+                if(document.getElementById('tabela_cad_produtos')){
+                    document.getElementById('tabela_cad_produtos').remove();
+                }
+           }
+         
+           if(document.getElementById('tabela_cad_clientes')){       
+                document.getElementById('tabela_cad_clientes').style.visibility="visible";
+           }
+        
+           if(document.getElementById('tabela_cad_fornecedores')){
+                document.getElementById('tabela_cad_fornecedores').style.visibility="visible";
+              }
+            
+           if(document.getElementById('tabela_cad_produtos')){
+                document.getElementById('tabela_cad_produtos').style.visibility="visible";
+           }
+        },1000);
+    }
+  }
 
 /*
 Função para excluir o cliente já cadastrado, passando o id do cliente como parâmetro e chamando o controller para excluir o cliente
@@ -1067,7 +1092,7 @@ function ajuda_cadastro(){
     if (ajuda_cadastro_cliente){
         Swal.fire({
             title: 'Ajuda',
-            text: 'Para cadastrar um novo cliente, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um cliente, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um cliente, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os clientes cadastrados clicando no texto Consultar.',
+            text: 'Para cadastrar um novo cliente, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um cliente, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um cliente, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os clientes no campo de busca inserindo seu CPF ou Nome.',
             icon: 'info',
             confirmButtonText: 'Fechar'
         })
@@ -1075,7 +1100,7 @@ function ajuda_cadastro(){
     if (ajuda_cadastro_fornecedor){
         Swal.fire({
             title: 'Ajuda',
-            text: 'Para cadastrar um novo fornecedor, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um fornecedor, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um fornecedor, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os fornecedores cadastrados clicando no texto Consultar.',
+            text: 'Para cadastrar um novo fornecedor, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um fornecedor, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um fornecedor, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os fornecedores cadastrados no campo de busca inserindo seu CNPJ ou Nome Fantasia.',
             icon: 'info',
             confirmButtonText: 'Fechar'
         })
@@ -1083,7 +1108,7 @@ function ajuda_cadastro(){
     if (ajuda_cadastro_produto){
         Swal.fire({
             title: 'Ajuda',
-            text: 'Para cadastrar um novo produto, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um produto, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um produto, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os produtos cadastrados clicando no texto Consultar.',
+            text: 'Para cadastrar um novo produto, preencha os campos corretamente e clique em cadastrar.\n\nPara alterar o cadastro de um produto, clique no botão Alterar e preencha os campos corretamente.\n\nPara excluir um produto, clique no botão Excluir e digite a senha master para confirmar a exclusão.\n\nVocê poderá consultar os produtos cadastrados no campo de busca inserindo o nome do Produto ou Código.',
             icon: 'info',
             confirmButtonText: 'Fechar'
         }) 

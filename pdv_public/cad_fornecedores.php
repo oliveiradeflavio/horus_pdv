@@ -1,14 +1,9 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
-        header("Location: login.php?login=2");
-    }
-
-   $acao = 'consultarTabelaFornecedores';
-   require 'cad_fornecedor_controller.php';
-
+session_start();
+if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
+    header("Location: login.php?login=2");
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -37,40 +32,40 @@
 </head>
 
 <body>
-<header>
-<nav class="navbar navbar-expand-lg navbar-light">
-           
-           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" >
-           <i class="fa-solid fa-ellipsis"></i>
-           </button>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
 
-           <div class="collapse navbar-collapse" id="navbarNav">
-               <ul class="navbar-nav ml-auto">
-                
-                       <div class="dropdown">                           
-                       <img src="../pdv/img/usuarios/<?= $_SESSION['foto_usuario'] ?>" alt="" width="50" height="50" class="img-circulo"> 
-                       <div class="dropdown-content mr-5">
-                           <a><?php echo $_SESSION['nome_usuario'] ?></a>
-                           <div class="dropdown-divider"></div>                              
-                           <a href="perfil_usuario.php">Meu Perfil</a>
-                           <?php if($_SESSION['perfil_usuario'] == 1): ?>
-                               <a href="#">Configurações</a>
-                           <?php endif; ?>
-                           <a href="sobre.php">Sobre</a>
-                           <a href="logout.php">Sair</a>
-                       </div>
-                       </div> 
-                
-               </ul>
-             
-           </div>
-       </div>
-   </nav>
- 
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <i class="fa-solid fa-ellipsis"></i>
+            </button>
 
-     </header>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
 
-     <section class="container row col-md-12 centro">
+                    <div class="dropdown">
+                        <img src="../pdv/img/usuarios/<?= $_SESSION['foto_usuario'] ?>" alt="" width="50" height="50" class="img-circulo">
+                        <div class="dropdown-content mr-5">
+                            <a><?php echo $_SESSION['nome_usuario'] ?></a>
+                            <div class="dropdown-divider"></div>
+                            <a href="perfil_usuario.php">Meu Perfil</a>
+                            <?php if ($_SESSION['perfil_usuario'] == 1) : ?>
+                                <a href="#">Configurações</a>
+                            <?php endif; ?>
+                            <a href="sobre.php">Sobre</a>
+                            <a href="logout.php">Sair</a>
+                        </div>
+                    </div>
+
+                </ul>
+
+            </div>
+            </div>
+        </nav>
+
+
+    </header>
+
+    <section class="container row col-md-12 centro">
         <!-- msg de retorno -->
         <?php
         if (isset($_GET['sucesso']) && $_GET['sucesso'] == '1') { ?>
@@ -86,7 +81,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-        </div>
+            </div>
 
         <?php } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == '3') { ?>
             <div class='alert alert-success mt-2' role='alert'>
@@ -94,7 +89,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-        </div>
+            </div>
 
         <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '2') { ?>
             <div class='alert alert-warning mt-2' role='alert'>
@@ -110,10 +105,8 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>   
-        <?php } 
-
-            else if (isset($_GET['erro']) && $_GET['erro'] == '4') { ?>
+            </div>
+        <?php } else if (isset($_GET['erro']) && $_GET['erro'] == '4') { ?>
             <div class='alert alert-danger mt-2' role='alert'>
                 <strong>Erro</strong> Senha master incorreta!
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -125,7 +118,7 @@
     </section>
 
     <section>
-    <div class="container mb-5">
+        <div class="container mb-5">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -139,12 +132,12 @@
                                 Cadastros
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a href="cad_clientes.php" class="dropdown-item">Cadastrar Clientes</a>
-                            <a href="cad_fornecedores.php" class="dropdown-item">Cadastrar Fornecedores</a>
-                            <a href="cad_produtos.php" class="dropdown-item">Cadastrar Produtos</a>
+                                <a href="cad_clientes.php" class="dropdown-item">Cadastrar Clientes</a>
+                                <a href="cad_fornecedores.php" class="dropdown-item">Cadastrar Fornecedores</a>
+                                <a href="cad_produtos.php" class="dropdown-item">Cadastrar Produtos</a>
                             </div>
-                          
-                            
+
+
                             <button onclick="location.href='#'" class="btn btn-primary">Histórico</button>
                             <button onclick="window.open('venda.php', '_blank')" class="btn btn-primary">Iniciar Venda</button>
                         </div>
@@ -156,7 +149,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
-                    <form id="formCadFornecedor" method="post" action="cad_fornecedor_controller.php" >
+                    <form id="formCadFornecedor" method="post" action="cad_fornecedor_controller.php">
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="inputCNPJ">CNPJ</label>
@@ -176,7 +169,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="inputCEP">CEP</label>
-                                <input type="text" class="form-control" id="inputCEP" name="inputCEP" onblur="pesquisaCEP(this.value)"  required>
+                                <input type="text" class="form-control" id="inputCEP" name="inputCEP" onblur="pesquisaCEP(this.value)" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEstado">Estado</label>
@@ -223,15 +216,15 @@
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <label for="inputEndereco">Endereço</label>
-                                <input type="text" class="form-control" id="inputEndereco" name="inputEndereco"  required>
+                                <input type="text" class="form-control" id="inputEndereco" name="inputEndereco" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputNumero">Número</label>
-                                <input type="number" class="form-control" id="inputNumero" name="inputNumero"  required>
+                                <input type="number" class="form-control" id="inputNumero" name="inputNumero" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputEnderecoComplemento">Complemento</label>
-                                <input type="text" class="form-control" id="inputEnderecoComplemento" name="inputEnderecoComplemento" >
+                                <input type="text" class="form-control" id="inputEnderecoComplemento" name="inputEnderecoComplemento">
                             </div>
 
                             <div class="form-group col-md-6">
@@ -242,10 +235,10 @@
 
                         <div class='form-row'>
                             <div class="form-group col-md-4">
-                                    <label for="inputTelefone">Telefone</label>
-                                    <input type="text" class="form-control" id="inputTelefone" name="inputTelefone">
-                                </div>
-                            
+                                <label for="inputTelefone">Telefone</label>
+                                <input type="text" class="form-control" id="inputTelefone" name="inputTelefone">
+                            </div>
+
                             <div class="form-group col-md-4">
                                 <label for="inputCelular">Celular</label>
                                 <input type="text" class="form-control" id="inputCelular" name="inputCelular" required>
@@ -256,7 +249,7 @@
                                 <input type="email" class="form-control" id="inputEmail" name="inputEmail" required>
                             </div>
 
-                          
+
                         </div>
 
                         <button type="button" onclick="validaCamposFornecedor()" class="btn btn-primary" id="btnCadastrarFornecedor">Cadastrar</button>
@@ -266,48 +259,83 @@
                     </form>
                 </div>
             </div>
-            
-            <h5 class="card-title mt-5" style="cursor: pointer" id="txt_consultar_fornecedores" onclick="mostrarTabelaCadastros()">Consultar Fornecedores Cadastrados</h5>
         </div>
 
-        <table class="table table-sm table-hover table-responsive p-3" style="display: none" id="tabela_cad_fornecedores">
-                <thead>
-                    <tr>
-                    <th scope="col">CNPJ</th>
-                    <th scope="col">Razão Social</th>
-                    <th scope="col">Nome Fantasia</th>
-                    <th scope="col">CEP</th>
-                    <th scope="col">Endereço</th>
-                    <th scope="col">Número</th>
-                    <th scope="col">Bairro</th>
-                    <th scope="col">Complemento</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Celular/WhatsApp</th>
-                    <th scope="col">Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach($cadFornecedores as $indice => $cadFornecedor){ ?>
+        <div class="container centro mb-2 mt-5" id="campo_pesquisa">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="GET" action="?#campo_pesquisa" id='pesquisar_dados'>
+                        <div class="input-group rounded">
+                            <input type="search" class="form-control rounded input_pesquisar" name="buscar" id="inputPesquisarForn" placeholder="CNPJ ou Empresa a ser pesquisado" onchange="verificarCampoPesquisa()" />
+                            <button type="button" onclick="verificarCampoPesquisa()" class="input-group-text border-0" id="botaoPesquisar">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <?php
+        if (isset($_GET['buscar'])) { ?>
 
-                    <tr>
-                        <td><?php echo $cadFornecedor->cnpj_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->razao_social_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->nome_fantasia_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->cep_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->endereco_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->numero_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->bairro_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->complemento_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->estado_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->cidade_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->telefone_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->celular_fornecedor; ?></td>
-                        <td><?php echo $cadFornecedor->email_fornecedor; ?></td>
+            <?php
+            $conexao = new PDO('mysql:host=localhost;dbname=pdv_horus', 'root', '');
+            $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $buscar = "%" . trim($_GET['buscar']) . "%";
+            $query = "SELECT * FROM tb_fornecedores WHERE nome_fantasia_fornecedor LIKE :buscar OR cnpj_fornecedor LIKE :buscar";
+            $stmt = $conexao->prepare($query);
+            $stmt->bindParam(':buscar', $buscar);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-                        <td><i class="fa-regular fa-pen-to-square icone_fontawesome" onclick="editarFornecedor(<?= $cadFornecedor->id_fornecedor ?>,
+            if (count($resultado) <= 0) {
+            ?>
+
+                <div class="d-flex justify-content-center col-md-12" role="alert">
+                    <img class="img-fluid" width="400" height="400" src="img/not-found.jpg" id='imagem_arquivo_not_found' alt="">
+                <?php
+            } else {
+                ?>
+                    <div id="loading"></div>
+
+                    <table class="table table-sm table-hover table-responsive p-3" id="tabela_cad_fornecedores">
+                        <thead>
+                            <tr>
+                                <th scope="col">CNPJ</th>
+                                <th scope="col">Razão Social</th>
+                                <th scope="col">Nome Fantasia</th>
+                                <th scope="col">CEP</th>
+                                <th scope="col">Endereço</th>
+                                <th scope="col">Número</th>
+                                <th scope="col">Bairro</th>
+                                <th scope="col">Complemento</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Cidade</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">Celular/WhatsApp</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($resultado as $indice => $cadFornecedor) { ?>
+
+                                <tr>
+                                    <td><?php echo $cadFornecedor->cnpj_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->razao_social_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->nome_fantasia_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->cep_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->endereco_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->numero_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->bairro_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->complemento_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->estado_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->cidade_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->telefone_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->celular_fornecedor; ?></td>
+                                    <td><?php echo $cadFornecedor->email_fornecedor; ?></td>
+
+                                    <td><i class="fa-regular fa-pen-to-square icone_fontawesome" onclick="editarFornecedor(<?= $cadFornecedor->id_fornecedor ?>,
                                                                                     '<?= $cadFornecedor->cnpj_fornecedor ?>',
                                                                                     '<?= $cadFornecedor->razao_social_fornecedor ?>',
                                                                                     '<?= $cadFornecedor->nome_fantasia_fornecedor ?>',
@@ -320,23 +348,21 @@
                                                                                     '<?= $cadFornecedor->cidade_fornecedor ?>',
                                                                                     '<?= $cadFornecedor->telefone_fornecedor ?>',
                                                                                     '<?= $cadFornecedor->celular_fornecedor ?>',
-                                                                                    '<?= $cadFornecedor->email_fornecedor ?>')"                                                                                
-                                                                                    
-                                                                                    style="cursor: pointer"></i></td>
+                                                                                    '<?= $cadFornecedor->email_fornecedor ?>')" style="cursor: pointer"></i></td>
 
-                        <td><i class="fas fa-trash-alt icone_fontawesome" onclick="excluirFornecedor(<?= $cadFornecedor->id_fornecedor ?>)" style="cursor: pointer"></i></td>
-                    </tr>
-                    <?php 
+                                    <td><i class="fas fa-trash-alt icone_fontawesome" onclick="excluirFornecedor(<?= $cadFornecedor->id_fornecedor ?>)" style="cursor: pointer"></i></td>
+                                </tr>
+                        </tbody>
+            <?php
+                            }
+                        }
                     }
-                   ?>
-
-
-
+            ?>
+                    </table>
     </section>
 
-<script src="js/pdv.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="js/pdv.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -3,12 +3,7 @@ session_start();
 if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
     header("Location: login.php?login=2");
 }
-
-$acao = 'consultarTabelaClientes';
-require 'cad_cliente_controller.php';
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -245,16 +240,13 @@ require 'cad_cliente_controller.php';
 
                     </form>
                 </div>
-
             </div>
-
-            <!-- <h5 class="card-title mt-5" style="cursor: pointer" onclick="mostrarTabelaCadastros()" id="txt_consultar">Consultar Clientes Cadastrados</h5> -->
         </div>
 
         <div class="container centro mb-2 mt-5" id="campo_pesquisa">
             <div class="row">
                 <div class="col-md-12">
-                    <form method="GET" action="" id='pesquisar_dados'>
+                    <form method="GET" action="?#campo_pesquisa" id='pesquisar_dados'>
                         <div class="input-group rounded">
                             <input type="search" class="form-control rounded input_pesquisar" name="buscar" id="inputPesquisa" placeholder="CPF ou Nome a ser pesquisado" onchange="verificarCampoPesquisa()" />
                             <button type="button" onclick="verificarCampoPesquisa()" class="input-group-text border-0" id="botaoPesquisar">
@@ -281,11 +273,13 @@ require 'cad_cliente_controller.php';
 
             if (count($resultado) <= 0) {
             ?>
+
                 <div class="d-flex justify-content-center col-md-12" role="alert">
                     <img class="img-fluid" width="400" height="400" src="img/not-found.jpg" id='imagem_arquivo_not_found' alt="">
                 <?php
             } else {
                 ?>
+                    <div id="loading"></div>
                     <table class="table table-sm table-hover table-responsive p-3" id="tabela_cad_clientes">
                         <thead>
                             <tr>
@@ -334,13 +328,13 @@ require 'cad_cliente_controller.php';
                                     <td> <i class="fas fa-trash-alt icone_fontawesome" onclick="excluirCliente(<?= $cadCliente->id_cliente ?>)" style='cursor: pointer'></i> </td>
                                 </tr>
                         </tbody>
-                    </table>
-
-        <?php
+            <?php
                             }
                         }
                     }
-        ?>
+            ?>
+
+                    </table>
     </section>
 
     <script src="js/pdv.js"></script>
