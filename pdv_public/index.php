@@ -142,7 +142,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                 ['Task', 'Registers'],
                 <?php
 
-                require_once '../pdv/conexao.php';
+               // require_once '../pdv/conexao.php';
                 // $conexao = new Conexao();
                 $conexao = new PDO('mysql:host=localhost;dbname=pdv_horus', 'root', '');
                 $query = "SELECT COUNT(*) FROM tb_clientes";

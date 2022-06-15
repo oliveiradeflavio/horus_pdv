@@ -3,9 +3,7 @@
     if(!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM'){
         header("Location: login.php?login=2");
     }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -16,8 +14,9 @@
 
     <!-- cdn bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     
     <!-- css -->
     <link rel="stylesheet" href="css/venda.css">
@@ -30,151 +29,133 @@
     <title>Hórus PDV - Venda</title>
 </head>
 <body>
-<div class="container">
+ <div class="container">
     <div class="row">
-    <div class='col-md-6'>
-        <img src="img/produto_sem_imagem.png" class="imagem_produto" alt="">
+    <div class='col-md-6 mt-2'>
+            <select class="form-control" name="selecao_cliente" id="selecao_cliente">
+                <option value="">Selecione um cliente</option>
+                <?php
+                    $conexao = new PDO('mysql:host=localhost;dbname=pdv_horus', 'root', '');
+                    $query = "SELECT * FROM tb_clientes";
+                    $stmt = $conexao->prepare($query);
+                    $stmt->execute();
+                    $clientes = $stmt->fetchAll();
+                    foreach($clientes as $cliente){
+                        echo "<option value='{$cliente['id_cliente']}'>{$cliente['nome_cliente']}</option>";
+                    }
+                ?>
+            </select>
+            
+            <select class="form-control" name="selecao_produto" id="selecao_produto">
+                <option value="">Selecione um produto</option>
+                <?php
+                    $query = "SELECT * FROM tb_produtos";
+                    $stmt = $conexao->prepare($query);
+                    $stmt->execute();
+                    $produtos = $stmt->fetchAll(PDO::FETCH_OBJ);
+                    foreach($produtos as $produto){
+                        echo "<option value='$produto->id_produto' data-valor='$produto->preco_unitario_produto' data-imagem='$produto->foto_produto' data-quantidade='$produto->quantidade_produto'>$produto->nome_produto</option>";
+                    }          
+                ?>
+            </select>
+            
+            <input type="number" class="form-control" name="quantidade_produto" id="quantidade_produto" value="1" placeholder="Quantidade">
 
-        <select class="form-control" name="" id="">
-            <option value="">Selecione um cliente</option>
-            <option value="">Cliente 1</option>
-            <option value="">Cliente 2</option>
-            <option value="">Cliente 3</option>
-        </select>
-         
-
-        <select class="form-control" name="" id="">
-            <option value="">Selecione um produto</option>
-            <option value="">Produto 1</option>
-            <option value="">Produto 2</option>
-            <option value="">Produto 3</option>
-        </select>
-         
-        <input type="number" class="form-control" name="" id="" value="1" placeholder="Quantidade">
-
-    <div class="row">
-        <div class="col-md-6">
-            <label for="">Preço Unitário</label>
-            <input type="text" class="form-control" name="" id="" value="R$ 0,00" disabled>
-        </div>
-        <div class="col-md-6">
-            <label for="">Preço Total</label>
-            <input type="text" class="form-control" name="" id="" value="R$ 0,00" disabled>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <button class="btn btn-success btn-block">Adicionar</button>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-danger btn-block">Remover</button>
-        </div>
-    </div>
-      
-    </div>
-
-    <div class="col-md-6">
-        <div class="">
-        <table class="table table-hover .table-borderless table-responsive">
-                <thead>
-                    <tr>
-                    <th scope="col">Produto</th>
-                    <th scope="col">Quantidade</th>
-                    <th scope="col">Preço Unitário</th>
-                    <th scope="col">Preço Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>Produto 1</td>
-                    <td>1</td>
-                    <td>R$ 0,00</td>
-                    <td>R$ 0,00</td>
-                    
-                    </tr>
-
-                    <tr>
-                    <td>Produto 2</td>
-                    <td>1</td>
-                    <td>R$ 0,00</td>
-                    <td>R$ 0,00</td>
-                    </tr>
-
-                    <tr>
-                    <td>Produto 3</td>
-                    <td>1</td>
-                    <td>R$ 0,00</td>
-                    <td>R$ 0,00</td>
-                    </tr>
-
-                    <tr>
-                    <td>Produto 4</td>
-                    <td>1</td>
-                    <td>R$ 0,00</td>
-                    <td>R$ 0,00</td>
-                    </tr>
-
-                    <tr>
-                    <td>Produto 5</td>
-                    <td>1</td>
-                    <td>R$ 0,00</td>
-                    <td>R$ 0,00</td>
-                    </tr>
-
-                    <tr>
-                    <td>Produto 6</td>
-                    <td>1</td>
-                    <td>R$ 0,00</td>
-                    <td>R$ 0,00</td>
-                    </tr>
-   
-                </tbody>
-      </table>
-
-
+        <div class="row">
+            <div class="col-md-6">
+                <label for="">Preço Unitário</label>
+                <input type="text" class="form-control" name="preco_unitario_produto" id="preco_unitario_produto" value="R$ 0,00" readonly>
+            
+            </div>
+            <div class="col-md-6">
+                <label for="">Preço Total</label>
+                <input type="text" class="form-control" name="preco_total_produto" id="preco_total_produto" value="R$ 0,00" readonly>
+            </div>
         </div>
 
-        <div class="row">               
+            <div class="row">
                 <div class="col-md-6">
-                    <label for="">Desconto</label>
-                    <input type="text" class="form-control" name="" id="" value="R$ 0,00" disabled>
+                    <button onclick="adicionarItens()" class="btn btn-success btn-block" id="btn_adicionar_itens">Adicionar</button>
                 </div>
                 <div class="col-md-6">
-                    <label for="">Total a pagar</label>
-                    <input type="text" class="form-control" name="" id="" value="R$ 0,00" disabled>
-                </div>
-                </div>
-           
-            <div class="row ml-5">
-                <div class="col-md-6">
-                    <button class="btn btn-success btn-block">Finalizar Venda</button>
-                </div>
-                <div class="col-md-6">
-                    <button class="btn btn-danger btn-block">Cancelar Venda</button>
+                    <button onclick="limpaCampos()" class="btn btn-danger btn-block">Remover</button>
                 </div>
             </div>
     </div>
 
+  <div class="col-md-6">
+        <div>
+            <img src="../pdv/img/produtos/produto_sem_imagem.png" class="imagem_produto" id="preview_imagem_produto">
+        </div>       
     </div>
+    
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-striped tabela_lista_itens" style="display:none" id="lista_itens">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Preço Unitário</th>
+                        <th>Preço Total</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="col-md-6" id="div_fechamento_conta" style="display: none">
+            <div class="row">              
+                    <div class="col-md-6 ml-3">
+                        <label for="">Total da Venda</label>
+                        <input type="text" class="form-control" name="total_venda" id="total_venda" value="0,00"  readonly>
+                    </div>  
+          
+                <div class="col-md-12 ml-3" >
+                    <button onclick="fecharPedido()" class="btn btn-info btn-block">Fechar Pedido</button>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-md-7 mt-3 ml-3">
+                <select name="selecao_pagamento" id="selecao_pagamento" class="form-control" style="display: none">
+                </select>
+            </div>
+                <div class="col-md-5 mt-2 ml-3" id="div_desconto_venda">
+            </div>
+                <div class="mt-2 ml-3" id="div_total_com_desconto">
+            </div>
+        </div>
+
+    </div>   
+</div>
+
+
+<div class="container" style="display: none">
+        <div class="row">
+            <div class="col-md-12">
+            <button class="form-control btn btn-danger btn-block">Fechar Compra</button>
+            </div>
+        </div>
+     </div>
+
+
+
 
 <div class="container footer">
     <div class="row">
        <div class="col-md-12">
-          
+
        </div>
 
-       <!-- <div class="col-md-6">
+    <div class="col-md-6">
            
-       </div> -->
+       </div>
     </div>
-
-
 </div>
 
 
-
+<script src="js/venda.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
