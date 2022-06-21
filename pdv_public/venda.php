@@ -81,71 +81,78 @@
                     <button onclick="limpaCampos()" class="btn btn-danger btn-block">Remover</button>
                 </div>
             </div>
-    </div>
+    </div>              
 
-  <div class="col-md-6">
-        <div>
-            <img src="../pdv/img/produtos/produto_sem_imagem.png" class="imagem_produto" id="preview_imagem_produto">
-        </div>       
-    </div>
+    <div class="col-md-6">
+            <div>
+                <img src="../pdv/img/produtos/produto_sem_imagem.png" class="imagem_produto" id="preview_imagem_produto">
+            </div>       
+        </div>
     
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <table class="table table-striped tabela_lista_itens" style="display:none" id="lista_itens">
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                        <th>Preço Unitário</th>
-                        <th>Preço Total</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="col-md-6" id="div_fechamento_conta" style="display: none">
-            <div class="row">              
-                    <div class="col-md-6 ml-3">
-                        <label for="">Total da Venda</label>
-                        <input type="text" class="form-control" name="total_venda" id="total_venda" value="0,00"  readonly>
-                    </div>  
-          
-                <div class="col-md-12 ml-3" >
-                    <button onclick="fecharPedido()" class="btn btn-info btn-block">Fechar Pedido</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-responsive  tabela_lista_itens" style="display:none" id="lista_itens">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Preço Unitário</th>
+                            <th>Preço Total</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="col-md-6" id="div_fechamento_conta" style="display: none">
+                <div class="row">              
+                        <div class="col-md-6 ml-3">
+                            <label for="">Total da Venda</label>
+                            <input type="text" class="form-control" name="total_venda" id="total_venda" value="0,00"  readonly>
+                        </div>  
+            
+                    <div class="col-md-12 ml-3" >
+                        <button onclick="fecharPedido()" id="botaoFecharPedido"class="btn btn-info btn-block">Fechar Pedido</button>
+                    </div>
+                </div>
+
+            <div class="row">
+                <div class="col-md-7 mt-3 ml-3">
+                    <select name="selecao_pagamento" id="selecao_pagamento" class="form-control" style="display: none">
+                    </select>
+                </div>
+                    <div class="col-md-5 mt-2 ml-3" id="div_desconto_venda">
+                </div>
+                    <div class="cold-md-3 mt-2 ml-3" id="div_total_com_desconto">
+                </div>
+                    <div class="col-md-5 mt-2 ml-3" id="div_pagamento_cartao">
                 </div>
             </div>
 
-        <div class="row">
-            <div class="col-md-7 mt-3 ml-3">
-                <select name="selecao_pagamento" id="selecao_pagamento" class="form-control" style="display: none">
-                </select>
+            <div class="container mb-3" style="display: none" id="div_fechar_conta">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button onclick="imprimirPedido()" class="btn btn-primary btn-block">Imprimir</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button onclick="fecharVenda()" class="btn btn-danger btn-block">Fechar Venda</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-                <div class="col-md-5 mt-2 ml-3" id="div_desconto_venda">
-            </div>
-                <div class="mt-2 ml-3" id="div_total_com_desconto">
-            </div>
-        </div>
 
-    </div>   
-</div>
-
-
-<div class="container" style="display: none">
-        <div class="row">
-            <div class="col-md-12">
-            <button class="form-control btn btn-danger btn-block">Fechar Compra</button>
-            </div>
-        </div>
-     </div>
-
-
+        </div>   
+  
+    </div>          
 
 
 <div class="container footer">
     <div class="row">
        <div class="col-md-12">
-
+           
        </div>
 
     <div class="col-md-6">

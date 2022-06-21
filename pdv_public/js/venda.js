@@ -172,24 +172,34 @@ function fecharPedido() {
     let selecao_pagamento = document.getElementById('selecao_pagamento');
     let div_desconto_venda = document.getElementById('div_desconto_venda');
     let div_total_com_desconto = document.getElementById('div_total_com_desconto');
+    let div_fechar_conta = document.getElementById('div_fechar_conta');
+    let botao_fechar_pedido = document.getElementById('botaoFecharPedido');
+    let div_codigo_pagamento_cartao = document.getElementById('div_pagamento_cartao');
 
     selecao_pagamento.style.display = 'block';
     selecao_pagamento.innerHTML = ' <option value="">Selecione um pagamento</option><option value="dinheiro">Dinheiro</option><option value="cartão de crédito">Cartão de Crédito</option><option value="cartão de débito">Cartão de Débito</option></select></div>';
     $('#selecao_pagamento').on('change', function () {
+    
+        botao_fechar_pedido.disabled = true;
+        div_fechar_conta.style.display = 'block';
 
         if($('#selecao_pagamento').val() == ''){
-            console.log('entrei aqui')
             div_desconto_venda.style.display = 'none';
             div_total_com_desconto.style.display = 'none';  
+            div_fechar_conta.style.display = 'none';
+            botao_fechar_pedido.disabled = false;
             total_venda_atual_com_desconto = 0;         
         }
 
-        if ($('#selecao_pagamento').val() == 'dinheiro') {
+        if ($('#selecao_pagamento').val() == 'dinheiro' || $('#selecao_pagamento').val() == 'cartão de crédito' || $('#selecao_pagamento').val() == 'cartão de débito') {
             div_desconto_venda.style.display = '';
             //div_total_com_desconto.style.display = '';
 
-            div_desconto_venda.innerHTML = '<div class="form-group"><label for="desconto_venda">Desconto (%)</label><input type="number" class="form-control" id="desconto_venda" placeholder="0"></div>';
+            if ($('#selecao_pagamento').val() == 'cartão de crédito' || $('#selecao_pagamento').val() == 'cartão de débito') {
+                div_codigo_pagamento_cartao.innerHTML = '<div class="form-group"><label for="codigo_pagamento_cartao">Código do Cartão</label><input type="text" class="form-control" id="codigo_pagamento_cartao" placeholder=""></div>';
+            }
 
+            div_desconto_venda.innerHTML = '<div class="form-group"><label for="desconto_venda">Desconto (%)</label><input type="number" class="form-control" id="desconto_venda" placeholder="0"></div>';        
             //Máscara no campo desconto (sómente números)
             $('#desconto_venda').on('keypress', function (e) {
                 let str = (e.keyCode ? e.keyCode : e.which);
@@ -241,6 +251,14 @@ function fecharPedido() {
 }
 
 function cancelarPedido() {
+    alert('em construção')
+}
+
+function imprimirPedido(){
+    alert('em construção')
+}
+
+function fecharVenda(){
     alert('em construção')
 }
 
