@@ -41,7 +41,7 @@
                     $stmt->execute();
                     $clientes = $stmt->fetchAll();
                     foreach($clientes as $cliente){
-                        echo "<option value='{$cliente['id_cliente']}'>{$cliente['nome_cliente']}</option>";
+                        echo "<option value='{$cliente['nome_cliente']}'>{$cliente['nome_cliente']}</option>";
                     }
                 ?>
             </select>
@@ -137,7 +137,7 @@
                                 <button onclick="imprimirPedido()" class="btn btn-primary btn-block">Imprimir</button>
                             </div>
                             <div class="col-md-6">
-                                <button onclick="fecharVenda()" class="btn btn-danger btn-block">Fechar Venda</button>
+                                <button onclick="fecharVenda()"  id='botaoFecharVenda' class="btn btn-danger btn-block">Fechar Venda</button>
                             </div>
                         </div>
                     </div>

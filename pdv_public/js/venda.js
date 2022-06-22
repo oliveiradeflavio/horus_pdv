@@ -27,7 +27,7 @@ $('#quantidade_produto').on('change', function () {
 });
 
 function adicionarItens() {
-
+    let cliente = document.getElementById('selecao_cliente');
     let selecao_produto = document.getElementById('selecao_produto');
     let quantidade_produto = document.getElementById('quantidade_produto');
     let preco_unitario_produto = document.getElementById('preco_unitario_produto');
@@ -37,7 +37,7 @@ function adicionarItens() {
     let total_venda = document.getElementById('total_venda').value;
     let div_fechamento_conta = document.getElementById('div_fechamento_conta');
 
-    if (selecao_produto.selectedIndex == 0 || quantidade_produto.value == 0 || preco_unitario_produto.value == 0 || preco_total_produto.value == 0) {
+    if (cliente.selectedIndex == 0 || selecao_produto.selectedIndex == 0 || quantidade_produto.value == 0 || preco_unitario_produto.value == 0 || preco_total_produto.value == 0) {
         Swal.fire({
             icon: 'warning',
             text: 'Preencha todos os campos para adicionar o item ao pedido',
@@ -187,8 +187,15 @@ function fecharPedido() {
             div_desconto_venda.style.display = 'none';
             div_total_com_desconto.style.display = 'none';  
             div_fechar_conta.style.display = 'none';
+            div_codigo_pagamento_cartao.style.display = 'none';
             botao_fechar_pedido.disabled = false;
-            total_venda_atual_com_desconto = 0;         
+            total_venda_atual_com_desconto = '' 
+            if(document.getElementById('total_com_desconto')){
+                document.getElementById('total_com_desconto').value = '';
+            }  
+            if(document.getElementById('codigo_pagamento_cartao')){
+                document.getElementById('codigo_pagamento_cartao').value = '';
+            } 
         }
 
         if ($('#selecao_pagamento').val() == 'dinheiro' || $('#selecao_pagamento').val() == 'cartão de crédito' || $('#selecao_pagamento').val() == 'cartão de débito') {
@@ -196,10 +203,12 @@ function fecharPedido() {
             //div_total_com_desconto.style.display = '';
 
             if ($('#selecao_pagamento').val() == 'cartão de crédito' || $('#selecao_pagamento').val() == 'cartão de débito') {
-                div_codigo_pagamento_cartao.innerHTML = '<div class="form-group"><label for="codigo_pagamento_cartao">Código do Cartão</label><input type="text" class="form-control" id="codigo_pagamento_cartao" placeholder=""></div>';
+                div_codigo_pagamento_cartao.style.display = '';
+                div_codigo_pagamento_cartao.innerHTML = '<div class="form-group"><label for="codigo_pagamento_cartao">Código do Cartão</label><input type="text" class="form-control" id="codigo_pagamento_cartao" placeholder="" required></div>';
             }
 
             div_desconto_venda.innerHTML = '<div class="form-group"><label for="desconto_venda">Desconto (%)</label><input type="number" class="form-control" id="desconto_venda" placeholder="0"></div>';        
+            
             //Máscara no campo desconto (sómente números)
             $('#desconto_venda').on('keypress', function (e) {
                 let str = (e.keyCode ? e.keyCode : e.which);
@@ -215,9 +224,7 @@ function fecharPedido() {
                                 
                 let total_venda_sem_desconto = document.getElementById('total_venda').value;
                 let desconto_venda = document.getElementById('desconto_venda').value;
-                console.log(total_venda_sem_desconto)
-                console.log(desconto_venda)
-
+             
                 if (desconto_venda > 0 && desconto_venda < 100) {
                     total_venda_atual_sem_desconto = total_venda_sem_desconto.toString().replace(/[^0-9]/g, '');
 
@@ -259,7 +266,53 @@ function imprimirPedido(){
 }
 
 function fecharVenda(){
-    alert('em construção')
+    let botao_fechar_venda = document.getElementById('botaoFecharVenda');
+    let cliente = document.getElementById('selecao_cliente');
+    let tabela_itens = document.getElementById('lista_itens');
+    let total_venda_valor_bruto = ''
+    let total_venda_atual_com_desconto = ''
+    let desconto_venda = ''
+    let codigo_pagamento_cartao = ''
+    let produtos_tabela = []
+
+    botao_fechar_venda.disabled = true;
+    cliente = cliente.options[cliente.selectedIndex].value;
+ 
+    if (document.getElementById('total_venda')){
+        total_venda_valor_bruto = document.getElementById('total_venda').value;
+    }
+    
+    if (document.getElementById('total_com_desconto') && document.getElementById('total_com_desconto').value != ''){
+       total_venda_atual_com_desconto = document.getElementById('total_com_desconto').value;
+    }
+    
+    if(document.getElementById('desconto_venda')){
+       desconto_venda = document.getElementById('desconto_venda').value;
+    }
+
+    if(document.getElementById('codigo_pagamento_cartao') && document.getElementById('codigo_pagamento_cartao').value != ''){
+        codigo_pagamento_cartao = document.getElementById('codigo_pagamento_cartao').value;
+    }   
+    
+    for(let i = 1; i < tabela_itens.rows.length; i++){
+        produtos_tabela.push(tabela_itens.rows[i].cells[0].childNodes[0].textContent);
+        produtos_tabela.push( tabela_itens.rows[i].cells[1].childNodes[0].textContent);
+        produtos_tabela.push( tabela_itens.rows[i].cells[2].childNodes[0].textContent);
+        produtos_tabela.push( tabela_itens.rows[i].cells[3].childNodes[0].textContent);
+    }
+   
+    console.log(cliente);
+    console.log(produtos_tabela);
+    console.log(total_venda_valor_bruto);
+    console.log(total_venda_atual_com_desconto);
+    console.log(desconto_venda);
+    console.log(codigo_pagamento_cartao);
+    
+
+
+
+
+    
 }
 
 function limpaCampos() {
