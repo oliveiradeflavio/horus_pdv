@@ -273,7 +273,12 @@ function fecharVenda(){
     let total_venda_atual_com_desconto = ''
     let desconto_venda = ''
     let codigo_pagamento_cartao = ''
-    let produtos_tabela = []
+    let produtos_tabela = {
+        nome_produto: [],
+        quantidade: [],
+        valor_unitario: [],
+        valor_total: []
+    }
 
     botao_fechar_venda.disabled = true;
     cliente = cliente.options[cliente.selectedIndex].value;
@@ -294,12 +299,19 @@ function fecharVenda(){
         codigo_pagamento_cartao = document.getElementById('codigo_pagamento_cartao').value;
     }   
     
-    for(let i = 1; i < tabela_itens.rows.length; i++){
-        produtos_tabela.push(tabela_itens.rows[i].cells[0].childNodes[0].textContent);
-        produtos_tabela.push( tabela_itens.rows[i].cells[1].childNodes[0].textContent);
-        produtos_tabela.push( tabela_itens.rows[i].cells[2].childNodes[0].textContent);
-        produtos_tabela.push( tabela_itens.rows[i].cells[3].childNodes[0].textContent);
+      for(let i = 1; i < tabela_itens.rows.length; i++){
+        // produtos_tabela.push( tabela_itens.rows[i].cells[0].childNodes[0].textContent);
+        // produtos_tabela.push( tabela_itens.rows[i].cells[1].childNodes[0].textContent);
+        // produtos_tabela.push( tabela_itens.rows[i].cells[2].childNodes[0].textContent);
+        // produtos_tabela.push( tabela_itens.rows[i].cells[3].childNodes[0].textContent);
+        produtos_tabela.nome_produto.push(tabela_itens.rows[i].cells[0].childNodes[0].textContent);
+        produtos_tabela.quantidade.push( tabela_itens.rows[i].cells[1].childNodes[0].textContent);
+        produtos_tabela.valor_unitario.push( tabela_itens.rows[i].cells[2].childNodes[0].textContent);
+        produtos_tabela.valor_total.push( tabela_itens.rows[i].cells[3].childNodes[0].textContent);
+          
+       
     }
+   
    
     console.log(cliente);
     console.log(produtos_tabela);
@@ -307,6 +319,18 @@ function fecharVenda(){
     console.log(total_venda_atual_com_desconto);
     console.log(desconto_venda);
     console.log(codigo_pagamento_cartao);
+
+    dados_venda = {cliente: cliente, produtos_tabela, total_venda_valor_bruto: total_venda_valor_bruto, total_venda_atual_com_desconto: total_venda_atual_com_desconto, desconto_venda: desconto_venda, codigo_pagamento_cartao: codigo_pagamento_cartao};
+
+    $.ajax({
+        type: 'POST',
+        url: 'venda_controller.php',
+        data: dados_venda,
+        dataType: 'json',
+        success: dados => {console.log(dados)}, 
+        error: error => {console.log(error)}
+
+    });
     
 
 
