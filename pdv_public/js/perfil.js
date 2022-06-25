@@ -21,3 +21,14 @@ function habilitarTrocaSenha() {
         return false
     }
 }
+
+//função que ativa o Label, irá abrir a janela para escolher a imagem
+function selecionaImagem(){
+    let input = document.getElementById("foto_perfil");
+    let nome_arquivo = document.getElementById("nome-arquivo");
+
+    input.addEventListener("change", function(){
+        nome_arquivo.textContent = input.value;
+    })
+}
+selecionaImagem();

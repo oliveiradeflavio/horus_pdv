@@ -142,17 +142,17 @@
                                 <input class="btn btn-primary" value="Salvar" type="submit">
                                 <input class="btn btn-danger" value="Cancelar" type="reset">
                             </div>
-                        </div>
-
-                   
+                        </div>                   
                 </div>
 
-                <div class="col-md-5 justify-content-center ">
+                <div class="col-md-5 justify-content-center centro ">
                     <div class="mt-5">
                         <img src="../pdv/img/usuarios/<?= $_SESSION['foto_usuario'] ?>" width="300" height="300" class="rounded-circle avatar-pic">
                     </div>
-                    <div class="mt-5 mb-5">
-                        <input type="file" name='foto_perfil' id='foto_perfil'>
+                    <div class="mt-2 mb-5">
+                        <label for='foto_perfil' class='sel-enviar-foto'>Enviar foto</label>
+                        <input id="foto_perfil" type="file" name="foto_perfil">
+                        <span id='nome-arquivo'></span>
                     </div>
                     <div>
                         <?php
@@ -173,7 +173,7 @@
                             <?php }
                             if(isset($_GET['atualizado']) && $_GET['atualizado'] == '1'){?>
                                 <div class='alert alert-success'  role='alert'>
-                                <strong>Sucesso!</strong> Perfil atualizado com sucesso.
+                                <strong>Sucesso!</strong> Perfil atualizado com sucesso, faça login novamente para verificar.
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

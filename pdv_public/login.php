@@ -35,7 +35,7 @@
                         <div class="col-md-8">
                             <div class="mb-4">
                                 <h3>Hórus PDV</h3>
-                                <p class="mb-4"> Sem conta? <a href="registrar.php"> Cadastre-se</a></p>
+                                <p class="mb-4"> Sem conta? <a href="registrar.php" style='color: #6c66aa;'> Cadastre-se</a></p>
                             </div>
                             <form action="login_controller.php" method="post">
                                 <div class="form-floating">

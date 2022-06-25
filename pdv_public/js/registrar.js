@@ -11,6 +11,17 @@ function readImage() {
 document.getElementById("img-input").addEventListener("change", readImage, false);
 //FIM preview  imagem no input
 
+//função que ativa o Label, irá abrir a janela para escolher a imagem
+function selecionaImagem(){
+    let input = document.getElementById("img-input");
+    let nome_arquivo = document.getElementById("nome-arquivo");
+
+    input.addEventListener("change", function(){
+        nome_arquivo.textContent = input.value;
+    })
+}
+selecionaImagem();
+
 //mascaras de input 
 $(document).ready(function () {
     $('#cpf').mask('000.000.000-00');
