@@ -200,6 +200,17 @@ function fecharPedido() {
 
         if ($('#selecao_pagamento').val() == 'dinheiro' || $('#selecao_pagamento').val() == 'cartão de crédito' || $('#selecao_pagamento').val() == 'cartão de débito') {
             div_desconto_venda.style.display = '';
+            div_total_com_desconto.style.display = 'none';  
+            div_fechar_conta.style.display = '';
+            div_codigo_pagamento_cartao.style.display = 'none';
+            botao_fechar_pedido.disabled = false;
+            total_venda_atual_com_desconto = '' 
+            if(document.getElementById('total_com_desconto')){
+                document.getElementById('total_com_desconto').value = '';
+            }  
+            if(document.getElementById('codigo_pagamento_cartao')){
+                document.getElementById('codigo_pagamento_cartao').value = '';
+            } 
             //div_total_com_desconto.style.display = '';
 
             if ($('#selecao_pagamento').val() == 'cartão de crédito' || $('#selecao_pagamento').val() == 'cartão de débito') {
@@ -320,7 +331,7 @@ function fecharVenda(){
     console.log(desconto_venda);
     console.log(codigo_pagamento_cartao);
 
-    dados_venda = {cliente: cliente, produtos_tabela, total_venda_valor_bruto: total_venda_valor_bruto, total_venda_atual_com_desconto: total_venda_atual_com_desconto, desconto_venda: desconto_venda, codigo_pagamento_cartao: codigo_pagamento_cartao};
+    dados_venda = {cliente: cliente, produtos: produtos_tabela, total_venda_valor_bruto: total_venda_valor_bruto, total_venda_atual_com_desconto: total_venda_atual_com_desconto, desconto_venda: desconto_venda, codigo_pagamento_cartao: codigo_pagamento_cartao};
 
     $.ajax({
         type: 'POST',
