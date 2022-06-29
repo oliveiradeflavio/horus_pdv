@@ -54,7 +54,7 @@
                     $stmt->execute();
                     $produtos = $stmt->fetchAll(PDO::FETCH_OBJ);
                     foreach($produtos as $produto){
-                        echo "<option value='$produto->id_produto' data-valor='$produto->preco_unitario_produto' data-imagem='$produto->foto_produto' data-quantidade='$produto->quantidade_produto'>$produto->nome_produto</option>";
+                        echo "<option value='$produto->id_produto' data-id='$produto->id_produto' data-valor='$produto->preco_unitario_produto' data-imagem='$produto->foto_produto' data-quantidade='$produto->quantidade_produto'>$produto->nome_produto</option>";
                     }          
                 ?>
             </select>
@@ -96,6 +96,7 @@
                 <table class="table table-responsive  tabela_lista_itens" style="display:none" id="lista_itens">
                     <thead>
                         <tr>
+                            <th>Código</th>
                             <th>Produto</th>
                             <th>Quantidade</th>
                             <th>Preço Unitário</th>
@@ -133,11 +134,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <button onclick="imprimirPedido()" class="btn btn-primary btn-block">Imprimir</button>
-                            </div>
+                            </div> -->
                             <div class="col-md-6">
-                                <button onclick="fecharVenda()"  id='botaoFecharVenda' class="btn btn-danger btn-block">Fechar Venda</button>
+                                <button onclick="fecharVenda()"  id='botaoFecharVenda' class="btn btn-success btn-block">Fechar Venda</button>
                             </div>
                         </div>
                     </div>
