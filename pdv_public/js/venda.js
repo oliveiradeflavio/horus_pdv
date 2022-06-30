@@ -272,7 +272,7 @@ function fecharPedido() {
                         div_total_com_desconto.style.display = '';
                     }
 
-                    div_total_com_desconto.innerHTML = '<div class="form-group"><label for="total_com_desconto">Total com desconto</label><input type="text" class="form-control" id="total_com_desconto" value="' + total_venda_atual_com_desconto + '" readonly></div>';
+                    div_total_com_desconto.innerHTML = '<div class="form-group"><label for="total_com_desconto">Total c/ desc</label><input type="text" class="form-control" id="total_com_desconto" value="' + total_venda_atual_com_desconto + '" readonly></div>';
                 } else {
                     total_venda_atual_com_desconto = 0;
                     div_total_com_desconto.style.display = 'none';

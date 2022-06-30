@@ -83,7 +83,7 @@
             </div>
     </div>              
 
-    <div class="col-md-6">
+    <div class="col-md-6 centro">
             <div>
                 <img src="../pdv/img/produtos/produto_sem_imagem.png" class="imagem_produto" id="preview_imagem_produto">
             </div>       
@@ -107,7 +107,7 @@
             </div>
             <div class="col-md-6" id="div_fechamento_conta" style="display: none">
                 <div class="row">              
-                        <div class="col-md-6 ml-3">
+                        <div class="col-md-12 ml-3">
                             <label for="">Total da Venda</label>
                             <input type="text" class="form-control" name="total_venda" id="total_venda" value="0,00"  readonly>
                         </div>  
@@ -118,15 +118,15 @@
                 </div>
 
             <div class="row">
-                <div class="col-md-7 mt-3 ml-3">
+                <div class="col-md-12 mt-3 ml-3">
                     <select name="selecao_pagamento" id="selecao_pagamento" class="form-control" style="display: none">
                     </select>
                 </div>
-                    <div class="col-md-5 mt-2 ml-3" id="div_desconto_venda">
+                    <div class="col-md-3 mt-2 ml-3" id="div_desconto_venda">
                 </div>
-                    <div class="cold-md-3 mt-2 ml-3" id="div_total_com_desconto">
+                    <div class="col-md-3 mt-2 ml-3" id="div_total_com_desconto">
                 </div>
-                    <div class="col-md-5 mt-2 ml-3" id="div_pagamento_cartao">
+                    <div class="col-md-4 mt-2 ml-3" id="div_pagamento_cartao">
                 </div>
             </div>
 
