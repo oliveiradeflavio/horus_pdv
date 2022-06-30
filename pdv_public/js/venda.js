@@ -27,40 +27,33 @@ $('#quantidade_produto').on('change', function () {
     }
 });
 
-function verificarQuantidadeProdutos(){
-    let quantidade_produto_bd = $('#selecao_produto option:selected').data('quantidade');
-    let quantidade_produto_venda = document.getElementById('quantidade_produto').value;
+//Função para verificar se o item já foi adicionado a tabela de produtos.
+function verificaItensRepetidosTabelaProduto() {
     let selecao_produto = document.getElementById('selecao_produto');
     let tabela_itens = document.getElementById('lista_itens');
     let produtos_tabela = {
         id_produto: [],
         quantidade: [],
-     }
+    }
 
-    for (let i = 1; i < tabela_itens.rows.length; i++) {
+    for (let i = 0; i < tabela_itens.rows.length; i++) {
         produtos_tabela.id_produto.push(tabela_itens.rows[i].cells[0].childNodes[0].textContent);
         produtos_tabela.quantidade.push(tabela_itens.rows[i].cells[2].childNodes[0].textContent);
     }
 
-    for(let x = 1; x < produtos_tabela.id_produto.length; x++){
-        if(produtos_tabela.id_produto[x] == selecao_produto.value){
-            quantidade_produto_venda = parseInt(produtos_tabela.quantidade[x]) + parseInt(quantidade_produto_venda);
-            console.log(quantidade_produto_venda);
-            if(quantidade_produto_venda > quantidade_produto_bd){
-                alert('Quantidade de produtos indisponível');
-                return false;
-            }
+    for (let x = 1; x < produtos_tabela.id_produto.length; x++) {
+        if (produtos_tabela.id_produto[x] == selecao_produto.value) {
+            return false
+        } else {
+            return true
         }
-        return true;
     }
-    
-
 
 }
 
 //Adiciona os itens escolhidos nos selects, para que possam ser exibidos na tabela de produtos
 function adicionarItens() {
- 
+
     let cliente = document.getElementById('selecao_cliente');
     let selecao_produto = document.getElementById('selecao_produto');
     let quantidade_produto = document.getElementById('quantidade_produto');
@@ -78,55 +71,56 @@ function adicionarItens() {
             type: 'error',
             confirmButtonText: 'Ok'
         });
-    
-    } else if (quantidade_produto_bd < quantidade_produto.value) {
-        Swal.fire({
-            icon: 'warning',
-            text: 'Quantidade de produto indisponível no estoque de produtos. Quantidade disponível: ' + quantidade_produto_bd,
-            type: 'error',
-            confirmButtonText: 'Ok'
-        });
-    // }else if(verificarQuantidadeProdutos()){
-    //     Swal.fire({
-    //         icon: 'warning',
-    //         text: 'Quantidade de produto indisponível no estoque de produtos. Quantidade disponível: ' + quantidade_produto_bd,
-    //         type: 'error',
-    //         confirmButtonText: 'Ok'
-    //     });
-    
+
     } else {
-        tabela_itens.style.display = 'block';
-        div_fechamento_conta.style.display = '';
 
-        let linha = tabela_itens.insertRow(1);
-        let celula_id_produto = linha.insertCell(0);
-        let celula_produto = linha.insertCell(1);
-        let celula_quantidade = linha.insertCell(2);
-        let celula_preco_unitario = linha.insertCell(3);
-        let celula_preco_total = linha.insertCell(4);
-        let celula_excluir = linha.insertCell(5);    
-       
-        celula_id_produto.innerHTML = selecao_produto.value;
-        celula_produto.innerHTML = selecao_produto.options[selecao_produto.selectedIndex].text;
-        celula_quantidade.innerHTML = quantidade_produto.value;
-        celula_preco_unitario.innerHTML = preco_unitario_produto.value;
-        celula_preco_total.innerHTML = preco_total_produto.value;
-        celula_excluir.innerHTML = '<i class="fas fa-trash-alt icone_fontawesome" style="cursor:pointer" onclick="excluirLinha(this)"></i>';
-  
+        if (quantidade_produto_bd < quantidade_produto.value) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Quantidade de produto indisponível no estoque de produtos. Quantidade disponível: ' + quantidade_produto_bd,
+                type: 'error',
+                confirmButtonText: 'Ok'
+            });
+        } else if (verificaItensRepetidosTabelaProduto() == false) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Produto já adicionado ao pedido',
+                type: 'error',
+                confirmButtonText: 'Ok'
+                });
+        } else {
 
-        total_venda = total_venda.toString().replace(/[^0-9]/g, '');
-        preco_total_produto = preco_total_produto.value.toString().replace(/[^0-9]/g, '');
+            tabela_itens.style.display = 'block';
+            div_fechamento_conta.style.display = '';
 
-        total_venda_atual_convertido = parseInt(total_venda) + parseInt(preco_total_produto);
-        total_venda_atual = total_venda_atual_convertido.toString().replace(/[\D]+/g, '');
-        total_venda_atual = total_venda_atual.toString().replace(/([0-9]{2})$/g, ",$1");
-        if (total_venda_atual.length > 6) {
-            total_venda_atual = total_venda_atual.toString().replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+            let linha = tabela_itens.insertRow(1);
+            let celula_id_produto = linha.insertCell(0);
+            let celula_produto = linha.insertCell(1);
+            let celula_quantidade = linha.insertCell(2);
+            let celula_preco_unitario = linha.insertCell(3);
+            let celula_preco_total = linha.insertCell(4);
+            let celula_excluir = linha.insertCell(5);
+
+            celula_id_produto.innerHTML = selecao_produto.value;
+            celula_produto.innerHTML = selecao_produto.options[selecao_produto.selectedIndex].text;
+            celula_quantidade.innerHTML = quantidade_produto.value;
+            celula_preco_unitario.innerHTML = preco_unitario_produto.value;
+            celula_preco_total.innerHTML = preco_total_produto.value;
+            celula_excluir.innerHTML = '<i class="fas fa-trash-alt icone_fontawesome" style="cursor:pointer" onclick="excluirLinha(this)"></i>';
+
+
+            total_venda = total_venda.toString().replace(/[^0-9]/g, '');
+            preco_total_produto = preco_total_produto.value.toString().replace(/[^0-9]/g, '');
+
+            total_venda_atual_convertido = parseInt(total_venda) + parseInt(preco_total_produto);
+            total_venda_atual = total_venda_atual_convertido.toString().replace(/[\D]+/g, '');
+            total_venda_atual = total_venda_atual.toString().replace(/([0-9]{2})$/g, ",$1");
+            if (total_venda_atual.length > 6) {
+                total_venda_atual = total_venda_atual.toString().replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+            }
+            $('#total_venda').val(total_venda_atual);
+
         }
-        $('#total_venda').val(total_venda_atual);
-
-       
-
     }
 
 }
@@ -165,12 +159,12 @@ function excluirLinha(elemento) {
         let div_total_com_desconto = document.getElementById('div_total_com_desconto');
 
         let div_fechar_conta = document.getElementById('div_fechar_conta');
-        if (document.getElementById('div_fechar_conta')){
+        if (document.getElementById('div_fechar_conta')) {
             div_fechar_conta.style.display = 'none';
-        }  
-        
+        }
+
         let div_codigo_pagamento_cartao = document.getElementById('div_pagamento_cartao');
-        if (document.getElementById('div_pagamento_cartao')){
+        if (document.getElementById('div_pagamento_cartao')) {
             div_codigo_pagamento_cartao.style.display = 'none';
         }
 
@@ -180,13 +174,13 @@ function excluirLinha(elemento) {
         selecao_pagamento.selectedIndex = 0;
         selecao_pagamento.style.display = 'none';
 
-        if(document.getElementById('desconto_venda')){
+        if (document.getElementById('desconto_venda')) {
             desconto_venda.value = 0;
         }
-        
-        if( document.getElementById('total_com_desconto')){
+
+        if (document.getElementById('total_com_desconto')) {
             total_com_desconto.value = 0
-        }       
+        }
         total_venda = 0
         limpaCampos();
     }
@@ -236,7 +230,7 @@ function fecharPedido() {
 
             if (document.getElementById('codigo_pagamento_cartao')) {
                 document.getElementById('codigo_pagamento_cartao').value = '';
-            }           
+            }
 
             if ($('#selecao_pagamento').val() == 'cartão de crédito' || $('#selecao_pagamento').val() == 'cartão de débito') {
                 div_codigo_pagamento_cartao.style.display = '';
@@ -281,7 +275,7 @@ function fecharPedido() {
                     div_total_com_desconto.innerHTML = '<div class="form-group"><label for="total_com_desconto">Total com desconto</label><input type="text" class="form-control" id="total_com_desconto" value="' + total_venda_atual_com_desconto + '" readonly></div>';
                 } else {
                     total_venda_atual_com_desconto = 0;
-                    div_total_com_desconto.style.display = 'none';                
+                    div_total_com_desconto.style.display = 'none';
 
                 }
             });
@@ -317,9 +311,11 @@ function fecharVenda() {
 
     botao_fechar_venda.disabled = true;
     cliente = cliente.options[cliente.selectedIndex].value;
-    tipo_de_pagamento = tipo_de_pagamento.options[tipo_de_pagamento.selectedIndex].value;  
+    tipo_de_pagamento = tipo_de_pagamento.options[tipo_de_pagamento.selectedIndex].value;
 
-    if (document.getElementById('codigo_pagamento_cartao') && document.getElementById('codigo_pagamento_cartao').value == '' && tipo_de_pagamento == 'cartão de crédito' || tipo_de_pagamento == 'cartão de débito') {
+    if (document.getElementById('codigo_pagamento_cartao') && document.getElementById('codigo_pagamento_cartao').value == '' 
+            && (tipo_de_pagamento == 'cartão de crédito' || tipo_de_pagamento == 'cartão de débito')) {
+
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -328,45 +324,86 @@ function fecharVenda() {
         });
         botao_fechar_venda.disabled = false;
     }
-    else{
+    else {
 
-    if (document.getElementById('codigo_pagamento_cartao') && document.getElementById('codigo_pagamento_cartao').value != '') {
-        codigo_pagamento_cartao = document.getElementById('codigo_pagamento_cartao').value;
-    }
-    
-    if (document.getElementById('total_venda')) {
-        total_venda_valor_bruto = document.getElementById('total_venda').value;
-    }
+        if (document.getElementById('codigo_pagamento_cartao') && document.getElementById('codigo_pagamento_cartao').value != '') {
+            codigo_pagamento_cartao = document.getElementById('codigo_pagamento_cartao').value;
+        }
 
-    if (document.getElementById('total_com_desconto') && document.getElementById('total_com_desconto').value != '') {
-        total_venda_atual_com_desconto = document.getElementById('total_com_desconto').value;
-    }
+        if (document.getElementById('total_venda')) {
+            total_venda_valor_bruto = document.getElementById('total_venda').value;
+        }
 
-    if (document.getElementById('desconto_venda')) {
-        desconto_venda = document.getElementById('desconto_venda').value;
-    }
+        if (document.getElementById('total_com_desconto') && document.getElementById('total_com_desconto').value != '') {
+            total_venda_atual_com_desconto = document.getElementById('total_com_desconto').value;
+        }
 
-    for (let i = 1; i < tabela_itens.rows.length; i++) {
-        produtos_tabela.id_produto.push(tabela_itens.rows[i].cells[0].childNodes[0].textContent);
-        produtos_tabela.nome_produto.push(tabela_itens.rows[i].cells[1].childNodes[0].textContent);
-        produtos_tabela.quantidade.push(tabela_itens.rows[i].cells[2].childNodes[0].textContent);
-        produtos_tabela.valor_unitario.push(tabela_itens.rows[i].cells[3].childNodes[0].textContent);
-        produtos_tabela.valor_total.push(tabela_itens.rows[i].cells[4].childNodes[0].textContent);
-    }
+        if (document.getElementById('desconto_venda')) {
+            desconto_venda = document.getElementById('desconto_venda').value;
+        }
 
-    dados_venda = { cliente: cliente, produtos: produtos_tabela, total_venda_valor_bruto: total_venda_valor_bruto, tipo_de_pagamento: tipo_de_pagamento, total_venda_atual_com_desconto: total_venda_atual_com_desconto, desconto_venda: desconto_venda, codigo_pagamento_cartao: codigo_pagamento_cartao };
+        for (let i = 1; i < tabela_itens.rows.length; i++) {
+            produtos_tabela.id_produto.push(tabela_itens.rows[i].cells[0].childNodes[0].textContent);
+            produtos_tabela.nome_produto.push(tabela_itens.rows[i].cells[1].childNodes[0].textContent);
+            produtos_tabela.quantidade.push(tabela_itens.rows[i].cells[2].childNodes[0].textContent);
+            produtos_tabela.valor_unitario.push(tabela_itens.rows[i].cells[3].childNodes[0].textContent);
+            produtos_tabela.valor_total.push(tabela_itens.rows[i].cells[4].childNodes[0].textContent);
+        }
 
-    //envio de dados para a página venda_controller.php
-    $.ajax({
-        type: 'POST',
-        url: 'venda_controller.php',
-        data: dados_venda,
-        dataType: 'json',
-        success: dados => { console.log(dados) },
-        error: error => { console.log(error) }
+        dados_venda = { cliente: cliente, produtos: produtos_tabela, total_venda_valor_bruto: total_venda_valor_bruto, tipo_de_pagamento: tipo_de_pagamento, total_venda_atual_com_desconto: total_venda_atual_com_desconto, desconto_venda: desconto_venda, codigo_pagamento_cartao: codigo_pagamento_cartao };
 
-    });
+        //envio de dados para a página venda_controller.php
+      
+        $.ajax({
+            type: 'POST',
+            url: 'venda_controller.php',
+            data: dados_venda,
+            dataType: 'json',
+            complete: function (response) {
+                if (response.responseJSON.status == 'sucesso') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Venda fechada com sucesso!',
+                        text: 'Venda fechada com sucesso!',
+                        confirmButtonText: 'Ok'
+                    });
+                    window.location.reload();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ocorreu um erro ao fechar a venda!',
+                        confirmButtonText: 'Ok'
+                    });
+                    botao_fechar_venda.disabled = false;
+                }
+            },
+            success:  dados => { console.log(dados);},
+            error: error => {  console.log(error); }
 
+        });
+        //retorno da página venda_controller.php
+        function response(data) {
+            if (data.status == 'sucesso') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Venda realizada com sucesso!',
+                    confirmButtonText: 'Ok'
+                });
+                window.location.href = 'venda_controller.php';
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ocorreu um erro ao realizar a venda!',
+                    confirmButtonText: 'Ok'
+                });
+                botao_fechar_venda.disabled = false;
+            }
+        }
+       
+        
     }
 
 }

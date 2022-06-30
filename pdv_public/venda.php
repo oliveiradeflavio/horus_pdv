@@ -54,7 +54,7 @@
                     $stmt->execute();
                     $produtos = $stmt->fetchAll(PDO::FETCH_OBJ);
                     foreach($produtos as $produto){
-                        echo "<option value='$produto->id_produto' data-id='$produto->id_produto' data-valor='$produto->preco_unitario_produto' data-imagem='$produto->foto_produto' data-quantidade='$produto->quantidade_produto'>$produto->nome_produto</option>";
+                        echo "<option value='$produto->id_produto' data-id='$produto->id_produto' data-valor='$produto->preco_venda_produto' data-imagem='$produto->foto_produto' data-quantidade='$produto->quantidade_produto'>$produto->nome_produto</option>";
                     }          
                 ?>
             </select>
