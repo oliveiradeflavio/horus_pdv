@@ -288,8 +288,20 @@ function cancelarPedido() {
     alert('em construção')
 }
 
-function imprimirPedido() {
-    alert('em construção')
+function imprimirPedido(n_pedido) {
+    let numero_da_venda = n_pedido;
+    $.ajax({
+        type:'POST',
+        url:'imprimir_pedido_controller.php',
+        datatype: 'json',
+        data: {pedido:numero_da_venda},
+        success: data => {
+            console.log(data);
+        },
+        error: error => { 
+            console.log(error); 
+        }
+    })
 }
 
 function fecharVenda() {
@@ -352,60 +364,56 @@ function fecharVenda() {
 
         dados_venda = { cliente: cliente, produtos: produtos_tabela, total_venda_valor_bruto: total_venda_valor_bruto, tipo_de_pagamento: tipo_de_pagamento, total_venda_atual_com_desconto: total_venda_atual_com_desconto, desconto_venda: desconto_venda, codigo_pagamento_cartao: codigo_pagamento_cartao };
 
-        //envio de dados para a página venda_controller.php
-      
+        //envio de dados para a página venda_controller.php      
         $.ajax({
             type: 'POST',
             url: 'venda_controller.php',
             data: dados_venda,
-            dataType: 'json',
-            complete: function (response) {
-                if (response.responseJSON.status == 'sucesso') {
+            dataType: 'json',            
+            success:  dados => {  
+                let dados_formatados = dados.substr(0,7);
+                let numero_venda = dados.substr(8,dados.length);
+                if (dados_formatados == 'sucesso'){
                     Swal.fire({
                         icon: 'success',
-                        title: 'Venda fechada com sucesso!',
-                        text: 'Venda fechada com sucesso!',
-                        confirmButtonText: 'Ok'
+                        title: 'Venda realizada com sucesso!',
+                        text: 'Deseja imprimir o pedido?',
+                        allowOutsideClick: false,
+                        showCancelButton: true,
+                        confirmButtonText: 'Sim',
+                        cancelButtonText: 'Não'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            imprimirPedido(numero_venda);
+                        
+                        }else{
+                            window.location.reload();                           
+                        }
                     });
-                    window.location.reload();
-                } else {
+                }else{
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Ocorreu um erro ao fechar a venda!',
+                        text: 'Ocorreu um erro ao realizar a venda!',
+                        allowOutsideClick: false,
                         confirmButtonText: 'Ok'
                     });
                     botao_fechar_venda.disabled = false;
-                }
+                }                
             },
-            success:  dados => { console.log(dados);},
-            error: error => {  console.log(error); }
-
-        });
-        //retorno da página venda_controller.php
-        function response(data) {
-            if (data.status == 'sucesso') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Sucesso!',
-                    text: 'Venda realizada com sucesso!',
-                    confirmButtonText: 'Ok'
-                });
-                window.location.href = 'venda_controller.php';
-            } else {
+            error: error => {  console.log(error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Ocorreu um erro ao realizar a venda!',
+                    allowOutsideClick: false,
                     confirmButtonText: 'Ok'
                 });
                 botao_fechar_venda.disabled = false;
-            }
-        }
-       
-        
-    }
+             }
 
+        });   
+    }
 }
 
 //Limpa os campos do formulário de venda

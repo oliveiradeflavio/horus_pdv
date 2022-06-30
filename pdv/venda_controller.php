@@ -85,10 +85,10 @@ $produtos_tabela = $dados_convertidos->produtos;
 //     $venda->__set('codigo_pagamento_cartao_venda', $codigo_pagamento_cartao);
 
 //     $vendaService->inserirVenda();
-//     echo 'Venda realizada com sucesso';
+    $contador = 10;
+    $retorno = json_encode('sucesso?' . strval($contador));
+    print_r($retorno);
 
-//         } 
-//     } 
-
-print_r ('Venda realizada com sucesso');
+       // } 
+    //}
 ?>
