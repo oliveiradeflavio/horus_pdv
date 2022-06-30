@@ -36,6 +36,9 @@ O Hórus PDV é um sistema de gestão de vendas para pequenas empresas. Cadastre
 
 ![Login](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/login.png)
 ![Registrar](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/registrar.png)
+![MCadastros](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/menu_cadastros.png)
+![MLateral](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/menu_lateral.png)
+![PerfilUsuario](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/perfil_usuario.png)
 
 <!-- CONTACT -->
 ## Contato
