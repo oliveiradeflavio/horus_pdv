@@ -290,18 +290,20 @@ function cancelarPedido() {
 
 function imprimirPedido(n_pedido) {
     let numero_da_venda = n_pedido;
-    $.ajax({
-        type:'POST',
-        url:'imprimir_pedido_controller.php',
-        datatype: 'json',
-        data: {pedido:numero_da_venda},
-        success: data => {
-            console.log(data);
-        },
-        error: error => { 
-            console.log(error); 
-        }
-    })
+    window.open('imprimir_pedido_controller.php?nv=' + numero_da_venda, '_blank');
+    window.location.reload();    
+    // $.ajax({
+    //     type:'POST',
+    //     url:'imprimir_pedido_controller.php',
+    //     datatype: 'json',
+    //     data: {pedido:numero_da_venda},
+    //     success: data => {
+    //         console.log(data);
+    //     },
+    //     error: error => { 
+    //         console.log(error); 
+    //     }
+    // })
 }
 
 function fecharVenda() {
