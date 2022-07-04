@@ -83,7 +83,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                             </div>
 
 
-                            <button onclick="location.href='#'" class="btn btn-primary">Histórico</button>
+                            <button onclick="location.href='historico_venda.php'" class="btn btn-primary">Histórico</button>
                             <button onclick="window.open('venda.php', '_blank')" class="btn btn-primary">Iniciar Venda</button>
                         </div>
                     </div>

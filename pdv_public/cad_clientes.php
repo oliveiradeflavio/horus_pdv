@@ -280,7 +280,8 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             } else {
                 ?>
                     <div id="loading"></div>
-                    <table class="table table-sm table-hover table-responsive p-3" id="tabela_cad_clientes">
+                    <div class="container col-md-12">
+                    <table class="table table-lg table-hover table-responsive p-3" id="tabela_cad_clientes">
                         <thead>
                             <tr>
                                 <th scope="col">CPF</th>
@@ -335,6 +336,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             ?>
 
                     </table>
+                    </div>
     </section>
 
     <script src="js/pdv.js"></script>

@@ -1,14 +1,43 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
+        header("Location: login.php?login=2");
+    }
+
     require_once 'conexao.php';
     require_once __DIR__ . '_public/plugins/vendor/autoload.php';
     use Mpdf\Mpdf;
 
     $mpdf = new Mpdf();
 
+    $download = $_GET['download'];
     $numero_pedido_impressao = $_GET['nv'];
 
     $conexao = new Conexao();
     $conexao = $conexao->conectar();
+
+    $mpdf->forcePortraitHeaders = true;
+    $mpdf->SetDisplayMode('fullpage');
+
+    $mpdf->SetHTMLHeader('
+    <div style="text-align: right; font-weight: bold;">
+        <img src="img/logo.png" width="100" height="100" alt="Logo">
+
+    ');
+
+    $mpdf->SetHTMLFooter('
+    <table width="100%">
+        <tr>
+            <td width="33%">{DATE d/m/Y}</td>
+            <td width="33%" align="center">{PAGENO}/{nbpg}</td>
+            <td width="33%" style="text-align: right;">Hórus PDV - por Flávio Oliveira</td>
+        </tr>
+    </table>');
+
+    $mpdf->WriteHTML('<h5 align=center>Hórus PDV
+    <h5 align=center>RUA TESTE, 123 - TESTE - SERRA NEGRA/SP</h5>
+    <h5 align=center>CNPJ: 00.000.000/0000-00 Fone: (00) 0000-0000</h5>
+    <hr>');
 
     //$output = "<meta charset='utf-8' />";
     $pagina = "
@@ -18,9 +47,9 @@
     <meta charset='utf-8' />
     </head>
     <body>
-    <h1>Pedido</h1>
-    <h2>Numero do Pedido: $numero_pedido_impressao</h2>
-    <table border='1'>
+    Vendedor: ".$_SESSION['nome_usuario']."
+    <h4>Numero do Pedido: $numero_pedido_impressao</h4><br>
+    <table align=center width=100% border=1>
     <tr>
     <th>Produto</th>
     <th>Quantidade</th>
@@ -41,12 +70,14 @@
 
     foreach($resultado as $key => $n_pedido_venda){
 
-        $pagina .= " <tr>
-        <td>teste</td>
-        <td>$n_pedido_venda->quantidade_venda</td>
-        <td>$n_pedido_venda->preco_unitario_venda</td>
-        <td>$n_pedido_venda->preco_total_venda</td>
-        </tr>";
+        $pagina .= " <tbody>
+        <tr>
+        <td align=left>$n_pedido_venda->produto_venda</td>
+        <td align=right>$n_pedido_venda->quantidade_venda</td>
+        <td align=right>$n_pedido_venda->valor_produto_unitario_venda</td>
+        <td align=right>$n_pedido_venda->valor_produto_total_venda</td>
+        </tr> ";
+       
         // echo $n_pedido_venda->id_venda . '<br>';
         // echo $n_pedido_venda->numero_da_venda_venda . '<br>';
         // echo $n_pedido_venda->produto_venda . '<br>';
@@ -60,9 +91,34 @@
         // echo $n_pedido_venda->codigo_pagamento_cartao_venda . '<br>';
         // echo $n_pedido_venda->data_hora_venda. '<br>';
     }
+    $pagina .= "</tbody>";
+    $pagina .= "</table>";
+     
+    
+    $pagina .= "<br><br>Valor total do pedido:<strong> R$ ".$n_pedido_venda->total_venda_valor_bruto_venda."</strong><br><br>";
+    $pagina .= "Desconto: " .$n_pedido_venda->desconto_venda_venda."%<br><br>";
+    $pagina .= "Valor total com desconto:<strong> R$ ".$n_pedido_venda->total_venda_atual_com_desconto_venda."</strong><br><br>";
+    $pagina .= "Forma de pagamento:<strong> ".$n_pedido_venda->tipo_de_pagamento_venda."</strong><br><br>";
 
-   
-    $mpdf->WriteHTML($pagina);
-    $mpdf->Output();
+    if ($n_pedido_venda->tipo_de_pagamento_venda != "dinheiro") {
+        $pagina .= "Codigo da Transação:<strong> ".$n_pedido_venda->codigo_pagamento_cartao_venda."</strong><br><br>";
+    }
+        
+    $data_br = date('d/m/Y H:i:s', strtotime($n_pedido_venda->data_hora_venda));
+    
+    $pagina .= "Data e hora do pedido:<strong> ".$data_br."</strong><br><br>";
+
+    $pagina .= "Cliente: <strong>".$n_pedido_venda->nome_cliente_venda."</strong><br><br>";
+    
+    $pagina .= "</body>"; 
+    $pagina .= "</html>";
+    
+    $mpdf->WriteHTML($pagina); 
+    
+    if ($download == 's') {
+        $mpdf->Output('horus_pdv_numero_pedido_'. strval($numero_pedido_impressao) .'.pdf', 'D');
+    } else {
+        $mpdf->Output();
+    }
 ?>
 

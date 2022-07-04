@@ -668,8 +668,10 @@ function verificarCampoPesquisa(){
     let inputPesquisar = document.getElementById('inputPesquisa');
     let inputPesquisarForn = document.getElementById('inputPesquisarForn');
     let inputPesquisarProd = document.getElementById('inputPesquisarProd');
+    let inputPesquisaHistorico = document.getElementById('inputPesquisaHistorico');
     let botaoPesquisar = document.getElementById('botaoPesquisar');
     let campo_pesquisa = document.getElementById('pesquisar_dados');
+    
 
     //verifico se o que foi digitado é número, se for formato de acordo. Cadastro de cliente (cpf), Cad de Fornecedor (cnpj) e Produto (codigo)
     if (inputPesquisar && Number(inputPesquisar.value)){
@@ -679,7 +681,7 @@ function verificarCampoPesquisa(){
         $('#inputPesquisarForn').mask('00.000.000/0000-00'); 
     }
     
-        if (inputPesquisar && inputPesquisar.value == "" || inputPesquisarForn && inputPesquisarForn.value == "" || inputPesquisarProd && inputPesquisarProd.value == ""){
+        if (inputPesquisar && inputPesquisar.value == "" || inputPesquisarForn && inputPesquisarForn.value == "" || inputPesquisarProd && inputPesquisarProd.value == "" || inputPesquisaHistorico && inputPesquisaHistorico.value == ""){
                 
             if (inputPesquisar){
                 inputPesquisar.style.borderColor = 'red';
@@ -699,6 +701,12 @@ function verificarCampoPesquisa(){
                 inputPesquisarProd.placeholder = 'Digite algo para pesquisar';
                 return false
             }
+            if(inputPesquisaHistorico){
+                inputPesquisaHistorico.style.borderColor = 'red';
+                inputPesquisaHistorico.style.borderWidth = '2px';
+                inputPesquisaHistorico.placeholder = 'Digite algo para pesquisar';
+                return false
+            }
         }
         else{
             if (inputPesquisar){
@@ -709,6 +717,9 @@ function verificarCampoPesquisa(){
             }
             if (inputPesquisarProd){
                 inputPesquisarProd.style.borderColor = '#ced4da';
+            }
+            if (inputPesquisaHistorico){
+                inputPesquisaHistorico.style.borderColor = '#ced4da';
             }
         botaoPesquisar.innerHTML = 'Pesquisando...';
         campo_pesquisa.submit();
@@ -729,6 +740,9 @@ document.onreadystatechange = function () {
          if(document.getElementById('tabela_cad_produtos')){
             document.getElementById('tabela_cad_produtos').style.visibility="hidden";
          }
+         if(document.getElementById('tabela_historico_venda')){
+            document.getElementById('tabela_historico_venda').style.visibility="hidden";
+         }
     
     } else if (state == 'complete') {
         setTimeout(function(){
@@ -747,19 +761,26 @@ document.onreadystatechange = function () {
                 if(document.getElementById('tabela_cad_produtos')){
                     document.getElementById('tabela_cad_produtos').remove();
                 }
+                if(document.getElementById('tabela_historico_venda')){
+                    document.getElementById('tabela_historico_venda').remove();
+                }
            }
          
-           if(document.getElementById('tabela_cad_clientes')){       
-                document.getElementById('tabela_cad_clientes').style.visibility="visible";
-           }
+            if(document.getElementById('tabela_cad_clientes')){       
+                    document.getElementById('tabela_cad_clientes').style.visibility="visible";
+            }
         
-           if(document.getElementById('tabela_cad_fornecedores')){
-                document.getElementById('tabela_cad_fornecedores').style.visibility="visible";
-              }
+            if(document.getElementById('tabela_cad_fornecedores')){
+                    document.getElementById('tabela_cad_fornecedores').style.visibility="visible";
+                }
             
-           if(document.getElementById('tabela_cad_produtos')){
-                document.getElementById('tabela_cad_produtos').style.visibility="visible";
-           }
+            if(document.getElementById('tabela_cad_produtos')){
+                    document.getElementById('tabela_cad_produtos').style.visibility="visible";
+            }
+           
+            if(document.getElementById('tabela_historico_venda')){
+                document.getElementById('tabela_historico_venda').style.visibility="visible";
+              }
         },1000);
     }
   }
@@ -1094,6 +1115,13 @@ function limpaCampos(){
     if (inputImagemProduto){
         inputImagemProduto.value = '';
     }
+
+}
+
+function download_pedido(id_pedido){
+    let numero_pedido = id_pedido;
+    window.open('imprimir_pedido_controller.php?download=s' + '&nv=' + numero_pedido);
+    window.location.reload();   
 
 }
 

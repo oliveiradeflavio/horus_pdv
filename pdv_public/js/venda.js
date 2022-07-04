@@ -290,7 +290,7 @@ function cancelarPedido() {
 
 function imprimirPedido(n_pedido) {
     let numero_da_venda = n_pedido;
-    window.open('imprimir_pedido_controller.php?nv=' + numero_da_venda, '_blank');
+    window.open('imprimir_pedido_controller.php?download=n' + '&nv=' + numero_da_venda, '_blank');
     window.location.reload();    
     // $.ajax({
     //     type:'POST',
