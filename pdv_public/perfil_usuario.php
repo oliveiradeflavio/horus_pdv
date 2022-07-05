@@ -85,8 +85,9 @@
                             </div>
                           
                             
-                            <button onclick="location.href='#'" class="btn btn-primary">Histórico</button>
-                            <button onclick="location.href='#'" class="btn btn-primary">Venda</button>
+                            <button onclick="location.href='historico_venda.php'" class="btn btn-primary">Histórico</button>
+                            <button onclick="location.href='relatorios.php'" class="btn btn-primary">Relatórios</button>
+                            <button onclick="location.href='venda.php'" class="btn btn-primary">Venda</button>
                         </div>
                     </div>
                 </div>
@@ -119,9 +120,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <input type="checkbox" class="col-md-12 form-check-input ml-5" id="checkbox_perfil_alterar_senha" onclick="habilitarTrocaSenha()">
-                            <label class="col-md-8 form-check-label" for="checkbox_perfil_alterar_senha">Ativar para alterar sua senha</label>
+                        <div class="form-group custom-control custom-switch ml-3">
+                            <input type="checkbox" class="custom-control-input"  id="checkbox_perfil_alterar_senha" onclick="habilitarTrocaSenha()">
+                            <label class="col-md-8 custom-control-label" for="checkbox_perfil_alterar_senha">Ativar para alterar sua senha</label>
                         </div>
 
                         <div class="form-group">

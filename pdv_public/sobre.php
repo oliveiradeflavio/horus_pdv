@@ -41,10 +41,15 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                     <div class="dropdown">
                         <img src="../pdv/img/usuarios/<?= $_SESSION['foto_usuario'] ?>" alt="" width="50" height="50" class="img-circulo">
                         <div class="dropdown-content mr-5">
-                            <a href="index.php" style="cursor:pointer"><?php echo $_SESSION['nome_usuario'] ?>
+                            <a><?php echo $_SESSION['nome_usuario'] ?></a>
                             <div class="dropdown-divider"></div>
-                            Voltar para o home</a>
-                            </a>
+                            <a href="index.php">Home</a>
+                            <a href="perfil_usuario.php">Meu Perfil</a>
+                            <?php if ($_SESSION['perfil_usuario'] == 1) : ?>
+                                <a href="#">Configurações</a>
+                            <?php endif; ?>
+                            <a href="sobre.php">Sobre</a>
+                            <a href="logout.php">Sair</a>
                         </div>
                     </div>
                 </ul>
@@ -65,6 +70,11 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                             <p class="fontes">O Hórus PDV é um sistema de gestão de produtos e serviços que tem como objetivo 
                                 <br>facilitar o controle de estoque, aumentar a produtividade e a segurança de seus funcionários.
                             </p>
+
+                            <p class="fontes">
+                                Cadastre clientes, fornecedores, produtos. Cadastre funcionários e faça suas vendas. Gere relatórios de vendas e estoque.
+                            </p>
+                                
                         </div>
                         <div class="px-4 mt-5">
                             <p>Desenvolvido por Flávio Oliveira</p>
@@ -78,6 +88,11 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                                 <a style="color: #000;"  role="button" href="https://github.com/oliveiradeflavio"
                                 target="_blank"
                                 ><i class="fab fa-github icone_sobre"></i
+                                ></a>
+
+                                <a style="color: #E1306C"  role="button" href="https://www.instagram.com/flavio_tech"
+                                target="_blank"
+                                ><i class="fab fa-instagram icone_sobre"></i
                                 ></a>
                         </div>
                     </div>

@@ -1118,6 +1118,7 @@ function limpaCampos(){
 
 }
 
+//Função irá fazer download do pedido de venda, enviando para a página imprimir_pedido_controller com os parâmetro de download como true.
 function download_pedido(id_pedido){
     let numero_pedido = id_pedido;
     window.open('imprimir_pedido_controller.php?download=s' + '&nv=' + numero_pedido);
@@ -1125,11 +1126,31 @@ function download_pedido(id_pedido){
 
 }
 
+function gerarRelatorio(){
+    let categoria = document.getElementById('categoria_relatorio').value;
+    let periodo = document.getElementById('periodo_relatorio').value;
+    let form_relatorio = document.getElementById('form_relatorio');
+
+    if(categoria == '' || periodo == ''){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Selecione uma categoria e período para gerar o relatório!',
+            confirmButtonText: 'Ok'
+        });
+    }else {
+        form_relatorio.method = 'POST';
+        form_relatorio.action = 'relatorio_controller.php';
+        form_relatorio.submit();
+    }   
+}
+
 //Função de ajuda de como preencher os campos do cadadastro de clientes, fornecedores e produtos (crud) e também fazer a consulta.
 function ajuda_cadastro(){
     let ajuda_cadastro_cliente = document.getElementById('ajuda_cad_cliente');
     let ajuda_cadastro_fornecedor = document.getElementById('ajuda_cad_fornecedor');
     let ajuda_cadastro_produto = document.getElementById('ajuda_cad_produto');
+    let ajuda_historico_venda = document.getElementById('ajuda_historico_venda');
 
     if (ajuda_cadastro_cliente){
         Swal.fire({
@@ -1154,7 +1175,15 @@ function ajuda_cadastro(){
             icon: 'info',
             confirmButtonText: 'Fechar'
         }) 
-    }   
+    }  
+    if (ajuda_historico_venda){
+        Swal.fire({
+            title: 'Ajuda',
+            text: 'Para consultar o histórico de vendas, preencha o campo de busca com o número do pedido.\n\nPara mostrar todas as vendas preencha com o caractere %. \n\nFaça o download em PDF do pedido clicando no ícone de download.',
+            icon: 'info',
+            confirmButtonText: 'Fechar'
+        })
+    } 
 }
 
     

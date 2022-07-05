@@ -284,10 +284,6 @@ function fecharPedido() {
     });
 }
 
-function cancelarPedido() {
-    alert('em construção')
-}
-
 function imprimirPedido(n_pedido) {
     let numero_da_venda = n_pedido;
     window.open('imprimir_pedido_controller.php?download=n' + '&nv=' + numero_da_venda, '_blank');
@@ -433,4 +429,18 @@ function limpaCampos() {
     preco_unitario_produto.value = 'R$ 0,00';
     preco_total_produto.value = 'R$ 0,00';
     preview_imagem_produto.src = '../pdv/img/produtos/produto_sem_imagem.png';
+}
+
+function ajuda() {
+    let ajuda_venda = document.getElementById('ajuda_venda');
+    if(ajuda_venda){
+        Swal.fire({
+            icon: 'info',
+            title: 'Ajuda',
+            text: 'Para adicionar um item para venda, preencha todos os campos.\n\nPara remover um item já adicionado, clique no ícone de lixeira. \n\n Para finalizar o pedido, clique em ' + 
+            'Fechar Venda, assim irá habilitar o campo para selecionar o tipo de pagamento. Com isso você tem acesso a desconto. Para finalizar a venda, clique em Fechar Venda. Após fechar a venda, ' +
+            'você irá conseguir imprimir o pedido. Para cancelar a venda, remova os itens adicionados.',
+        })
+    }
+    
 }

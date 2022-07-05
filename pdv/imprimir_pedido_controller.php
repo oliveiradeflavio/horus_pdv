@@ -10,6 +10,7 @@
 
     $mpdf = new Mpdf();
 
+     //Esses dois parâmetros vem da página de histórico e venda. Na página de histórico o download é true já na página de venda o download é false. Na página de venda.php será para impressão.
     $download = $_GET['download'];
     $numero_pedido_impressao = $_GET['nv'];
 
@@ -78,18 +79,6 @@
         <td align=right>$n_pedido_venda->valor_produto_total_venda</td>
         </tr> ";
        
-        // echo $n_pedido_venda->id_venda . '<br>';
-        // echo $n_pedido_venda->numero_da_venda_venda . '<br>';
-        // echo $n_pedido_venda->produto_venda . '<br>';
-        // echo $n_pedido_venda->quantidade_venda . '<br>';
-        // echo $n_pedido_venda->valor_produto_unitario_venda . '<br>';
-        // echo $n_pedido_venda->valor_produto_total_venda . '<br>';
-        // echo $n_pedido_venda->total_venda_valor_bruto_venda . '<br>';
-        // echo $n_pedido_venda->tipo_de_pagamento_venda . '<br>';
-        // echo $n_pedido_venda->desconto_venda_venda. '<br>';
-        // echo $n_pedido_venda->total_venda_atual_com_desconto_venda . '<br>';
-        // echo $n_pedido_venda->codigo_pagamento_cartao_venda . '<br>';
-        // echo $n_pedido_venda->data_hora_venda. '<br>';
     }
     $pagina .= "</tbody>";
     $pagina .= "</table>";

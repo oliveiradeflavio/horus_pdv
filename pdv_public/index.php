@@ -3,9 +3,7 @@ session_start();
 if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
     header("Location: login.php?login=2");
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -84,6 +82,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
 
 
                             <button onclick="location.href='historico_venda.php'" class="btn btn-primary">Histórico</button>
+                            <button onclick="location.href='relatorios.php'" class="btn btn-primary">Relatórios</button>
                             <button onclick="window.open('venda.php', '_blank')" class="btn btn-primary">Iniciar Venda</button>
                         </div>
                     </div>
@@ -130,6 +129,8 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Gráficos Google Charts -->
     <script>
         google.charts.load("current", {
             packages: ["corechart"]
@@ -142,8 +143,6 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                 ['Task', 'Registers'],
                 <?php
 
-               // require_once '../pdv/conexao.php';
-                // $conexao = new Conexao();
                 $conexao = new PDO('mysql:host=localhost;dbname=pdv_horus', 'root', '');
                 $query = "SELECT COUNT(*) FROM tb_clientes";
                 $stmt = $conexao->prepare($query);
@@ -190,11 +189,52 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
 
         function drawChartVendas() {
             var data_vendas = google.visualization.arrayToDataTable([
+
                 ['Year', 'Vendas'],
-                ['2013', 1000],
-                ['2014', 1170],
-                ['2015', 660],
-                ['2016', 1030]
+                <?php
+                //Ano atual gráfico de vendas
+                $ano_atual = date("Y");
+                $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano_atual";
+                $stmt = $conexao->prepare($query);
+                $stmt->bindValue(':ano_atual', $ano_atual);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                foreach ($result as $row) {
+                    echo "['" . $ano_atual . "', " . $row[0] . "],";
+                }
+                //1 ano passado gráfico de vendas
+                $ano_passado = $ano_atual - 1;
+                $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano_passado";
+                $stmt = $conexao->prepare($query);
+                $stmt->bindValue(':ano_passado', $ano_passado);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                foreach ($result as $row) {
+                    echo "['" . $ano_passado . "', " . $row[0] . "],";
+                }
+
+                //2 anos passados gráfico de vendas
+                $ano_retrasado = $ano_atual - 2;
+                $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano_retrasado";
+                $stmt = $conexao->prepare($query);
+                $stmt->bindValue(':ano_retrasado', $ano_retrasado);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                foreach ($result as $row) {
+                    echo "['" . $ano_retrasado . "', " . $row[0] . "],";
+                }
+
+                //3 anos passados atrás gráfico de vendas
+                $ano_antretrasado = $ano_atual - 3;
+                $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano_antretrasado";
+                $stmt = $conexao->prepare($query);
+                $stmt->bindValue(':ano_antretrasado', $ano_antretrasado);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                foreach ($result as $row) {
+                    echo "['" . $ano_antretrasado . "', " . $row[0] . "],";
+                }
+                ?>
             ]);
 
             var options = {
@@ -214,5 +254,6 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             chart.draw(data_vendas, options);
         }
     </script>
+    <!-- fim gráficos google charts -->
 </body>
 </html>

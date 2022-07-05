@@ -29,9 +29,13 @@
     <title>Hórus PDV - Venda</title>
 </head>
 <body>
- <div class="container">
+<i class="fa-solid fa-circle-question icone_fontawesome ml-3 mt-3" id="ajuda_venda" style="cursor: pointer" onclick="ajuda()"></i>
+ 
+<div class="container">
     <div class="row">
     <div class='col-md-6 mt-2'>
+    
+
             <select class="form-control" name="selecao_cliente" id="selecao_cliente">
                 <option value="">Selecione um cliente</option>
                 <?php
@@ -134,9 +138,6 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <!-- <div class="col-md-6">
-                                <button onclick="imprimirPedido()" class="btn btn-primary btn-block">Imprimir</button>
-                            </div> -->
                             <div class="col-md-6">
                                 <button onclick="fecharVenda()"  id='botaoFecharVenda' class="btn btn-success btn-block">Fechar Venda</button>
                             </div>

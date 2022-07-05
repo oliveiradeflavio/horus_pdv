@@ -86,6 +86,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                             </div>
 
                             <button onclick="location.href='historico_venda.php'"class="btn btn-primary">Histórico</button>
+                            <button onclick="location.href='relatorios.php'" class="btn btn-primary">Relatórios</button>
                             <button onclick="window.open('venda.php', '_blank')" class="btn btn-primary">Iniciar Venda</button>
                         </div>
                     </div>
@@ -102,6 +103,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                             <button type="button" onclick="verificarCampoPesquisa()" class="input-group-text border-0" id="botaoPesquisar">
                                 <i class="fas fa-search"></i>
                             </button>
+                            <i class="fa-solid fa-circle-question icone_fontawesome ml-3" id="ajuda_historico_venda" style="cursor: pointer" onclick="ajuda_cadastro()"></i>
                         </div>
                     </form>
                 </div>
