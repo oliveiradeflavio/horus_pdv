@@ -46,7 +46,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                             <div class="dropdown-divider"></div>
                             <a href="perfil_usuario.php">Meu Perfil</a>
                             <?php if ($_SESSION['perfil_usuario'] == 1) : ?>
-                                <a href="#">Configurações</a>
+                                <a href="configuracoes.php">Configurações</a>
                             <?php endif; ?>
                             <a href="sobre.php">Sobre</a>
                             <a href="logout.php">Sair</a>
@@ -191,49 +191,23 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             var data_vendas = google.visualization.arrayToDataTable([
 
                 ['Year', 'Vendas'],
-                <?php
-                //Ano atual gráfico de vendas
-                $ano_atual = date("Y");
-                $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano_atual";
+                //Pego todos os anos que existem no banco de dados, usando o DISTINCT.
+                <?php  
+                $query = 'SELECT DISTINCT(YEAR(data_hora_venda)) AS ano FROM tb_vendas';
                 $stmt = $conexao->prepare($query);
-                $stmt->bindValue(':ano_atual', $ano_atual);
                 $stmt->execute();
-                $result = $stmt->fetchAll();
-                foreach ($result as $row) {
-                    echo "['" . $ano_atual . "', " . $row[0] . "],";
-                }
-                //1 ano passado gráfico de vendas
-                $ano_passado = $ano_atual - 1;
-                $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano_passado";
-                $stmt = $conexao->prepare($query);
-                $stmt->bindValue(':ano_passado', $ano_passado);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                foreach ($result as $row) {
-                    echo "['" . $ano_passado . "', " . $row[0] . "],";
+                $todos_anos = $stmt->fetchAll();
+                foreach ($todos_anos as $ano) {
+                    $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano";
+                    $stmt = $conexao->prepare($query);
+                    $stmt->bindValue(':ano', $ano['ano']);
+                    $stmt->execute();
+                    $result = $stmt->fetchAll();
+                    foreach ($result as $row) {
+                        echo "['" . $ano['ano'] . "', " . $row[0] . "],";
+                    }
                 }
 
-                //2 anos passados gráfico de vendas
-                $ano_retrasado = $ano_atual - 2;
-                $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano_retrasado";
-                $stmt = $conexao->prepare($query);
-                $stmt->bindValue(':ano_retrasado', $ano_retrasado);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                foreach ($result as $row) {
-                    echo "['" . $ano_retrasado . "', " . $row[0] . "],";
-                }
-
-                //3 anos passados atrás gráfico de vendas
-                $ano_antretrasado = $ano_atual - 3;
-                $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano_antretrasado";
-                $stmt = $conexao->prepare($query);
-                $stmt->bindValue(':ano_antretrasado', $ano_antretrasado);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                foreach ($result as $row) {
-                    echo "['" . $ano_antretrasado . "', " . $row[0] . "],";
-                }
                 ?>
             ]);
 

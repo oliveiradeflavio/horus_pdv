@@ -120,6 +120,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
 
                             }else if(categoria == 'rel_vendas'){
                                 $('#periodo_relatorio').removeAttr('disabled'); 
+                                $('#btn_gerar_relatorio').removeAttr('disabled');
                                 $('#periodo_relatorio').html('');
                                 $('#periodo_relatorio').append('<option value="todos_anos">Todos</option>');
                                 <?php 

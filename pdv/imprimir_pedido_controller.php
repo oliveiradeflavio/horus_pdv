@@ -39,8 +39,7 @@
     <h5 align=center>RUA TESTE, 123 - TESTE - SERRA NEGRA/SP</h5>
     <h5 align=center>CNPJ: 00.000.000/0000-00 Fone: (00) 0000-0000</h5>
     <hr>');
-
-    //$output = "<meta charset='utf-8' />";
+    
     $pagina = "
     <html>
     <head>
