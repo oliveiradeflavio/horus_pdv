@@ -25,13 +25,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="img/logo.png" width="400" height="400" alt="logo" class="img-fluid mt-5 transparencia">
+                    <img src="img/logo.png" width="400" height="400" alt="logo" class="img-fluid mt-5 transparencia img_desktop">
+                    <img src="img/logo_mobile.png" width="400" height="400" alt="logo" class="img-fluid mt-5 transparencia img_mobile">
                 </div>
                 <div class="col-md-6 mt-5">
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="mb-4">
-                                <h3>Hórus PDV</h3>
+                                <h3 class='img_desktop'>Hórus PDV</h3>
                                 <p class="mb-4"> Sem conta? <a href="registrar.php" style='color: #6c66aa;'> Cadastre-se</a></p>
                             </div>
                             <form action="login_controller.php" method="post">
