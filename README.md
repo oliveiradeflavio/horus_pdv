@@ -28,8 +28,7 @@ O Hórus PDV é um sistema de gestão de vendas para pequenas empresas. Cadastre
 * [VIACEP](https://viacep.com.br/)
 * [SweetAlert2](https://sweetalert2.github.io/)
 * [GoogleCharts](https://developers.google.com/chart)
-
-
+* [mPDF](https://mpdf.github.io/)
 
 <!-- USAGE EXAMPLES -->
 ## Demo
