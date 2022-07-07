@@ -7,7 +7,8 @@ if (!isset($_SESSION)) {
 require_once "conexao.php";
 require "cad_cliente_model.php";
 require "cad_cliente_service.php";
-require "configuracoes_controller.php";
+require "configuracoes_model.php";
+require "configuracoes_service.php";
 
 //capturar o parametro ação que esta sendo passado como parametro via GET
 $acao = isset($_GET['acao']) ? $_GET['acao'] : $acao;
@@ -27,8 +28,10 @@ if ($acao == 'consultarTabelaClientes') {
     master tem acesso a essa função.
     */
     $pass = isset($_GET['p']) ? $_GET['p'] : $pass;
-    $pass = md5($pass);    
-    $configuracoes = $configuracoesService->consultaConfiguracoes();
+    $pass = md5($pass);   
+    $configuracao = new Configuracoes();
+    $configuracoesService = new ConfiguracoesService($conexao, $configuracao); 
+    $configuracoes = $configuracoesService->consultaConfiguracoes(); 
     foreach($configuracoes as $i => $config){
         if($config->senha_master_configuracoes == $pass){
             $id = $_GET['id'];

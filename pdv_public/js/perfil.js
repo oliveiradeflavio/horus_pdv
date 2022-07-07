@@ -15,6 +15,7 @@ function habilitarTrocaSenha() {
         campo_antiga_senha.required = true;
         campo_nova_senha.required = true;
         return true
+   
     } else {
         campo_antiga_senha.disabled = true;
         campo_nova_senha.disabled = true;

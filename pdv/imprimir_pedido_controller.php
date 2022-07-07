@@ -5,6 +5,9 @@
     }
 
     require_once 'conexao.php';
+    require 'dados_empresariais_model.php';
+    require 'dados_empresariais_service.php';
+
     require_once __DIR__ . '_public/plugins/vendor/autoload.php';
     use Mpdf\Mpdf;
 
@@ -15,6 +18,7 @@
     $numero_pedido_impressao = $_GET['nv'];
 
     $conexao = new Conexao();
+    $conexao2 = $conexao;
     $conexao = $conexao->conectar();
 
     $mpdf->forcePortraitHeaders = true;
@@ -24,7 +28,7 @@
     <div style="text-align: right; font-weight: bold;">
         <img src="img/logo.png" width="100" height="100" alt="Logo">
 
-    ');
+    ');   
 
     $mpdf->SetHTMLFooter('
     <table width="100%">
@@ -35,10 +39,18 @@
         </tr>
     </table>');
 
-    $mpdf->WriteHTML('<h5 align=center>Hórus PDV
-    <h5 align=center>RUA TESTE, 123 - TESTE - SERRA NEGRA/SP</h5>
-    <h5 align=center>CNPJ: 00.000.000/0000-00 Fone: (00) 0000-0000</h5>
-    <hr>');
+    $dados_empresariais = new DadosEmpresariaisModel();
+    $dados_empresariais_service = new DadosEmpresariaisService($conexao2, $dados_empresariais);
+
+    $consulta_dados_empresarias = $dados_empresariais_service->consultarDadosEmpresariais();
+    foreach($consulta_dados_empresarias as $key => $dados_empresariais){
+        $mpdf->WriteHTML('<h5 align=center>'.$dados_empresariais->nome_empresa_dados_empresariais.'</h5>
+        <h5 align=center>'.$dados_empresariais->endereco_dados_empresariais.', '.$dados_empresariais->numero_dados_empresariais. ' - ' .$dados_empresariais->bairro_dados_empresariais.' - '. $dados_empresariais->cidade_dados_empresariais.'/'.$dados_empresariais->estado_dados_empresariais.'</h5>
+        <h5 align=center>CNPJ:'.$dados_empresariais->cnpj_dados_empresariais.' Fone: '.$dados_empresariais->telefone_dados_empresariais.'/'.$dados_empresariais->celular_dados_empresariais.'</h5>
+        <hr>');
+    } 
+
+   
     
     $pagina = "
     <html>

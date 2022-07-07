@@ -12,19 +12,40 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!--------- ONLINE -------->
     <!-- cdn bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
-    <!-- css -->
-    <link rel="stylesheet" href="css/index.css">
+     //jquery mask 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    //fontawesome
+    <script src="https://kit.fontawesome.com/90a33d8225.js" crossorigin="anonymous"></script> -->
+    <!------- FIM ONLINE ------>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
 
     <!-- jquery mask -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="js/jquery.mask.min.js"></script>
+
+    <!-- fontawesome-->
+    <link rel="stylesheet" href="assets/fontawesome/css/all.css">
+
+     <!-- sweetalert2 -->
+     <link rel="stylesheet" href="css/sweetalert2.min.css">
+     <script src="js/sweetalert2.all.min.js"></script>   
+       <!------------ FIM OFFLINE ------------->
 
     <!-- fontawesome-->
     <script src="https://kit.fontawesome.com/90a33d8225.js" crossorigin="anonymous"></script>
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/index.css">
 
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
@@ -49,7 +70,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                             <div class="dropdown-divider"></div>
                             <a href="perfil_usuario.php">Meu Perfil</a>
                             <?php if ($_SESSION['perfil_usuario'] == 1) : ?>
-                                <a href="#">Configurações</a>
+                                <a href="configuracoes.php">Configurações</a>
                             <?php endif; ?>
                             <a href="sobre.php">Sobre</a>
                             <a href="logout.php">Sair</a>
@@ -73,14 +94,14 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             <div class='alert alert-success mt-2' role='alert'>
                 <strong>Sucesso!</strong> Cliente cadastrado com sucesso!
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true" onclick='resetURL()'>&times;</span>
                 </button>
             </div>
         <?php } else if (isset($_GET['sucesso']) && $_GET['sucesso'] == '2') { ?>
             <div class='alert alert-success mt-2' role='alert'>
                 <strong>Sucesso!</strong> Cliente removido com sucesso!
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true" onclick='resetURL()'>&times;</span>
                 </button>
             </div>
 
@@ -88,7 +109,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             <div class='alert alert-success mt-2' role='alert'>
                 <strong>Sucesso!</strong> Cliente alterado com sucesso!
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true" onclick='resetURL()'>&times;</span>
                 </button>
             </div>
 
@@ -96,7 +117,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             <div class='alert alert-warning mt-2' role='alert'>
                 <strong>Atenção</strong> CPF já cadastrado!
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true" onclick='resetURL()'>&times;</span>
                 </button>
             </div>
 
@@ -104,7 +125,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             <div class='alert alert-danger mt-2' role='alert'>
                 <strong>Erro</strong> Senha master incorreta!
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true" onclick='resetURL()'>&times;</span>
                 </button>
             </div>
         <?php } ?>
@@ -341,8 +362,5 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
     </section>
 
     <script src="js/pdv.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </body>
-
 </html>

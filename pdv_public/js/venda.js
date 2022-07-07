@@ -1,3 +1,4 @@
+//seleção do produto, pegando o valor unitário do produto e setando esses valores. Pego também a imagem do produto e seto na div de preview de imagem 
 $('#selecao_produto').on('change', function () {
     $('#quantidade_produto').val(1);
     let preco_unitario = $('#selecao_produto option:selected').data('valor');
@@ -8,6 +9,7 @@ $('#selecao_produto').on('change', function () {
 
 });
 
+//seleção da quantidade de produto, pego o valor unitário setado na funçaõ anterior e multiplico pela quantidade selecionada
 $('#quantidade_produto').on('change', function () {
     if ($('#quantidade_produto').val() > 0) {
         let preco_unitario = $('#preco_unitario_produto').val();
@@ -369,6 +371,9 @@ function fecharVenda() {
             data: dados_venda,
             dataType: 'json',            
             success:  dados => {  
+                /*formato o valor dados deixando apenas a palavra sucesso, separando a string do valor id que vem junto. 
+                Esse valor id, uso para imprimir o pedido, enviando para a função imprimirPedido()
+                */
                 let dados_formatados = dados.substr(0,7);
                 let numero_venda = dados.substr(8,dados.length);
                 if (dados_formatados == 'sucesso'){
@@ -392,7 +397,7 @@ function fecharVenda() {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Ocorreu um erro ao realizar a venda!',
+                        text: 'Ocorreu um erro ao realizar a venda!' + dados,
                         allowOutsideClick: false,
                         confirmButtonText: 'Ok'
                     });

@@ -18,11 +18,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     
-    <!-- css -->
-    <link rel="stylesheet" href="css/venda.css">
+    <!-- sweetalert2 -->
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+    <script src="js/sweetalert2.all.min.js"></script>  
 
     <!-- fontawesome-->
-    <script src="https://kit.fontawesome.com/90a33d8225.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/fontawesome/css/all.css">
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/venda.css">
 
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
@@ -163,8 +167,6 @@
     </div>
 </div>
 
-
 <script src="js/venda.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

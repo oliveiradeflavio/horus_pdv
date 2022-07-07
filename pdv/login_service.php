@@ -79,8 +79,33 @@
             }
            
         }
+
+        public function alteraPermissaoUsuario(){
+                
+                $query = "update tb_usuarios set perfil_usuario = :permissao where id_usuario = :id";
+                try{
+                $stmt = $this->conexao->prepare($query);
+                $stmt->bindValue(':permissao', $this->login->__get('perfil_usuario'));
+                $stmt->bindValue(':id', $this->login->__get('id_usuario'));
+                $stmt->execute();
+                }
+                catch(PDOException $e){
+                    echo "PDOException: " .$e->getMessage();
+                }
+        }
+
+        public function novaSenhaUsuario(){
+
+            $query = "update tb_usuarios set password_usuario = :senha where id_usuario = :id";
+            try{
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':senha', $this->login->__get('nova_senha'));
+            $stmt->bindValue(':id', $this->login->__get('id_usuario'));
+            $stmt->execute();
+            }
+            catch(PDOException $e){
+                echo "PDOException: " .$e->getMessage();
+            }           
+        }
        
     }
-
-
-?>

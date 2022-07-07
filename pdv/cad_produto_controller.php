@@ -7,7 +7,8 @@ if (!isset($_SESSION)){
 require_once "conexao.php";
 require "cad_produto_model.php";
 require "cad_produto_service.php";
-require "configuracoes_controller.php";
+require "configuracoes_model.php";
+require "configuracoes_service.php";
 
 $cadProduto = new CadProduto();
 $conexao = new Conexao();
@@ -26,7 +27,9 @@ if ($acao == 'consultarTabelaProdutos') {
     master tem acesso a essa função.
     */
     $pass = isset($_GET['p']) ? $_GET['p'] : $pass;
-    $pass = md5($pass);    
+    $pass = md5($pass);  
+    $configuracao = new Configuracoes();
+    $configuracoesService = new ConfiguracoesService($conexao, $configuracao);  
     $configuracoes = $configuracoesService->consultaConfiguracoes();
     foreach($configuracoes as $i => $config){
         if($config->senha_master_configuracoes == $pass){

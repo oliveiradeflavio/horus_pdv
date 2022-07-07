@@ -12,16 +12,37 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+     <!--------- ONLINE -------->
     <!-- cdn bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
-    <!-- css -->
-    <link rel="stylesheet" href="css/index.css">
+     //jquery mask 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    //fontawesome
+    <script src="https://kit.fontawesome.com/90a33d8225.js" crossorigin="anonymous"></script> -->
+    <!------- FIM ONLINE ------>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+
+    <!-- jquery mask -->
+    <script src="js/jquery.mask.min.js"></script>
 
     <!-- fontawesome-->
-    <script src="https://kit.fontawesome.com/90a33d8225.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/fontawesome/css/all.css">
+
+     <!-- sweetalert2 -->
+     <link rel="stylesheet" href="css/sweetalert2.min.css">
+     <script src="js/sweetalert2.all.min.js"></script>   
+       <!------------ FIM OFFLINE ------------->
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/index.css">
 
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
@@ -148,33 +169,49 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                 $stmt = $conexao->prepare($query);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                foreach ($result as $row) {
-                    echo "['Clientes', " . $row[0] . "],";
+                if(count($result) > 0){
+                    foreach ($result as $row) {
+                        echo "['Clientes', " . $row[0] . "],";
+                    }
+                }else{
+                    echo "['Clientes', 0],";                
                 }
 
                 $query = "SELECT COUNT(*) FROM tb_fornecedores";
                 $stmt = $conexao->prepare($query);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                foreach ($result as $row) {
-                    echo "['Fornecedores', " . $row[0] . "],";
-                }
+                if(count($result) > 0){
+                    foreach ($result as $row) {
+                        echo "['Fornecedores', " . $row[0] . "],";
+                    }
+                }else{
+                    echo "['Fornecedores', 0],";                
+                }                
 
                 $query = "SELECT COUNT(*) FROM tb_produtos";
                 $stmt = $conexao->prepare($query);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                foreach ($result as $row) {
-                    echo "['Produtos', " . $row[0] . "],";
+                if(count($result) > 0){
+                    foreach ($result as $row) {
+                        echo "['Produtos', " . $row[0] . "],";
+                    }
+                }else{
+                    echo "['Produtos', 0],";                
                 }
-
+               
                 $query =  "SELECT COUNT(*) FROM  tb_usuarios";
                 $stmt = $conexao->prepare($query);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                foreach ($result as $row) {
-                    echo "['Usuários', " . $row[0] . "],";
-                }
+                if(count($result) > 0){
+                    foreach ($result as $row) {
+                        echo "['Usuários', " . $row[0] . "],";
+                    }
+                }else{
+                    echo "['Usuários', 0],";                
+                }               
                 ?>
 
             ]);
@@ -197,16 +234,21 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                 $stmt = $conexao->prepare($query);
                 $stmt->execute();
                 $todos_anos = $stmt->fetchAll();
-                foreach ($todos_anos as $ano) {
-                    $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano";
-                    $stmt = $conexao->prepare($query);
-                    $stmt->bindValue(':ano', $ano['ano']);
-                    $stmt->execute();
-                    $result = $stmt->fetchAll();
-                    foreach ($result as $row) {
-                        echo "['" . $ano['ano'] . "', " . $row[0] . "],";
+                if(count($todos_anos) > 0){
+                    foreach ($todos_anos as $ano) {
+                        $query = "SELECT COUNT(`numero_da_venda_venda`) FROM tb_vendas WHERE YEAR(`data_hora_venda`) = :ano";
+                        $stmt = $conexao->prepare($query);
+                        $stmt->bindValue(':ano', $ano['ano']);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll();
+                        foreach ($result as $row) {
+                            echo "['" . $ano['ano'] . "', " . $row[0] . "],";
+                        }
                     }
+                }else{
+                    echo "['0', 0],";
                 }
+               
 
                 ?>
             ]);

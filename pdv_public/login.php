@@ -15,9 +15,6 @@
     <!-- css -->
     <link rel="stylesheet" href="css/login.css">
 
-    <!-- fontawesome-->
-    <script src="https://kit.fontawesome.com/90a33d8225.js" crossorigin="anonymous"></script>
-
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
     <title>Hórus PDV</title>
@@ -75,15 +72,9 @@
                              ?>
                             
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
-
         </div>
-
 </body>
-
 </html>

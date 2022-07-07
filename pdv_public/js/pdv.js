@@ -1145,6 +1145,13 @@ function gerarRelatorio(){
     }   
 }
 
+//Reseta a URL da página, removendo todo o conteudo que tiver após o ?
+function resetURL() {
+    const url = window.location.href;
+    const resultado = url.split('?')[0];
+    history.pushState(null, null, resultado);
+}
+
 //Função de ajuda de como preencher os campos do cadadastro de clientes, fornecedores e produtos (crud) e também fazer a consulta.
 function ajuda_cadastro(){
     let ajuda_cadastro_cliente = document.getElementById('ajuda_cad_cliente');

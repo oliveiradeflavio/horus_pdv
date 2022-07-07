@@ -1,9 +1,42 @@
 <?php
   
   session_start();
-  require "conexao.php";
+  require_once "conexao.php";
   require "login_model.php";
   require "login_service.php";
+
+
+    //capturar o parametro ação que esta sendo passado como parametro via GET
+    $acao = isset($_GET['acao']) ? $_GET['acao'] : $acao;
+
+    if( $acao == 'permissao'){
+        $login = new Login();
+        $conexao = new Conexao();
+        $loginService = new LoginService($conexao, $login);
+
+        $permissao_usuario = $_POST['permissao_usuario'];
+        $id_usuario = $_POST['usuario_permissao'];
+
+        $login->__set('id_usuario', $id_usuario);
+        $login->__set('perfil_usuario', $permissao_usuario);
+        $loginService->alteraPermissaoUsuario();
+        header('Location: configuracoes.php?sucesso_permissao=1#nav_permissao_usuario');
+   
+    }elseif($acao == 'recuperar_senha'){
+        $login = new Login();
+        $conexao = new Conexao();
+        $loginService = new LoginService($conexao, $login);
+
+        $id_usuario = $_POST['usuario_recuperar_senha'];
+        $nova_senha = md5($_POST['senha_usuario_recuperada_nova']);
+        
+        $login->__set('id_usuario', $id_usuario);
+        $login->__set('nova_senha', $nova_senha);
+
+        $loginService->novaSenhaUsuario();
+        header('Location: configuracoes.php?sucesso_nova_senha=1#nav_recuperacao');
+    
+    }else{
 
     $cpf = $_POST['cpf'];
     $nome = $_POST['nome'];
@@ -64,8 +97,7 @@
         
         }
     }
-  
-
+}
 
 
 ?>
