@@ -12,9 +12,11 @@
 
 [![tela inicial][product-screenshot]]()
 
-*** EM DESENVOLVIMENTO ****
 
-O Hórus PDV é um sistema de gestão de vendas para pequenas empresas. Cadastre clientes, fornecedores, produtos e faça sua venda.
+O Hórus PDV é um sistema de gestão de produtos e serviços que tem como objetivo facilitar o controle de estoque, aumentar a produtividade e a segurança de seus funcionários.
+
+Cadastre clientes, fornecedores, produtos. Cadastre funcionários e faça suas vendas. Gere relatórios de vendas e estoque.
+
 
 ### Construído com
 
