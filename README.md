@@ -38,8 +38,12 @@ Cadastre clientes, fornecedores, produtos. Cadastre funcionários e faça suas v
 ![Login](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/login.png)
 ![Registrar](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/registrar.png)
 ![MCadastros](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/menu_cadastros.png)
-![MLateral](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/menu_lateral.png)
+![HistoricoVenda](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/relatorio_historico_venda.png)
+![MenuRelatorios](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/menu_relatorios.png)
 ![PerfilUsuario](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/perfil_usuario.png)
+![Venda](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/tela_venda.png)
+![ImpressaoVenda](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/impressao_venda.png)
+![Configuracoes](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/configuracoes.png)
 
 <!-- CONTACT -->
 ## Contato
