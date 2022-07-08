@@ -261,7 +261,9 @@ function meu_callback(conteudo) {
         document.getElementById('inputEstado').value = (conteudo.uf);
         document.getElementById('inputEnderecoComplemento').value = (conteudo.complemento);
         document.getElementById('inputCelular').value = (conteudo.ddd);
-        document.getElementById('inputTelefone').value = (conteudo.ddd);
+        if(document.getElementById('inputTelefone')){
+            document.getElementById('inputTelefone').value = (conteudo.ddd);
+        }
 
     } else {
         Swal.fire('Oops...', 'CEP não encontrado!', 'error');
@@ -290,7 +292,9 @@ function pesquisaCEP(valor) {
             document.getElementById('inputEstado').value = "...";
             document.getElementById('inputEnderecoComplemento').value = "...";
             document.getElementById('inputCelular').value = "...";
-            document.getElementById('inputTelefone').value = "...";
+            if(document.getElementById('iputTelefone')){
+             document.getElementById('inputTelefone').value = "...";
+            }
 
             //Cria um elemento javascript.
             let script = document.createElement('script');
