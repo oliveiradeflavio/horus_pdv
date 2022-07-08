@@ -27,7 +27,8 @@ if ($acao == 'consultarTabelaProdutos') {
     master tem acesso a essa função.
     */
     $pass = isset($_GET['p']) ? $_GET['p'] : $pass;
-    $pass = md5($pass);  
+    $pass = md5($pass);
+    echo "<br>";  
     $configuracao = new Configuracoes();
     $configuracoesService = new ConfiguracoesService($conexao, $configuracao);  
     $configuracoes = $configuracoesService->consultaConfiguracoes();
@@ -44,7 +45,7 @@ if ($acao == 'consultarTabelaProdutos') {
             $cadProdutoService->excluirProduto();
             header('Location: cad_produtos.php?sucesso=2'); 
 
-        }else{
+        }else{       
             header('Location: cad_produtos.php?erro=3');   
         }
     }   

@@ -21,7 +21,7 @@
     foreach($configuracoes as $i => $config){
         if($config->senha_master_configuracoes == $senha_master_antiga){
             $configuracao->__set('senha_master_nova', $senha_master_nova);
-           // $configuracoesService->alterarSenhaMaster();
+            $configuracoesService->alterarSenhaMaster();
             header('Location: configuracoes.php?sucesso_senha=1');
         }else{
             header('Location: configuracoes.php?erro_senha=2');

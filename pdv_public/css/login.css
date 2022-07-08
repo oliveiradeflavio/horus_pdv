@@ -67,13 +67,14 @@ html, body{
 }
 
 #preview{
+   border: 1px solid rgb(228, 228, 228);
    border-radius: 50%; 
    width: 400px;
    height: 400px;
 }
 
 #preview:hover{
-    border: 1px solid #fff;
+    border: 1px solid rgb(212, 208, 208);
 }
 
 

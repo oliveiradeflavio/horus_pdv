@@ -214,6 +214,53 @@ function habilitarRecuperacaoSenha(){
             })
         }
     });
+}
+
+function habilitarExcluirUsuario(){
+    let checkbox = document.getElementById('checkbox_excluir_usuario');
+    let usuario_excluir = document.getElementById('usuario_excluir');
+    let btn_excluir_usuario = document.getElementById('btn_excluir_usuario');
+
+    if(checkbox.checked){
+        usuario_excluir.disabled = false;
+        usuario_excluir.required = true;
+        btn_excluir_usuario.disabled = false;
+    
+    }
+    else {
+        usuario_excluir.disabled = true;
+        btn_excluir_usuario.disabled = true;
+    }
+    
+    btn_excluir_usuario.addEventListener('click', function(event){
+        event.preventDefault();
+        if(usuario_excluir.value == ''){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha todos os campos para excluir o usuário!',
+                confirmButtonText: 'Ok'
+            });
+        }else{
+            Swal.fire({
+                title: 'Confirmação',
+                text: 'Deseja realmente excluir o usuário?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if(result.value){
+                    let form = document.getElementById('form_excluir_usuario');
+                    form.method = 'POST';
+                    form.action = 'registra_controller.php?acao=excluir_usuario'
+                    form.submit();
+                }
+            })
+        }
+    });
 
 }
 

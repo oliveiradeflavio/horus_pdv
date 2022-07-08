@@ -36,6 +36,16 @@
         $loginService->novaSenhaUsuario();
         header('Location: configuracoes.php?sucesso_nova_senha=1#nav_recuperacao');
     
+    }elseif($acao == 'excluir_usuario'){
+        $login = new Login();
+        $conexao = new Conexao();
+        $loginService = new LoginService($conexao, $login);
+
+        $id_usuario = $_POST['usuario_excluir'];
+        $login->__set('id_usuario', $id_usuario);
+        $loginService->excluirUsuario();
+        header('Location: configuracoes.php?sucesso_excluir_usuario=1#nav_excluir_usuario');
+    
     }else{
 
     $cpf = $_POST['cpf'];

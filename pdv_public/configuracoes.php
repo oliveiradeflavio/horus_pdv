@@ -95,6 +95,9 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                             <a class="nav-link" id="nav_recuperacao_senha" href="#nav_recuperacao">Recuperação de Senha</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" id="nav_excluisao_usuario" href="#nav_excluir_usuario">Excluir Usuário</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" id="nav_dados_empresariais" href="#nav_dados">Dados Empresariais</a>
                         </li>
                     </ul>
@@ -220,7 +223,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                             </div>
                         </div>
 
-                            <div class="tab-pane fade" id="nav_recuperacao" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tab-pane fade" id="nav_recuperacao" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="container mt-5">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -282,12 +285,72 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                                
-                            </div>
+                            </div>                                 
+                        </div>
+                        <div class="tab-pane fade" id="nav_excluir_usuario" role="tabpanel" aria-labelledby="nav-profile-tab">
 
+                            <div class="container mt-5">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="card-title">Excluir Usuário</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form action="registra_controller.php?acao=excluir_usuario" method="post" id="form_excluir_usuario">
+                                                        <div class="form-group custom-control custom-switch ml-3">
+                                                            <input type="checkbox" class="custom-control-input" id="checkbox_excluir_usuario" onclick="habilitarExcluirUsuario()">
+                                                            <label class="col-md-8 custom-control-label" for="checkbox_excluir_usuario">Ativar para excluir</label>
+                                                        </div>        
+                                                        <div class="form-group">
+                                                            <label for="usuario_excluir">Usuário</label>
+                                                            <select class="form-control" id="usuario_excluir" name="usuario_excluir" disabled>
+                                                                <option value="">Escolha um usuário</option>
+                                                                <?php
+                                                                $conexao = new PDO("mysql:host=localhost;dbname=pdv_horus", "root", "");
+                                                                $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                                $query = 'SELECT * FROM tb_usuarios';
+                                                                $stmt = $conexao->prepare($query);
+                                                                $stmt->execute();
+                                                                $usuarios = $stmt->fetchAll();
+                                                                foreach ($usuarios as $usuario) { 
+                                                                    if($_SESSION['id_usuario'] != $usuario['id_usuario']){?>
+                                                                        <option value="<?php echo $usuario['id_usuario']; ?>"><?php echo $usuario['nome_usuario']; ?></option>
+                                                            <?php  }
+                                                               } ?>
+                                                            </select>
+                                                        </div>
+                                                    <button type="button" onclick="habilitarExcluirUsuario()" id="btn_excluir_usuario" class="btn btn-primary" disabled>Salvar</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                                <!-- msg de retorno -->
+                                          <div class="container row col-md-12 centro">
+                                            <?php
+                                            if (isset($_GET['sucesso_excluir_usuario']) && $_GET['sucesso_excluir_usuario'] == '1') { ?>                                             
+                                              
+                                                <div class='alert alert-success mt-2' role='alert'>
+                                                    <strong>Sucesso!</strong> Usuário excluído com sucesso.
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+                                                        <span aria-hidden="true" onclick="resetURL()">&times;</span>
+                                                    </button>
+                                                </div>
+                                            <?php }
+                                            if (isset($_GET['erro_excluir_usuario']) && $_GET['erro_excluir_usuario'] == '2') { ?>
+                                                <div class='alert alert-danger mt-2' role='alert'>
+                                                    <strong>Atenção</strong> Erro ao excluir o usuário.
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true" onclick="resetURL()">&times;</span>
+                                                    </button>
+                                                </div>                                               
+                                            <?php } ?>
+                                        </div>
+                                        </div>                             
+                                    </div>
+                                </div>
+                            </div>
+                           
                             <div class="tab-pane fade" id="nav_dados" role="tabpanel" aria-labelledby="nav-profile-tab">
-
                             <div class="container mt-5">
                                 <div class="row">
                                     <div class="col-md-12">

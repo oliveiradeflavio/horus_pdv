@@ -46,6 +46,13 @@
             }
         }
 
+        public function excluirUsuario(){
+            $query = "DELETE FROM tb_usuarios WHERE id_usuario = :id";
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':id', $this->login->__get('id_usuario'));
+            $stmt->execute();            
+        }
+
         public function atualizar(){
 
             $query = "update tb_usuarios set nome_usuario = :nome, email_usuario = :email, foto_usuario = :foto where id_usuario = :id";
