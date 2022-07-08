@@ -302,7 +302,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             } else {
                 ?>
                     <div id="loading"></div>
-                    <div class="container col-md-12">
+                    <div class="container col-md-11">
                     <table class="table table-lg table-hover table-responsive p-3" id="tabela_cad_clientes">
                         <thead>
                             <tr>
