@@ -118,7 +118,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                         <div class="card-header">
                             <h5>Cadastros Realizados</h5>
                         </div>
-                        <div class='card-body centro' id="chart_div_cadastros"></div>
+                        <div class='card-body centro' id="chart_div_cadastros" style="height: 400 ; width: 600;"></div>
 
                     </div>
                 </div>
@@ -218,6 +218,8 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
 
             var options = {
                 pieHole: 0.3,
+                //is3D: true,
+                //pieSliceText: 'value',
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('chart_div_cadastros'));
