@@ -37,8 +37,6 @@ Cadastre clientes, fornecedores, produtos. Cadastre funcionários e faça suas v
 
 ####Vídeo apresentação: https://youtu.be/3ojOJlJk9H8
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3ojOJlJk9H8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ####Acessar o link para testar na prática: http://horuspdv.epizy.com/
 
 login: usuarioteste
