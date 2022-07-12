@@ -35,11 +35,11 @@ Cadastre clientes, fornecedores, produtos. Cadastre funcionários e faça suas v
 <!-- USAGE EXAMPLES -->
 ## Demo
 
-####Vídeo apresentação: https://youtu.be/3ojOJlJk9H8
+#### Vídeo apresentação: https://youtu.be/3ojOJlJk9H8
 
-####Acessar o link para testar na prática: http://horuspdv.epizy.com/
+#### Acessar o link para testar na prática: http://horuspdv.epizy.com/
 
-login: usuarioteste
+login: usuarioteste<br>
 senha: usuarioteste
 
 ![Login](https://github.com/oliveiradeflavio/horus_pdv/blob/main/screen/login.png)
