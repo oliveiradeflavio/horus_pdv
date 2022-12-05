@@ -163,8 +163,9 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'Registers'],
                 <?php
-
-                $conexao = new PDO('mysql:host=localhost;dbname=pdv_horus', 'root', '');
+                require_once '../pdv/conexao.php';
+                $conexao = new Conexao();
+                $conexao = $conexao->conectar();
                 $query = "SELECT COUNT(*) FROM tb_clientes";
                 $stmt = $conexao->prepare($query);
                 $stmt->execute();

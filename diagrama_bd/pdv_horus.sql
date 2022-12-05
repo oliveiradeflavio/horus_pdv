@@ -66,7 +66,7 @@ CREATE TABLE `tb_vendas` (
   `desconto_venda_venda` char(11),
   `total_venda_atual_com_desconto_venda` char(11),
   `codigo_pagamento_cartao_venda` varchar(255),
-  `data_hora_venda` datetime NOT NULL DEFAULT "current_timestamp"
+  `data_hora_venda` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE `tb_dados_empresariais` (

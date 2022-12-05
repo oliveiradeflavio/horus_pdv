@@ -142,8 +142,9 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                                 $('#periodo_relatorio').html('');
                                 $('#periodo_relatorio').append('<option value="todos_anos">Todos</option>');
                                 <?php 
-                                    $conexao = new PDO('mysql:host=localhost;dbname=pdv_horus', 'root', '');
-                                    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                    require_once '../pdv/conexao.php';
+                                    $conexao = new Conexao();
+                                    $conexao = $conexao->conectar();
                                     $query = 'SELECT DISTINCT(YEAR(data_hora_venda)) AS ano FROM tb_vendas';
                                     $resultado = $conexao->query($query);
                                     while($linha = $resultado->fetch(PDO::FETCH_ASSOC)){

@@ -284,8 +284,9 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
         if (isset($_GET['buscar'])) { ?>
 
             <?php
-            $conexao = new PDO('mysql:host=localhost;dbname=pdv_horus', 'root', '');
-            $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            require_once '../pdv/conexao.php';
+            $conexao = new Conexao();
+            $conexao = $conexao->conectar();
             $buscar = "%" . trim($_GET['buscar']) . "%";
             $query = "SELECT * FROM tb_clientes WHERE nome_cliente LIKE :buscar OR cpf_cliente LIKE :buscar";
             $stmt = $conexao->prepare($query);

@@ -43,7 +43,9 @@
             <select class="form-control" name="selecao_cliente" id="selecao_cliente">
                 <option value="">Selecione um cliente</option>
                 <?php
-                    $conexao = new PDO('mysql:host=localhost;dbname=pdv_horus', 'root', '');
+                    require_once '../pdv/conexao.php';
+                    $conexao = new Conexao();
+                    $conexao = $conexao->conectar();                    
                     $query = "SELECT * FROM tb_clientes";
                     $stmt = $conexao->prepare($query);
                     $stmt->execute();

@@ -4,7 +4,7 @@
         private $host = 'localhost';
         private $dbname = 'pdv_horus';
         private $user = 'root';
-        private $pass = '';
+        private $pass = 'foliveira';
 
         public function conectar(){
             try{

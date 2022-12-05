@@ -182,8 +182,9 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                                                         <select class="form-control" id="usuario_permissao" name="usuario_permissao" disabled>
                                                             <option value="">Escolha um usuário</option>
                                                             <?php
-                                                            $conexao = new PDO("mysql:host=localhost;dbname=pdv_horus", "root", "");
-                                                            $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                            require_once '../pdv/conexao.php';
+                                                            $conexao = new Conexao();
+                                                            $conexao = $conexao->conectar();
                                                             $query = 'SELECT * FROM tb_usuarios';
                                                             $stmt = $conexao->prepare($query);
                                                             $stmt->execute();
@@ -242,8 +243,9 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                                                         <select class="form-control" id="usuario_recuperar_senha" name="usuario_recuperar_senha" disabled>
                                                             <option value="">Escolha um usuário</option>
                                                             <?php
-                                                            $conexao = new PDO("mysql:host=localhost;dbname=pdv_horus", "root", "");
-                                                            $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                            require_once '../pdv/conexao.php';
+                                                            $conexao = new Conexao();
+                                                            $conexao = $conexao->conectar();
                                                             $query = 'SELECT * FROM tb_usuarios';
                                                             $stmt = $conexao->prepare($query);
                                                             $stmt->execute();
@@ -307,8 +309,9 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                                                             <select class="form-control" id="usuario_excluir" name="usuario_excluir" disabled>
                                                                 <option value="">Escolha um usuário</option>
                                                                 <?php
-                                                                $conexao = new PDO("mysql:host=localhost;dbname=pdv_horus", "root", "");
-                                                                $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                                require_once '../pdv/conexao.php';
+                                                                $conexao = new Conexao();
+                                                                $conexao = $conexao->conectar();
                                                                 $query = 'SELECT * FROM tb_usuarios';
                                                                 $stmt = $conexao->prepare($query);
                                                                 $stmt->execute();
@@ -366,8 +369,9 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
                                                     </div> 
                                                     <div class="form-row">       
                                                     <?php
-                                                    $conexao = new PDO("mysql:host=localhost;dbname=pdv_horus", "root", "");
-                                                    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    require_once '../pdv/conexao.php';
+                                                    $conexao = new Conexao();
+                                                    $conexao = $conexao->conectar();
                                                     $query = 'SELECT * FROM tb_dados_empresariais';
                                                     $stmt = $conexao->prepare($query);
                                                     $stmt->execute();
