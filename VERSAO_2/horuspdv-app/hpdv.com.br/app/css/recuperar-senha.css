@@ -1,0 +1,92 @@
+@import url('master.css');
+
+#recover-password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h5 {
+    margin-bottom: 20px;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+p {
+    color: var(--text-secondary);
+    font-size: 20px;
+    font-weight: 400;
+
+}
+
+.card-recover-password {
+    padding: 30px;
+}
+
+.card-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: -48px;
+    margin-left: -20px;
+}
+
+input {
+    margin-bottom: 30px;
+    color: var(--text-secondary) !important;
+}
+
+@media (max-width: 500px) {
+    .card-recover-password {
+        margin-top: -300px;
+    }
+
+    h5 {
+        font-size: 30px;
+    }
+
+    p {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+}
+
+/* landscape */
+@media (max-width: 1024px) and (orientation: landscape) {
+    .center {
+        height: auto;
+    }
+
+    .card {
+        height: auto;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    a {
+        margin-bottom: 20px;
+    }
+
+    input {
+        margin-bottom: 20px;
+    }
+
+    h5 {
+        margin-bottom: 20px;
+    }
+
+    .error-msg {
+        margin-top: 20px;
+    }
+
+    .btn-enter {
+        width: 100%;
+    }
+
+    #spinner_loading {
+        font-size: 12px;
+    }
+}

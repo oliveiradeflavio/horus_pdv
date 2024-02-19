@@ -1,0 +1,119 @@
+/* font  */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+:root {
+    --text-primary: #FFFFFF;
+    --text-secondary: #000000;
+    --text-subtitle: #515151;
+    /* versao hexadecimal #211D3A */
+    --bg-main: linear-gradient(36deg, rgb(33, 29, 58) 20%, rgba(37, 29, 59, 1) 80%, rgba(42, 29, 61, 1) 90%);
+    --text-hover: #2ebff4;
+    --shadow: 0 0 0.625rem rgba(16, 13, 35, 0.6);
+    --bg-card: #1E293B;
+}
+
+body {
+    font-family: 'Comfortaa', cursive;
+    font-weight: normal;
+    background: var(--bg-main) no-repeat;
+    /* background-image: url(''); */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+li {
+    list-style: none;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+@keyframes shadowAnimation {
+    0% {
+        box-shadow: 0 0 10px rgba(16, 13, 35, 0.6);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(66, 49, 111, 0.8);
+    }
+
+    100% {
+        box-shadow: 0 0 10px rgba(34, 29, 67, 0.6);
+    }
+}
+
+.btn-enter {
+    background: #464aa3;
+    /* background-image: linear-gradient(45deg, #355994 5%, #1E293B 55%, #243f81 90%); */
+    background-position: 60% 0;
+    background-size: 200% 200%;
+    color: var(--text-primary);
+    border-radius: 15px;
+    border: none;
+    padding: 12px 48px;
+    font-size: 16px;
+    font-weight: 200;
+    transition: all 0.5s ease;
+}
+
+.btn-enter:hover {
+    color: var(--text-primary);
+    background: #4e53bd;
+    transition: all .1s ease-in;
+}
+
+/* icone voltar */
+.fa-circle-left {
+    font-size: 30px;
+    color: var(--text-secondary);
+    margin-top: 20px;
+}
+
+.fa-circle-left:hover {
+    color: var(--text-hover);
+}
+
+.loader-container {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.loader {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border: 5px solid;
+    border-radius: 50%;
+    border-color: #2ebff4;
+    border-top-color: transparent;
+    animation: spinner 0.7s linear infinite;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg)
+    }
+}

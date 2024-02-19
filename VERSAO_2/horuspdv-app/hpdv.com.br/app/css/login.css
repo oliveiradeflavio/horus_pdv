@@ -1,0 +1,105 @@
+@import url('master.css');
+
+.card {
+    display: flex;
+    justify-content: center;
+    width: 31.25rem;
+    height: 31.25rem;
+    border-radius: 0.9375rem;
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    background: var(--bg-card);
+}
+
+.card a {
+    color: var(--text-primary);
+}
+
+.card a:hover {
+    color: var(--text-hover);
+}
+
+.card input {
+    /* margin-top: 20px; */
+    margin-bottom: 30px;
+    color: var(--text-secondary) !important;
+}
+
+#login h5 {
+    margin-bottom: 20px;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* olho senha */
+.fa-eye {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-secondary);
+}
+
+.fa-eye-slash {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-subtitle);
+}
+
+.btn-enter {
+    width: 100%;
+}
+
+.error-msg {
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#spinner_loading {
+    font-size: 12px;
+    color: var(--text-primary);
+}
+
+/* landscape */
+@media (max-width: 1024px) and (orientation: landscape) {
+    .center {
+        height: auto;
+    }
+
+    .card {
+        height: auto;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    a {
+        margin-bottom: 20px;
+    }
+
+    input {
+        margin-bottom: 20px;
+    }
+
+    h5 {
+        margin-bottom: 20px;
+    }
+
+    .error-msg {
+        margin-top: 20px;
+    }
+
+    .btn-enter {
+        width: 100%;
+    }
+
+    #spinner_loading {
+        font-size: 12px;
+    }
+}
