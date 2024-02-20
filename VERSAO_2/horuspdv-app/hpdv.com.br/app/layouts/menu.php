@@ -11,29 +11,66 @@
             <div>
                 <ul class="menu-container">
                     <li class="menu-box">
-                        <a href="dashboard">
+                        <a href="home">
+                            <i class="fa-solid fa-house"></i>
+                            Home</a>
+                        </a>
+                    </li>
+                    <div class="menu-box dropbottom">
+                        <li class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-address-card"></i>
+                            Cadastros
+                        </li>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user-plus"></i> Cliente</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-truck-fast"></i> Fornecedor</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-tags"></i> Produto</a></li>
+                        </ul>
+                    </div>
+
+                    <li class="menu-box">
+                        <a href="#">
                             <i class="fa-solid fa-chart-line"></i>
                             Dashboard</a>
                         </a>
                     </li>
                     <li class="menu-box">
-                        <a href="detalhes-licenca">
-                            <i class="fa-solid fa-key"></i>
-                            Detalhes da Licença</a>
+                        <a href="#">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            Histórico de Vendas</a>
                         </a>
                     </li>
                     <li class="menu-box">
-                        <a href="editar-perfil">
-                            <i class="fa-solid fa-user-gear"></i>
-                            Editar Perfil</a>
+                        <a href="#">
+                            <i class="fa-solid fa-file-invoice"></i>
+                            Relatórios</a>
                         </a>
                     </li>
                     <li class="menu-box">
+                        <a href="#">
+                            <i class="fa-solid fa-cart-arrow-down"></i>
+                            Iniciar Vendas</a>
+                        </a>
+                    </li>
+
+                    <div class="menu-box dropbottom">
+                        <li class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-gear"></i>
+                            Configurações
+                        </li>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user-gear"></i> Editar Perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-key"></i> Detalhes da Licença</a></li>
+
+                        </ul>
+                    </div>
+
+                    <!-- <li class="menu-box">
                         <a href="configuracoes">
                             <i class="fa-solid fa-gear"></i>
                             Configurações</a>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

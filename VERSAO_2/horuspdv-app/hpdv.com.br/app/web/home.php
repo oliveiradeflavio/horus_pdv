@@ -18,7 +18,7 @@
                             <div class="row">
                                 <div class="col-md-4 card-box ">
 
-                                    <a href="#">
+                                    <a href="cadastro-cliente">
                                         <i class="fa-solid fa-user-plus"></i>
                                         Cadastro de Cliente</a>
                                 </div>

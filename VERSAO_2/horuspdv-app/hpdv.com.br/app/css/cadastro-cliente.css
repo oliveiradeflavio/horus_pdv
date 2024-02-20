@@ -1,0 +1,5 @@
+@import url('menu.css');
+
+.fa-solid {
+    color: var(--text-primary);
+}

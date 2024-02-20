@@ -24,4 +24,5 @@
  <link rel="icon" type="image/png" sizes="512x512" href="../assets/icones/android-chrome-512x512.png">
  <link rel="shortcut icon" href="favicon.ico" type="../assets/icones/favicon.ico">
 
+
  <title>Hórus PDV</title>
