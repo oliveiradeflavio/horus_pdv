@@ -65,10 +65,3 @@
 </body>
 
 </html>
-
-<!-- cad cliente'
-cad produto'
-cad fornecedor'
-historico de vendas
-Relatórios
-Iniciar Vendas -->

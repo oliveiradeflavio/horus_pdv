@@ -89,6 +89,30 @@
     border-radius: 0 0 15px 15px;
 } */
 
+.menu-container {
+    display: flex;
+    justify-content: center;
+}
+
+.menu-container i {
+    text-align: center;
+}
+
+.menu-box {
+    margin-right: 30px;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    padding: 15px;
+    background: var(--bg-main);
+}
+
+.menu-box:hover {
+    transition: all .3s ease-in;
+    box-shadow: var(--shadow);
+    background: var(--bg-hover);
+
+}
+
 @media (max-width: 500px) {
     .card {
         height: 85%;
@@ -103,6 +127,19 @@
     .card .fa-solid {
         font-size: 20px;
         margin-bottom: 10px
+    }
+
+    .menu-container {
+        display: block;
+        text-align: center;
+    }
+
+    .menu-box {
+        margin-bottom: 10px;
+    }
+
+    .offcanvas.offcanvas-top {
+        height: auto;
     }
 }
 
@@ -121,5 +158,18 @@
     .card .fa-solid {
         font-size: 20px;
         margin-bottom: 10px
+    }
+
+    .menu-container {
+        display: block;
+        text-align: center;
+    }
+
+    .menu-box {
+        margin-bottom: 10px;
+    }
+
+    .offcanvas.offcanvas-top {
+        height: auto;
     }
 }

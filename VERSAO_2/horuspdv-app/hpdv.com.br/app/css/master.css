@@ -16,6 +16,7 @@
     /* versao hexadecimal #211D3A */
     --bg-main: linear-gradient(36deg, rgb(33, 29, 58) 20%, rgba(37, 29, 59, 1) 80%, rgba(42, 29, 61, 1) 90%);
     --text-hover: #2ebff4;
+    --bg-hover: #4e53bd;
     --shadow: 0 0 0.625rem rgba(16, 13, 35, 0.6);
     --bg-card: #1E293B;
 }
@@ -73,7 +74,7 @@ li {
 
 .btn-enter:hover {
     color: var(--text-primary);
-    background: #4e53bd;
+    background: var(--bg-hover);
     transition: all .1s ease-in;
 }
 
