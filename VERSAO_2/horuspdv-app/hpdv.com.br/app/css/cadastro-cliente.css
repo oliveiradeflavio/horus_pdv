@@ -1,5 +1,9 @@
 @import url('menu.css');
 
 .fa-solid {
-    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.card-box {
+    width: 100%;
 }

@@ -62,7 +62,7 @@
 
 .card .fa-solid {
     font-size: 50px;
-
+    margin-bottom: 10px
 }
 
 /* personalizar o offcanvas */
@@ -112,6 +112,24 @@
     box-shadow: var(--shadow);
     background: var(--bg-hover);
 
+}
+
+li {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    background: var(--bg-main);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    color: var(--text-primary);
+    font-size: 20px;
+    line-height: 54px;
+}
+
+.btn-close {
+    font-size: 30px;
+    margin-right: 32px !important;
 }
 
 @media (max-width: 500px) {

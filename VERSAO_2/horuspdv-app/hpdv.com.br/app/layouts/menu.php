@@ -10,7 +10,7 @@
         <div class="offcanvas-body">
             <div>
                 <ul class="menu-container">
-                    <li class="menu-box">
+                    <li class="menu-box" onclick="window.location.href='home';">
                         <a href="home">
                             <i class="fa-solid fa-house"></i>
                             Home</a>
@@ -65,12 +65,12 @@
                         </ul>
                     </div>
 
-                    <!-- <li class="menu-box">
-                        <a href="configuracoes">
-                            <i class="fa-solid fa-gear"></i>
-                            Configurações</a>
+                    <li class="menu-box" onclick="window.location.href='sair';">
+                        <a href="sair">
+                            <i class="fa-solid fa-person-walking-arrow-right"></i>
+                            Sair / Efetuar logoff</a>
                         </a>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
         </div>

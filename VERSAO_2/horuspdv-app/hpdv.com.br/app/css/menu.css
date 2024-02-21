@@ -107,6 +107,24 @@
 
 }
 
+li {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    background: var(--bg-main);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    color: var(--text-primary);
+    font-size: 20px;
+    line-height: 54px;
+}
+
+.btn-close {
+    font-size: 30px;
+    margin-right: 32px !important;
+}
+
 /* responsive */
 
 @media (max-width: 500px) {

@@ -113,6 +113,21 @@ li {
     animation: spinner 0.7s linear infinite;
 }
 
+.swal2-popup {
+    font-family: 'Comfortaa', cursive;
+    background: var(--bg-main);
+    color: var(--text-primary);
+}
+
+.card a:hover {
+    color: var(--text-primary);
+    background: var(--text-hover);
+    transition: all .1s ease-in;
+    box-shadow: var(--shadow);
+}
+
+
+
 @keyframes spinner {
     to {
         transform: rotate(360deg)
