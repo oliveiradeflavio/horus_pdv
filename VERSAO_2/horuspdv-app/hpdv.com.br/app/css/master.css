@@ -25,7 +25,6 @@ body {
     font-family: 'Comfortaa', cursive;
     font-weight: normal;
     background: var(--bg-main) no-repeat;
-    /* background-image: url(''); */
 }
 
 a {
@@ -64,10 +63,10 @@ li {
     background-position: 60% 0;
     background-size: 200% 200%;
     color: var(--text-primary);
-    border-radius: 15px;
+    border-radius: 0.9375rem;
     border: none;
-    padding: 12px 48px;
-    font-size: 16px;
+    padding: 0.75rem 3rem;
+    font-size: 1rem;
     font-weight: 200;
     transition: all 0.5s ease;
 }
@@ -80,9 +79,9 @@ li {
 
 /* icone voltar */
 .fa-circle-left {
-    font-size: 30px;
+    font-size: 1.875rem;
     color: var(--text-secondary);
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
 
 .fa-circle-left:hover {
@@ -104,9 +103,9 @@ li {
 
 .loader {
     position: relative;
-    width: 70px;
-    height: 70px;
-    border: 5px solid;
+    width: 4.375rem;
+    height: 4.375rem;
+    border: 0.3125rem solid;
     border-radius: 50%;
     border-color: #2ebff4;
     border-top-color: transparent;
