@@ -22,7 +22,7 @@
                             Cadastros
                         </li>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user-plus"></i> Cliente</a></li>
+                            <li><a class="dropdown-item" href="cadastro-cliente"><i class="fa-solid fa-user-plus"></i> Cliente</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fa-solid fa-truck-fast"></i> Fornecedor</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fa-solid fa-tags"></i> Produto</a></li>
                         </ul>
@@ -75,3 +75,4 @@
             </div>
         </div>
     </div>
+    <div class="loader-container"></div>

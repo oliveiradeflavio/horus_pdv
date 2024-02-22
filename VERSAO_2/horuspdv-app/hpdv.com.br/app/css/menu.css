@@ -89,6 +89,7 @@
 
 .menu-container i {
     text-align: center;
+    margin-bottom: 0px;
 }
 
 .menu-box {
@@ -105,10 +106,6 @@
     box-shadow: var(--shadow);
     background: var(--bg-hover);
 
-}
-
-li {
-    cursor: pointer;
 }
 
 .dropdown-menu {
@@ -130,6 +127,10 @@ li {
 @media (max-width: 500px) {
     .card {
         height: 85%;
+    }
+
+    .card-box {
+        width: 80vw !important;
     }
 
     .card-box a {

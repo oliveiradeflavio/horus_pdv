@@ -114,10 +114,6 @@
 
 }
 
-li {
-    cursor: pointer;
-}
-
 .dropdown-menu {
     background: var(--bg-main);
     border-radius: 0.9375rem;

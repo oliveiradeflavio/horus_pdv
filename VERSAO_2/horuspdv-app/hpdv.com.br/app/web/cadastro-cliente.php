@@ -13,7 +13,6 @@
 </body>
 <main>
     <section>
-
         <div class="container">
             <div class="row">
                 <div class="col-md-12 center">
@@ -38,14 +37,8 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
                     </div>
                 </div>
-
             </div>
         </div>
         </div>
@@ -176,14 +169,11 @@
                                 <button type="submit" class="btn btn-primary">Salvar</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                             </div>
-
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
     <div class="modal fade bd-example-modal-lg show" data-bs-backdrop="static" data-bs-keyboard="false" id="modal-pesquisa-cliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -193,22 +183,60 @@
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="row">
-                        <form action="#" method="post">
+                        <form action="#" method="post" id="formSearchClient">
                             <input type="hidden" name="csrf_token">
                             <input type="hidden" name="action">
-                            <div>
-
+                            <div id="container-search">
+                                <label for="pesquisar-cliente" class="label-search-client">
+                                    <input type="search" name="pesquisar-cliente" id="pesquisar-cliente" class="form-control" placeholder="Pesquise por cpf" required>
+                                    <div class="icon-search-client">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <button type="reset" class="btn-close" id="btn-close-search-client"></button>
+                                </label>
                             </div>
                         </form>
+                        <div class="table-responsive">
+                            <table class="table table-hover mt-4">
+                                <thead>
+                                    <tr>
+
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">CPF</th>
+                                        <th scope="col">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>
+                                            <i class="fas fa-edit"></i>
+                                            <i class="fas fa-trash-alt"></i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>
+                                            <i class="fas fa-edit"></i>
+                                            <i class="fas fa-trash-alt"></i>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <section>
+</main>
+</body>
 
-    </section>
-
-    <script src="../js/cadastro-cliente.js"></script>
+<script src=" ../js/_component/modal.js"></script>
+<script src="../js/cadastro-cliente.js"></script>
 
 </html>
