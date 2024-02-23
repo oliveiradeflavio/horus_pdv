@@ -13,11 +13,6 @@
                 <div class="row">
                     <div class="col-md-12 center">
                         <div class="card card-recover-password">
-                            <div class="card-title">
-                                <a href="login" title="Voltar">
-                                    <i class="fa-solid fa-circle-left"></i>
-                                </a>
-                            </div>
                             <h5>
                                 Recuperar Senha
                             </h5>

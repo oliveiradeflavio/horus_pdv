@@ -9,48 +9,56 @@
 }
 
 h5 {
-    margin-bottom: 20px;
-    font-size: 38px;
+    margin-bottom: 1.25rem;
+    font-size: 2.375rem;
     font-weight: 700;
     color: var(--text-secondary);
 }
 
 p {
     color: var(--text-secondary);
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 400;
 
 }
 
 .card-recover-password {
-    padding: 30px;
+    padding: 1.875rem;
 }
 
 .card-title {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-top: -48px;
-    margin-left: -20px;
+    margin-top: -3rem;
+    margin-left: -1.25rem;
 }
 
+.card a:hover {
+    color: var(--text-hover);
+    background: none !important;
+    transition: all .1s ease-in;
+    box-shadow: none !important;
+}
+
+
 input {
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
     color: var(--text-secondary) !important;
 }
 
 @media (max-width: 500px) {
     .card-recover-password {
-        margin-top: -300px;
+        margin-top: -18.75rem;
     }
 
     h5 {
-        font-size: 30px;
+        font-size: 1.875rem;
     }
 
     p {
-        font-size: 16px;
-        margin-bottom: 16px;
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
 }
 
@@ -62,24 +70,24 @@ input {
 
     .card {
         height: auto;
-        margin-top: 10px;
-        margin-bottom: 20px;
+        margin-top: 0.625rem;
+        margin-bottom: 1.25rem;
     }
 
     a {
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
 
     input {
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
 
     h5 {
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
 
     .error-msg {
-        margin-top: 20px;
+        margin-top: 1.25rem;
     }
 
     .btn-enter {
@@ -87,6 +95,6 @@ input {
     }
 
     #spinner_loading {
-        font-size: 12px;
+        font-size: 0.75rem;
     }
 }
