@@ -13,12 +13,12 @@
 }
 
 .btn-enter {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 129px;
-    border-bottom-left-radius: 129px;
-    padding: 10px;
-    font-size: 18px;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+    border-bottom-right-radius: 8.0625rem;
+    border-bottom-left-radius: 8.0625rem;
+    padding: 0.625rem;
+    font-size: 1.125rem;
 }
 
 .btn-enter:hover {
@@ -32,7 +32,7 @@
     width: 100%;
     height: 80%;
     border-radius: 0.9375rem;
-    padding: 20px;
+    padding: 1.25rem;
     text-align: center;
     box-shadow: var(--shadow);
     background: var(--bg-card);
@@ -43,14 +43,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px;
-    font-size: 20px;
-    border: 1px solid #000;
-    padding: 40px;
+    margin: 1.25rem;
+    font-size: 1.25rem;
+    border: 0.0625rem solid #000;
+    padding: 2.5rem;
     text-align: center;
     color: var(--text-secondary);
     background: var(--text-primary);
-    border-radius: 15px;
+    border-radius: 0.9375rem;
 }
 
 .card a:hover {
@@ -61,8 +61,8 @@
 }
 
 .card .fa-solid {
-    font-size: 50px;
-    margin-bottom: 10px
+    font-size: 3.125rem;
+    margin-bottom: 0.625rem
 }
 
 /* personalizar o offcanvas */
@@ -70,7 +70,7 @@
     background: var(--bg-card);
     box-shadow: var(--shadow);
     color: var(--text-primary);
-    border-radius: 15px;
+    border-radius: 0.9375rem;
 }
 
 .offcanvas-header button {
@@ -99,10 +99,10 @@
 }
 
 .menu-box {
-    margin-right: 30px;
-    border: 1px solid transparent;
-    border-radius: 15px;
-    padding: 15px;
+    margin-right: 1.875rem;
+    border: 0.0625rem solid transparent;
+    border-radius: 0.9375rem;
+    padding: 0.9375rem;
     background: var(--bg-main);
     text-align: center;
 }
@@ -114,22 +114,18 @@
 
 }
 
-li {
-    cursor: pointer;
-}
-
 .dropdown-menu {
     background: var(--bg-main);
-    border-radius: 15px;
+    border-radius: 0.9375rem;
     box-shadow: var(--shadow);
     color: var(--text-primary);
-    font-size: 20px;
-    line-height: 54px;
+    font-size: 1.25rem;
+    line-height: 3.375rem;
 }
 
 .btn-close {
-    font-size: 30px;
-    margin-right: 32px !important;
+    font-size: 1.875rem;
+    margin-right: 2rem !important;
 }
 
 @media (max-width: 500px) {
@@ -138,14 +134,14 @@ li {
     }
 
     .card-box a {
-        padding: 20px;
-        font-size: 16px;
-        margin: 5px;
+        padding: 1.25rem;
+        font-size: 1rem;
+        margin: 0.3125rem;
     }
 
     .card .fa-solid {
-        font-size: 20px;
-        margin-bottom: 10px
+        font-size: 1.25rem;
+        margin-bottom: 0.625rem
     }
 
     .menu-container {
@@ -154,7 +150,7 @@ li {
     }
 
     .menu-box {
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
     }
 
     .offcanvas.offcanvas-top {
@@ -172,7 +168,7 @@ li {
     }
 
     .menu-box {
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
     }
 
     .offcanvas.offcanvas-top {
@@ -188,14 +184,14 @@ li {
     }
 
     .card-box a {
-        padding: 20px;
-        font-size: 12px;
-        margin: 5px;
+        padding: 1.25rem;
+        font-size: 0.75rem;
+        margin: 0.3125rem;
     }
 
     .card .fa-solid {
-        font-size: 20px;
-        margin-bottom: 10px
+        font-size: 1.25rem;
+        margin-bottom: 0.625rem
     }
 
     .menu-container {
@@ -204,7 +200,7 @@ li {
     }
 
     .menu-box {
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
     }
 
     .offcanvas.offcanvas-top {

@@ -18,17 +18,20 @@
 
 .card a:hover {
     color: var(--text-hover);
+    background: none !important;
+    transition: all .1s ease-in;
+    box-shadow: none !important;
 }
 
 .card input {
     /* margin-top: 20px; */
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
     color: var(--text-secondary) !important;
 }
 
 #login h5 {
-    margin-bottom: 20px;
-    font-size: 38px;
+    margin-bottom: 1.25rem;
+    font-size: 2.375rem;
     font-weight: 700;
     color: var(--text-primary);
 }
@@ -36,19 +39,19 @@
 /* olho senha */
 .fa-eye {
     position: absolute;
-    top: 5px;
-    right: 10px;
+    top: 0.3125rem;
+    right: 0.625rem;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: var(--text-secondary);
 }
 
 .fa-eye-slash {
     position: absolute;
-    top: 5px;
-    right: 10px;
+    top: 0.3125rem;
+    right: 0.625rem;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: var(--text-subtitle);
 }
 
@@ -57,15 +60,24 @@
 }
 
 .error-msg {
-    margin-top: 20px;
-    font-size: 13px;
+    margin-top: 1.25rem;
+    font-size: 0.8125rem;
     font-weight: 400;
 }
 
 #spinner_loading {
-    font-size: 12px;
+    font-size: 0.75rem;
     color: var(--text-primary);
 }
+
+/* responsive */
+
+@media (max-width: 500px) {
+    .card {
+        width: 100%;
+    }
+}
+
 
 /* landscape */
 @media (max-width: 1024px) and (orientation: landscape) {
@@ -75,24 +87,24 @@
 
     .card {
         height: auto;
-        margin-top: 10px;
-        margin-bottom: 20px;
+        margin-top: 0.625rem;
+        margin-bottom: 1.25rem;
     }
 
     a {
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
 
     input {
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
 
     h5 {
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
 
     .error-msg {
-        margin-top: 20px;
+        margin-top: 1.25rem;
     }
 
     .btn-enter {
@@ -100,6 +112,6 @@
     }
 
     #spinner_loading {
-        font-size: 12px;
+        font-size: 0.75rem;
     }
 }

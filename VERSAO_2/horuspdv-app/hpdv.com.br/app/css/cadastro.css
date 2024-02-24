@@ -1,0 +1,119 @@
+@import url('menu.css');
+
+
+.fa-solid {
+    margin-bottom: 1.25rem;
+}
+
+.container-box {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+.card {
+    height: auto;
+}
+
+.card-box {
+    width: 100%;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 1.25rem;
+}
+
+.modal-title {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.25rem;
+}
+
+.modal-title .btn-close {
+    font-size: 1.25rem;
+}
+
+.form-floating {
+    margin-bottom: 0.625rem;
+}
+
+label {
+    margin-left: 0.625rem;
+}
+
+.form-group {
+    margin-top: -1.5rem;
+    margin-bottom: 0.625rem;
+}
+
+.form-select {
+    padding: 1rem 12px;
+    margin-top: 25px;
+}
+
+.form-select:option {
+    font-family: 'Comfortaa', cursive;
+}
+
+.required-field-label:after {
+    content: "*";
+    color: #ff0000;
+    margin-left: 0.125rem;
+}
+
+.container-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: -13px;
+}
+
+#excluir-img-preview {
+    background-color: transparent;
+    color: var(--text-primary);
+    font-size: 12px;
+    z-index: 1;
+    margin-bottom: 10px;
+}
+
+#excluir-img-preview:hover {
+    cursor: pointer;
+    color: var(--text-hover);
+    transition: all .1s ease-in;
+}
+
+#preview-img {
+    margin-bottom: 10px;
+}
+
+.container-img label {
+    background-color: #464aa3;
+    color: var(--text-primary);
+    border-radius: 0.9375rem;
+    border: none;
+    padding: 0.75rem 3rem;
+    font-size: 1rem;
+    font-weight: 200;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.container-img label:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+    transition: all .1s ease-in;
+}
+
+.input-file {
+    display: none;
+}
+
+#nome-arquivo {
+    display: none
+}
