@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <li class="menu-box">
-                        <a href="#">
+                        <a href="historico-de-vendas">
                             <i class="fa-solid fa-clock-rotate-left"></i>
                             Histórico de Vendas</a>
                         </a>
