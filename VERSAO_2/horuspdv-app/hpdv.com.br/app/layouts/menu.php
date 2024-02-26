@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li class="menu-box">
-                        <a href="#">
+                        <a href="relatorio">
                             <i class="fa-solid fa-file-invoice"></i>
                             Relatórios</a>
                         </a>

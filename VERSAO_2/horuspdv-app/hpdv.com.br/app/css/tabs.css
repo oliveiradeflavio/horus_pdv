@@ -1,0 +1,42 @@
+@import url('menu.css');
+
+.nav {
+    justify-content: center;
+}
+
+.nav i {
+    color: var(--text-primary);
+    margin: 10px;
+}
+
+.nav .nav-item a {
+    display: block;
+    color: var(--text-primary);
+}
+
+.nav .nav-item a:hover {
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+.tab-pane {
+    color: var(--text-primary);
+    margin-top: 15px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid var(--text-primary);
+}
+
+.nav-item:hover {
+    background: var(--text-hover);
+    color: var(--text-primary);
+    border-radius: 0.9375rem;
+    border: none;
+    padding: 1px;
+}
+
+.nav-item a:hover {
+    color: var(--text-primary);
+}

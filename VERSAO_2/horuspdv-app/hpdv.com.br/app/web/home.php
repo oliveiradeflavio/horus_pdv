@@ -40,7 +40,7 @@
                                         Histórico de Vendas</a>
                                 </div>
                                 <div class="col-md-4 card-box">
-                                    <a href="#">
+                                    <a href="relatorio">
                                         <i class="fa-solid fa-file-invoice"></i>
                                         Relatórios</a>
                                 </div>
