@@ -1,5 +1,6 @@
 @import url('menu.css');
 
+
 .nav {
     justify-content: center;
 }
@@ -37,13 +38,17 @@
 .nav-item:hover {
     background: var(--text-hover);
     color: var(--text-primary);
-    border-radius: 0.9375rem;
+    border-top-left-radius: 0.9375rem;
+    border-top-right-radius: 0.9375rem;
     border: none;
-    padding: 1px;
 }
 
-.nav-item a:hover {
+.nav-item a.active {
+    background: var(--text-hover);
     color: var(--text-primary);
+    border-top-left-radius: 0.9375rem;
+    border-top-right-radius: 0.9375rem;
+    border: none;
 }
 
 .slider {
@@ -84,4 +89,36 @@
 
 .switch input[type="checkbox"] {
     display: none;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+    border: 1px solid var(--bg-card);
+    border-radius: 15px;
+    padding: 50px;
+    box-shadow: var(--shadow);
+    height: 400px;
+}
+
+
+@media (max-width: 500px) {
+    .card {
+        height: auto;
+    }
+}
+
+/* landscape */
+@media (max-width: 1024px) and (orientation: landscape) {
+
+    .card {
+        height: 100%;
+        margin-top: 70px
+    }
+
+    .center {
+        height: 100%;
+    }
 }

@@ -37,6 +37,10 @@ li {
     cursor: pointer;
 }
 
+.form-select {
+    cursor: pointer;
+}
+
 .center {
     display: flex;
     flex-direction: column;
