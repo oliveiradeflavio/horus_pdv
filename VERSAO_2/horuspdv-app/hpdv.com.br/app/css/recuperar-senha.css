@@ -1,4 +1,4 @@
-@import url('master.css');
+@import url('global.css');
 
 #recover-password {
     display: flex;
@@ -49,7 +49,7 @@ input {
 
 @media (max-width: 500px) {
     .card-recover-password {
-        margin-top: -18.75rem;
+        width: 100%;
     }
 
     h5 {

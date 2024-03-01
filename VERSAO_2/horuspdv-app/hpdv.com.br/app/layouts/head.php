@@ -3,7 +3,7 @@
  <meta name="apple-mobile-web-app-capable" content="yes">
  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
  <meta name="theme-color" content="#211D3A">
- <meta name="application-name" content="Hórus PDV">
+ <meta name="application-name" content="PDV">
  <meta name="description" content="App para cadastro e venda de produtos">
  <meta name="author" content="Flávio Oliveira">
 

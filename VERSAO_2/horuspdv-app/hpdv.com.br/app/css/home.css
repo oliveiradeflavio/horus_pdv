@@ -1,4 +1,4 @@
-@import url('master.css');
+@import url('global.css');
 
 #container-home {
     display: flex;
@@ -129,8 +129,15 @@
 }
 
 @media (max-width: 500px) {
+
+    .center {
+        height: 100vh;
+    }
+
     .card {
-        height: 85%;
+        height: auto;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .card-box a {
@@ -161,7 +168,6 @@
 
 @media (min-width: 800px) and (max-height: 1370px) {
 
-
     .menu-container {
         display: block;
         text-align: center;
@@ -175,7 +181,6 @@
         height: auto;
     }
 }
-
 
 /* landscape */
 @media (max-width: 1024px) and (orientation: landscape) {

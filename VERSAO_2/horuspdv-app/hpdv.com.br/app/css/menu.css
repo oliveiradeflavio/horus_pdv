@@ -1,4 +1,4 @@
-@import url('master.css');
+@import url('global.css');
 
 #container-home {
     display: flex;
@@ -123,7 +123,6 @@
 }
 
 /* responsive */
-
 @media (max-width: 500px) {
     .card {
         height: 85%;
