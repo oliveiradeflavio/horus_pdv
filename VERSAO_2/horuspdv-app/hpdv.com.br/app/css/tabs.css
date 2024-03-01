@@ -105,8 +105,15 @@ form {
 
 
 @media (max-width: 500px) {
+
+    .center {
+        height: auto;
+        margin-bottom: 40px;
+    }
+
     .card {
         height: auto;
+        margin-top: 50px;
     }
 }
 
