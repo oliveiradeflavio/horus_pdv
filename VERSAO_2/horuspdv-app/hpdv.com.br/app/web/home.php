@@ -45,8 +45,8 @@
                                         Relatórios</a>
                                 </div>
                                 <div class="col-md-4 card-box">
-                                    <a href="#">
-                                        <i class="fa-solid fa-cart-arrow-down"></i>
+                                    <a href="vendas" target="_blank">
+                                        <i class=" fa-solid fa-cart-arrow-down"></i>
                                         Iniciar Vendas</a>
                                 </div>
                             </div>

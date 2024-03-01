@@ -41,6 +41,14 @@ li {
     cursor: pointer;
 }
 
+input:disabled {
+    cursor: not-allowed !important;
+}
+
+button:disabled {
+    cursor: not-allowed !important;
+}
+
 .center {
     display: flex;
     flex-direction: column;

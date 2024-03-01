@@ -1,0 +1,117 @@
+@import url('global.css');
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem;
+    margin-top: 0.625rem;
+    background: var(--bg-card);
+    border-radius: 0.9375rem;
+    margin-bottom: 0.625rem;
+}
+
+.select2-container--bootstrap-5 {
+    width: 100% !important;
+}
+
+.select2-container--bootstrap-5 .select2-selection--single {
+    padding: 1.875rem !important;
+}
+
+.select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered {
+    font-size: 2.1rem;
+    text-align: center;
+    margin-top: -1.6875rem;
+}
+
+.select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option {
+    font-size: 2.1rem !important;
+    text-align: center;
+    padding: 1.25rem;
+}
+
+.form-control {
+    font-size: 1.25rem;
+    text-align: center;
+    font-weight: 800;
+}
+
+.container_product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--bg-card);
+    border-radius: 0.9375rem;
+}
+
+.container-product-preview {
+    text-align: center;
+    padding: 0.625rem;
+    margin-top: 0.625rem;
+    background: var(--bg-card);
+    border-radius: 0.9375rem;
+}
+
+.container-product-preview img {
+    height: 25rem;
+    background-color: var(--text-primary);
+    border-radius: 0.9375rem;
+    padding: 0.625rem;
+}
+
+.container-cupom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem;
+    background: var(--bg-card);
+    border-radius: 0.9375rem;
+    margin-bottom: 0.625rem;
+}
+
+.container-cupom .cupom {
+    background-color: var(--text-primary);
+    border-radius: 0.9375rem;
+    width: 100%;
+    padding: 0.625rem;
+    height: 28.125rem;
+}
+
+.subtotal {
+    width: 100%;
+    color: var(--bg-hover);
+}
+
+.container-operation {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5625rem;
+    background: var(--bg-card);
+    border-radius: 0.9375rem;
+    margin-bottom: 0.625rem;
+}
+
+.container-operation button {
+    margin-right: 1.875rem;
+    margin-left: 1.875rem;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 1.25rem;
+}
+
+.modal-title {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.25rem;
+}
+
+.modal-title .btn-close {
+    font-size: 1.25rem;
+}

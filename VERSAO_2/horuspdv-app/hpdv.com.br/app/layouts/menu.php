@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li class="menu-box">
-                        <a href="#">
+                        <a href="vendas" target="_blank">
                             <i class="fa-solid fa-cart-arrow-down"></i>
                             Iniciar Vendas</a>
                         </a>
