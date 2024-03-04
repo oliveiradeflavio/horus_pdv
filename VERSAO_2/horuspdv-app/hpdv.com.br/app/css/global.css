@@ -49,6 +49,12 @@ button:disabled {
     cursor: not-allowed !important;
 }
 
+.required-field-label:after {
+    content: "*";
+    color: #ff0000;
+    margin-left: 0.125rem;
+}
+
 .center {
     display: flex;
     flex-direction: column;
