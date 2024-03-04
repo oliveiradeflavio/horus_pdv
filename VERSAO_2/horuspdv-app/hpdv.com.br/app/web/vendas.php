@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/i18n/pt-BR.js"></script>
 
 <body>
 
@@ -138,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <!-- <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="container-system">
@@ -170,7 +171,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> -->
         </footer>
     </main>
 
