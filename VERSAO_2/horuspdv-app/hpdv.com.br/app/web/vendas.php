@@ -4,22 +4,33 @@
 <head>
     <?php require '../layouts/head.php' ?>
     <link rel="stylesheet" href="../css/vendas.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" / </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 
 <body>
 
     <main>
-        <section>
+        <section class="section-product-list">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="product-list">
-                            <select name="" id="select_product" class="form-select">
+                            <select name="" id="select_client" class="form-select" required>
+                                <option value="">Selecione um cliente</option>
+                                <option value="">Consumidor (sem cadastro realizado)</option>
+                                <option value="">Cliente 1</option>
+                                <option value="">Cliente 2</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-list">
+                            <select name="" id="select_product" class="form-select" required>
                                 <option value="">Selecione um produto</option>
                                 <option value="">Coca Cola</option>
                                 <option value="">Suco</option>
@@ -127,6 +138,39 @@
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="container-system">
+                            <label for="">Usuário Logado: Teste</label>
+                            <label for="">Data: <?php echo date("d/m/Y") ?></label>
+                            <label for="">Dia da Semana: <?php
+                                                            // date_default_timezone_set('UTC');
+                                                            // $date = new IntlDateFormatter(
+                                                            //     'pt_BR',
+                                                            //     IntlDateFormatter::FULL,
+                                                            //     IntlDateFormatter::FULL,
+                                                            //     'America/Sao_Paulo',
+                                                            //     IntlDateFormatter::GREGORIAN
+                                                            // );
+                                                            // $dia_da_semana = $date->format(new DateTime());
+                                                            setlocale(LC_TIME, 'pt_BR');
+                                                            $dia_da_semana  = array(
+                                                                "Sunday" => "Domingo",
+                                                                "Monday" => "Segunda-feira",
+                                                                "Tuesday" => "Terça-feira",
+                                                                "Wednesday" => "Quarta-feira",
+                                                                "Thursday" => "Quinta-feira",
+                                                                "Friday" => "Sexta-feira",
+                                                                "Saturday" => "Sábado"
+                                                            );
+                                                            $dia_da_semana = $dia_da_semana[date('l')];
+                                                            echo $dia_da_semana; ?></label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </footer>
     </main>
 
@@ -179,12 +223,12 @@
                                 </div>
 
                                 <div class="mt-3">
-                                    <button type="submit" class="btn btn-primary btn-lg">Fechar Venda</button>
+                                    <button class="btn btn-primary btn-lg">Fechar Venda</button>
                                     <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Voltar para venda</button>
                                 </div>
                             </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>

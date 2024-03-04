@@ -1,5 +1,14 @@
 @import url('global.css');
 
+.center {
+    display: inherit;
+    margin-top: 50%;
+}
+
+.section-product-list {
+    margin-top: 20px;
+}
+
 .product-list {
     display: flex;
     flex-direction: column;
@@ -101,6 +110,26 @@
     margin-left: 1.875rem;
 }
 
+
+.container-system {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem;
+    margin-top: 0.625rem;
+    background: var(--bg-card);
+    border-radius: 0.9375rem;
+    margin-bottom: 0.625rem;
+    color: var(--text-primary);
+}
+
+.container-system label {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
 .modal-content {
     background-color: var(--bg-card);
     padding: 1.25rem;
@@ -114,4 +143,31 @@
 
 .modal-title .btn-close {
     font-size: 1.25rem;
+}
+
+.modal-content .form-floating>label {
+    margin-left: 0.625rem;
+}
+
+footer {
+    height: 30vh;
+}
+
+
+@media (max-width: 500px) {
+    .select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered {
+        font-size: 1.4rem;
+        text-align: center;
+        margin-top: -1.1rem;
+    }
+
+    thead {
+        font-size: 0.6rem;
+    }
+
+    .container-operation button {
+        font-size: 0.8rem;
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
 }
