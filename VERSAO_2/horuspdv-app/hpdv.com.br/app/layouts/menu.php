@@ -60,7 +60,7 @@
                         </li>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="editar-perfil"><i class="fa-solid fa-user-gear"></i> Editar Perfil</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-key"></i> Detalhes da Licença</a></li>
+                            <li><a class="dropdown-item" href="detalhe-licenca"><i class="fa-solid fa-key"></i> Detalhes da Licença</a></li>
 
                         </ul>
                     </div>

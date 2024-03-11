@@ -9,6 +9,7 @@ form input {
     margin-bottom: 10px;
 }
 
+
 .slider {
     background-color: var(--bg-hover);
     border-radius: 100px;
@@ -52,4 +53,13 @@ form input {
 
 .switch input[type="checkbox"] {
     display: none;
+}
+
+/* landscape */
+@media (max-width: 1024px) and (orientation: landscape) {
+
+    .table-responsive {
+        overflow-x: clip;
+    }
+
 }

@@ -32,6 +32,14 @@ a {
     color: inherit;
 }
 
+p {
+    color: var(--text-primary);
+}
+
+h5 {
+    color: var(--text-primary);
+}
+
 li {
     list-style: none;
     cursor: pointer;
