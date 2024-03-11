@@ -6,13 +6,13 @@
 }
 
 .nav a {
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 .nav a i {
     color: var(--text-primary);
-    margin: 10px;
-    font-size: 25px !important;
+    margin: 0.625rem;
+    font-size: 1.5625rem !important;
 }
 
 .nav .nav-item a {
@@ -28,11 +28,11 @@
 
 .tab-pane {
     color: var(--text-primary);
-    margin-top: 15px;
+    margin-top: 0.9375rem;
 }
 
 .nav-tabs {
-    border-bottom: 1px solid var(--text-primary);
+    border-bottom: 0.0625rem solid var(--text-primary);
 }
 
 .nav-item:hover {
@@ -53,25 +53,25 @@
 
 .slider {
     background-color: var(--bg-hover);
-    border-radius: 100px;
-    padding: 1px;
-    margin: 10px;
+    border-radius: 6.25rem;
+    padding: 0.0625rem;
+    margin: 0.625rem;
     cursor: pointer;
     position: relative;
     display: inline-block;
-    width: 51px;
-    height: 29px;
+    width: 3.1875rem;
+    height: 1.8125rem;
 }
 
 .slider::after {
     content: "";
     display: flex;
-    top: 2.3px;
-    left: 2px;
-    width: 26px;
-    height: 26px;
+    top: 0.1437rem;
+    left: 0.125rem;
+    width: 1.625rem;
+    height: 1.625rem;
     background-color: var(--text-hover);
-    border-radius: 200px;
+    border-radius: 12.5rem;
     position: absolute;
     box-shadow: transparent 0px 0px 0px 2px, rgba(0, 0, 0, 0.3) 0px 6px 6px;
     transition: left 300ms cubic-bezier(0.4, 0, 0.2, 1) 0s, background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
@@ -95,12 +95,25 @@ form {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top: 20px;
-    border: 1px solid var(--bg-card);
-    border-radius: 15px;
-    padding: 50px;
+    margin-top: 1.25rem;
+    border: 0.0625rem solid var(--bg-card);
+    border-radius: 0.9375rem;
+    padding: 3.125rem;
     box-shadow: var(--shadow);
-    height: 400px;
+    height: 25rem;
+}
+
+form input {
+    margin-top: 0.625rem;
+    margin-bottom: 0.625rem;
+}
+
+label {
+    margin-top: 10px;
+}
+
+.form-floating {
+    color: var(--text-secondary);
 }
 
 
@@ -108,12 +121,12 @@ form {
 
     .center {
         height: auto;
-        margin-bottom: 40px;
+        margin-bottom: 2.5rem;
     }
 
     .card {
         height: auto;
-        margin-top: 50px;
+        margin-top: 3.125rem;
     }
 }
 
@@ -122,7 +135,7 @@ form {
 
     .card {
         height: 100%;
-        margin-top: 70px
+        margin-top: 4.375rem
     }
 
     .center {
