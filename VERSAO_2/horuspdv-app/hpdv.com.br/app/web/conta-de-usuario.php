@@ -178,6 +178,6 @@
 </main>
 
 
-<script src="../js/conta-de-usuario.js"></script>
+<script src="../js/user-account.js"></script>
 
 </html>

@@ -18,12 +18,12 @@
 
 
  <!-- icone android iphone web -->
- <link rel="apple-touch-icon" sizes="180x180" href="../assets/icones/apple-touch-icon.png">
- <link rel="icon" type="image/png" sizes="32x32" href="../assets/icones/favicon-32x32.png">
- <link rel="icon" type="image/png" sizes="16x16" href="../assets/icones/favicon-16x16.png">
- <link rel="icon" type="image/png" sizes="192x192" href="../assets/icones/android-chrome-192x192.png">
- <link rel="icon" type="image/png" sizes="512x512" href="../assets/icones/android-chrome-512x512.png">
- <link rel="shortcut icon" href="favicon.ico" type="../assets/icones/favicon.ico">
+ <link rel="apple-touch-icon" sizes="180x180" href="../assets/icon/apple-touch-icon.png">
+ <link rel="icon" type="image/png" sizes="32x32" href="../assets/icon/favicon-32x32.png">
+ <link rel="icon" type="image/png" sizes="16x16" href="../assets/icon/favicon-16x16.png">
+ <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon/android-chrome-192x192.png">
+ <link rel="icon" type="image/png" sizes="512x512" href="../assets/icon/android-chrome-512x512.png">
+ <link rel="shortcut icon" href="favicon.ico" type="../assets/icon/favicon.ico">
 
 
  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

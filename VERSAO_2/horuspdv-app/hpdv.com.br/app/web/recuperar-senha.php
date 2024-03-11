@@ -3,7 +3,7 @@
 
 <head>
     <?php require '../layouts/head.php' ?>
-    <link rel="stylesheet" href="../css/recuperar-senha.css">
+    <link rel="stylesheet" href="../css/recover-password.css">
 </head>
 
 <body>
@@ -49,6 +49,6 @@
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../js/recuperar-senha.js"></script>
+<script src="../js/recover-password.js"></script>
 
 </html>

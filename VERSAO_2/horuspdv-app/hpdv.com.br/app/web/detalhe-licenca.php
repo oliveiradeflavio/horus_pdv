@@ -3,7 +3,7 @@
 
 <head>
     <?php require '../layouts/head.php' ?>
-    <link rel="stylesheet" href="../css/configuracoes.css">
+    <link rel="stylesheet" href="../css/settings.css">
 
 </head>
 

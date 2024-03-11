@@ -3,7 +3,7 @@
 
 <head>
     <?php require '../layouts/head.php' ?>
-    <link rel="stylesheet" href="../css/vendas.css">
+    <link rel="stylesheet" href="../css/sales.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
@@ -236,6 +236,6 @@
     </div>
     </div>
 </body>
-<script src="../js/vendas.js"></script>
+<script src="../js/sales.js"></script>
 
 </html>

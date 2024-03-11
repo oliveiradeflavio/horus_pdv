@@ -178,6 +178,6 @@
 </main>
 </body>
 
-<script src="../js/relatorio.js"></script>
+<script src="../js/report.js"></script>
 
 </html>

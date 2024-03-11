@@ -3,7 +3,7 @@
 
 <head>
     <?php require '../layouts/head.php' ?>
-    <link rel="stylesheet" href="../css/cadastro.css">
+    <link rel="stylesheet" href="../css/register.css">
 
 </head>
 
@@ -231,6 +231,6 @@
 </body>
 
 <script src=" ../js/_component/modal.js"></script>
-<script src="../js/cadastro.js"></script>
+<script src="../js/register.js"></script>
 
 </html>

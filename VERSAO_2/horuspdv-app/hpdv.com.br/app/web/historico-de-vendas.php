@@ -230,6 +230,6 @@
 </main>
 </body>
 
-<script src="../js/historico-de-vendas.js"></script>
+<script src="../js/sales-history.js"></script>
 
 </html>
