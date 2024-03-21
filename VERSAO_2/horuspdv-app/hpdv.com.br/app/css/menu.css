@@ -66,10 +66,25 @@
     border-radius: 0.9375rem;
 }
 
+/* .navbar-bg {
+    background: var(--bg-card);
+    box-shadow: var(--shadow);
+    color: var(--text-primary);
+} */
+
 .offcanvas-header button {
     color: var(--text-primary) !important;
 
 }
+
+.offcanvas.offcanvas-top {
+    height: min-content !important;
+}
+
+/* .offcanvas.offcanvas-top {
+    height: 200px !important;
+} */
+
 
 /* .offcanvas-header {
     background: var(--bg-card);
@@ -105,7 +120,6 @@
     transition: all .3s ease-in;
     box-shadow: var(--shadow);
     background: var(--bg-hover);
-
 }
 
 .dropdown-menu {
@@ -115,6 +129,10 @@
     color: var(--text-primary);
     font-size: 1.25rem;
     line-height: 3.375rem;
+}
+
+.dropdown-menu.show {
+    margin-left: 50% !important;
 }
 
 .btn-close {
@@ -175,6 +193,7 @@
     .offcanvas.offcanvas-top {
         height: auto;
     }
+
 }
 
 

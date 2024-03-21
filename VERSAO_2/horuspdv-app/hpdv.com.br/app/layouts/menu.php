@@ -5,7 +5,7 @@
     <div class="offcanvas offcanvas-top" tabindex="-1" id="menuSuperior" aria-labelledby="offcanvasTopLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasTopLabel">nome_usuario_logado</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="menuSuperior" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <div>
@@ -22,31 +22,24 @@
                             Cadastros
                         </li>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="cadastro-cliente"><i class="fa-solid fa-user-plus"></i> Cliente</a></li>
-                            <li><a class="dropdown-item" href="cadastro-produto"><i class="fa-solid fa-tags"></i> Produto</a></li>
-                            <li><a class="dropdown-item" href="cadastro-fornecedor"><i class="fa-solid fa-truck-fast"></i> Fornecedor</a></li>
+                            <li onclick="window.location.href='cadastro-cliente';"><a class="dropdown-item" href="cadastro-cliente"><i class="fa-solid fa-user-plus"></i> Cliente</a></li>
+                            <li onclick="window.location.href='cadastro-produto';"><a class="dropdown-item" href="cadastro-produto"><i class="fa-solid fa-tags"></i> Produto</a></li>
+                            <li onclick="window.location.href='cadastro-fornecedor';"><a class="dropdown-item" href="cadastro-fornecedor"><i class="fa-solid fa-truck-fast"></i> Fornecedor</a></li>
                         </ul>
                     </div>
-
-                    <li class="menu-box">
-                        <a href="#">
-                            <i class="fa-solid fa-chart-line"></i>
-                            Dashboard</a>
-                        </a>
-                    </li>
-                    <li class="menu-box">
+                    <li class="menu-box" onclick="window.location.href='historico-de-vendas';">
                         <a href="historico-de-vendas">
                             <i class="fa-solid fa-clock-rotate-left"></i>
                             Histórico de Vendas</a>
                         </a>
                     </li>
-                    <li class="menu-box">
+                    <li class="menu-box" onclick="window.location.href='relatorio';">
                         <a href="relatorio">
                             <i class="fa-solid fa-file-invoice"></i>
                             Relatórios</a>
                         </a>
                     </li>
-                    <li class="menu-box">
+                    <li class="menu-box" onclick="window.location.href='vendas';">
                         <a href="vendas" target="_blank">
                             <i class="fa-solid fa-cart-arrow-down"></i>
                             Iniciar Vendas</a>
@@ -59,9 +52,9 @@
                             Configurações
                         </li>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="conta-de-usuario"><i class="fa-solid fa-users"></i> Contas de Usuários</a></li>
-                            <li><a class="dropdown-item" href="detalhe-licenca"><i class="fa-solid fa-key"></i> Detalhes da Licença</a></li>
-                            <li><a class="dropdown-item" href="editar-perfil"><i class="fa-solid fa-user-gear"></i> Editar Perfil</a></li>
+                            <li onclick="window.location.href='conta-de-usuario';"><a class="dropdown-item" href="conta-de-usuario"><i class="fa-solid fa-users"></i> Contas de Usuários</a></li>
+                            <li onclick="window.location.href='detalhe-licenca';"><a class="dropdown-item" href="detalhe-licenca"><i class="fa-solid fa-key"></i> Detalhes da Licença</a></li>
+                            <li onclick="window.location.href='editar-perfil';"><a class="dropdown-item" href="editar-perfil"><i class="fa-solid fa-user-gear"></i> Editar Perfil</a></li>
                         </ul>
                     </div>
 
@@ -75,4 +68,5 @@
             </div>
         </div>
     </div>
-    <div class="loader-container"></div>
+</nav>
+<div class="loader-container"></div>
