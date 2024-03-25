@@ -55,11 +55,31 @@ form input {
     display: none;
 }
 
+/* tela 1280x800 macbook pro 2011 */
+@media (min-width: 1280px) and (max-height: 800px) {
+
+    .center {
+        margin-bottom: 50px;
+    }
+
+    .card {
+        height: 100vh;
+        margin-top: 80px;
+    }
+}
+
 /* landscape */
 @media (max-width: 1024px) and (orientation: landscape) {
+    .center {
+        height: auto;
+        margin-top: 10px;
+    }
+
+    .card {
+        height: 100%;
+    }
 
     .table-responsive {
         overflow-x: clip;
     }
-
 }

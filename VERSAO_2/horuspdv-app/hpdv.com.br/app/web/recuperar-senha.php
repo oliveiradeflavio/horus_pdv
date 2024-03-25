@@ -26,11 +26,11 @@
                                     <label for="cpf">CPF</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="usuario-de-acesso" name="usuario-de-acesso" placeholder="Usuário de Acesso" title="Usuário de Acesso">
+                                    <input type="text" class="form-control" id="accessUser" name="access-user" placeholder="Usuário de Acesso" title="Usuário de Acesso">
                                     <label for="usuario-de-acesso">Usuário de Acesso</label>
                                 </div>
                                 <div>
-                                    <button class="btn btn-enter" title="Recuperar" id="btn-recuperar-senha">
+                                    <button class="btn btn-enter" title="Recuperar" id="btnRecoverPassword">
                                         Recuperar
                                     </button>
                                 </div>
@@ -44,11 +44,14 @@
 
         </section>
 
-        <div id="loading"></div>
+        <div class="loader-container"></div>
     </main>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script scr="../js/_component/loading.js"></script>
+<script src="../js/_component/validation.js"></script>
+<script src="../js/_component/mask.js"></script>
 <script src="../js/recover-password.js"></script>
 
 </html>

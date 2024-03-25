@@ -1,3 +1,4 @@
+<?php require "../layouts/session.php" ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 

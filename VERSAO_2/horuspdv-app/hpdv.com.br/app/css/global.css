@@ -49,8 +49,10 @@ li {
     cursor: pointer;
 }
 
-input:disabled {
+input:disabled,
+.form-control:disabled {
     cursor: not-allowed !important;
+
 }
 
 button:disabled {
@@ -237,6 +239,26 @@ button:disabled {
     background-color: #464aa3;
 }
 
+
+/* olho senha */
+.fa-eye {
+    position: absolute;
+    top: 0.3125rem;
+    right: 0.625rem;
+    cursor: pointer;
+    font-size: 1.125rem !important;
+    color: var(--text-secondary);
+}
+
+.fa-eye-slash,
+.fa-eye-slash-repeat {
+    position: absolute;
+    top: 0.3125rem;
+    right: 0.625rem;
+    cursor: pointer;
+    font-size: 1.125rem;
+    color: var(--text-subtitle);
+}
 
 
 @keyframes spinner {
