@@ -30,7 +30,7 @@
                                         <label for="name" class="required-field-label">Nome Completo</label>
                                     </div>
                                     <div class="form-floating">
-                                        <input type="text" id="email" name="email" title="E-mail" class="form-control" placeholder="E-mail" onblur="validaEmail(this.value)" value="<?= $user_logged->email ?>">
+                                        <input type="text" id="email" name="email" title="E-mail" class="form-control" placeholder="E-mail" value="<?= $user_logged->email ?>">
                                         <label for="email" class="required-field-label">E-mail</label>
                                     </div>
 
@@ -65,8 +65,8 @@
                                     <div>
                                         <button class="btn btn-primary btn-lg">Salvar</button>
                                     </div>
+                                </form>
                             </div>
-                            </form>
                         </div>
                     </div>
 
@@ -79,6 +79,7 @@
 
 </body>
 
+<script src="../js/_component/validation.js"></script>
 <script src="../js/edit-profile.js"></script>
 
 </html>

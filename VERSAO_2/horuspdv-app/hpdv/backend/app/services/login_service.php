@@ -67,4 +67,35 @@ class LoginService
             return false;
         }
     }
+
+    public function updateProfile()
+    {
+        $query = "UPDATE tb_usuarios SET nome = :nome, email = :email, senha_usuario = :senha_usuario WHERE id = :id";
+        $stmt = $this->connect->prepare($query);
+        $stmt->bindValue(':nome', $this->user->__get('nome'));
+        $stmt->bindValue(':email', $this->user->__get('email'));
+        $stmt->bindValue(':senha_usuario', $this->user->__get('senha_usuario'));
+        $stmt->bindValue(':id', $this->user->__get('id'));
+        $result = $stmt->execute();
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateProfileNoPassword()
+    {
+        $query = "UPDATE tb_usuarios SET nome = :nome, email = :email WHERE id = :id";
+        $stmt = $this->connect->prepare($query);
+        $stmt->bindValue(':nome', $this->user->__get('nome'));
+        $stmt->bindValue(':email', $this->user->__get('email'));
+        $stmt->bindValue(':id', $this->user->__get('id'));
+        $result = $stmt->execute();
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

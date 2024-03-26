@@ -22,60 +22,60 @@
                         <div class="card">
                             <ul id='tab_conta_de_usuario' class="nav nav-tabs nav-pills nav-fill">
                                 <li class="nav-item">
-                                    <a class="active" data-bs-toggle="pill" data-bs-target="#tab_conta_de_usuario_novo_usuario"> <i class="fa-solid fa-user-plus"></i>
+                                    <a class="active" data-bs-toggle="pill" data-bs-target="#tab_user_account_new_user"> <i class="fa-solid fa-user-plus"></i>
                                         Novo Usuário
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a data-bs-toggle="pill" data-bs-target="#tab_conta_de_usuario_excluir_usuario"> <i class="fa-solid fa-user-minus"></i>
+                                    <a data-bs-toggle="pill" data-bs-target="#tab_user_account_delete_user"> <i class="fa-solid fa-user-minus"></i>
                                         Excluir Usuário</a>
                                 </li>
                                 <li class="nav-item">
 
-                                    <a data-bs-toggle="pill" data-bs-target="#tab_conta_de_usuario_permissao_usuario"> <i class="fa-solid fa-address-card"></i>
+                                    <a data-bs-toggle="pill" data-bs-target="#tab_user_account_user_permission"> <i class="fa-solid fa-address-card"></i>
                                         Permissões</a>
                                 </li>
                                 <li class="nav-item">
 
-                                    <a data-bs-toggle="pill" data-bs-target="#tab_conta_de_usuario_usuarios_cadastrados"><i class="fa-solid fa-users"></i>
+                                    <a data-bs-toggle="pill" data-bs-target="#tab_user_account_registered_users"><i class="fa-solid fa-users"></i>
                                         Usuários Cadastrados
                                     </a>
                                 </li>
                             </ul>
-                            <div id="tab_conta_de_usuario_content" class="tab-content">
-                                <div id="tab_conta_de_usuario_novo_usuario" class="tab-pane fade active show" role="tabpanel">
+                            <div id="tab_user_account_content" class="tab-content">
+                                <div id="tab_user_account_new_user" class="tab-pane fade active show" role="tabpanel">
                                     <div>
-                                        <form action="#" method="post">
+                                        <form action="#" method="post" id="formNewUser">
                                             <input type="hidden" name="csrf_token">
 
                                             <div class="form-floating">
-                                                <input type="text" id="cpf" name="cpf" class="form-control" title="CPF" placeholder="CPF" onblur="validaCPF(this.value)" maxlength="14">
+                                                <input type="text" id="cpf" name="cpf" class="form-control" title="CPF" placeholder="CPF" maxlength="14">
                                                 <label for="cpf" class="required-field-label" title="CPF">CPF</label>
                                             </div>
 
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" id="nome-cliente" placeholder="Nome Completo">
-                                                <label for="nome-cliente" class="required-field-label">Nome Completo</label>
+                                                <input type="text" class="form-control" id="customer-client" placeholder="Nome Completo" minlength="3">
+                                                <label for="customer-client" class="required-field-label">Nome Completo</label>
                                             </div>
                                             <div class="form-floating">
-                                                <input type="text" id="email" name="email" title="E-mail" class="form-control" placeholder="E-mail" onblur="validaEmail(this.value)">
+                                                <input type="text" id="email" name="email" title="E-mail" class="form-control" placeholder="E-mail">
                                                 <label for="email" class="required-field-label">E-mail</label>
                                             </div>
 
                                             <div class="form-floating">
-                                                <input type="text" id="usuario-acesso" name="usuario-acesso" class="form-control" title="Usuário de Acesso" placeholder="Usuário de Acesso">
-                                                <label for="usuario-acesso" class="required-field-label" title="usuario-acesso">Usuário de Acesso</label>
+                                                <input type="text" id="user-access" name="user-access" class="form-control" title="Usuário de Acesso" placeholder="Usuário de Acesso" minlength="3">
+                                                <label for="user-access" class="required-field-label">Usuário de Acesso</label>
                                             </div>
 
                                             <div>
-                                                <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+                                                <button class="btn btn-primary btn-lg">Salvar</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                <div id="tab_conta_de_usuario_excluir_usuario" class="tab-pane fade" role="tabpanel">
+                                <div id="tab_user_account_delete_user" class="tab-pane fade" role="tabpanel">
                                     <div>
-                                        <form action="#" method="post">
+                                        <form action="#" method="post" id="formDeleteUser">
                                             <input type="hidden" name="csrf_token">
 
                                             <div>
@@ -83,7 +83,7 @@
                                                     <input type="hidden" name="csrf_token">
                                                     <div class="form-group mt-3 mb-3">
                                                         <label for="">Usuários cadastrados</label>
-                                                        <select name="select_excluir_usuario" id="select_excluir_usuario" class="form-select">
+                                                        <select name="select_delete_user" id="select_delete_user" class="form-select">
                                                             <option value="" selected>Selecionar</option>
                                                             <option value="usuario1">Usuário 1</option>
                                                             <option value="usuario2">Usuário 2</option>
@@ -91,7 +91,7 @@
                                                     </div>
 
                                                     <div>
-                                                        <button type="submit" class="btn btn-primary btn-lg">Excluir</button>
+                                                        <button class="btn btn-primary btn-lg">Excluir</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -100,9 +100,9 @@
                                     </div>
                                 </div>
 
-                                <div id="tab_conta_de_usuario_permissao_usuario" class="tab-pane fade" role="tabpanel">
+                                <div id="tab_user_account_user_permission" class="tab-pane fade" role="tabpanel">
                                     <div>
-                                        <form action="#" method="post">
+                                        <form action="#" method="post" id="formUserPermission">
                                             <input type="hidden" name="csrf_token">
 
                                             <div>
@@ -110,7 +110,7 @@
                                                     <input type="hidden" name="csrf_token">
                                                     <div class="form-group mt-3 mb-3">
                                                         <label for="">Usuários cadastrados</label>
-                                                        <select name="select_permissao_usuario" id="select_permissao_usuario" class="form-select">
+                                                        <select name="select_user_permission" id="select_user_permission" class="form-select">
                                                             <option value="" selected>Selecionar</option>
                                                             <option value="usuario1">Usuário 1</option>
                                                             <option value="usuario2">Usuário 2</option>
@@ -118,13 +118,13 @@
                                                     </div>
                                                     <div class="form-group mt-3 mb-3">
                                                         <label for="">Tipo de Permissão</label>
-                                                        <select name="select_tipo_de_permissao" id="select_tipo_de_permissao" class="form-select">
+                                                        <select name="select_permission_type" id="select_permission_type" class="form-select">
                                                             <option value="" selected>Selecionar</option>
 
                                                         </select>
                                                     </div>
                                                     <div>
-                                                        <button type="submit" class="btn btn-primary btn-lg">Alterar Permissão</button>
+                                                        <button class="btn btn-primary btn-lg">Alterar Permissão</button>
                                                     </div>
                                                 </form>
 
@@ -133,9 +133,9 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div id="tab_conta_de_usuario_usuarios_cadastrados" class="tab-pane fade" role="tabpanel">
+                                <div id="tab_user_account_registered_users" class="tab-pane fade" role="tabpanel">
                                     <div>
-                                        <form action="#" method="post">
+                                        <form action="#" method="post" id="formRegisteredUsers">
                                             <input type="hidden" name="csrf_token">
 
                                             <div>
@@ -176,6 +176,8 @@
     </main>
 
 
+    <script src="../js/_component/validation.js"></script>
+    <script src="../js/_component/mask.js"></script>
     <script src="../js/user-account.js"></script>
 
 </html>

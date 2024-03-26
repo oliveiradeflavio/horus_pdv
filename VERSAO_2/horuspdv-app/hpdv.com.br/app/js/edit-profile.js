@@ -68,13 +68,153 @@ formEditProfile.addEventListener('submit', function (e) {
     e.preventDefault();
 
     let name = document.getElementById('name').value;
-    let email = document.getElementById('email').value;
+    let email = document.getElementById('email');
     let oldPassword = document.getElementById('oldPassword').value;
     let newPassword = document.getElementById('newPassword').value;
     let statusChangePassword = document.getElementById('chboxChangePassword');
+    let csrf_token = document.querySelector('input[name="csrf_token"]').value;
 
+    if (statusChangePassword.checked) {
+        if (oldPassword === '' || newPassword === '') {
+            Swal.fire({
+                icon: 'error',
+                title: "Atenção!",
+                text: 'Para alterar a senha, preencha os campos de senha antiga e nova senha.',
+            })
+        }
 
+        if (oldPassword.length < 6 || newPassword.length < 6) {
+            Swal.fire({
+                icon: 'error',
+                title: "Atenção!",
+                text: 'A senha deve ter no mínimo 6 caracteres.',
+            })
+        }
 
+        if (email.value === '' || name === '' || name.length < 2) {
+            Swal.fire({
+                icon: 'error',
+                title: "Atenção!",
+                text: 'Preencha todos os campos.',
+            })
+        }
+
+        if (!emailValidation(email)) {
+            Swal.fire({
+                icon: 'error',
+                title: "Atenção!",
+                text: 'E-mail inválido.',
+            })
+        }
+
+        else {
+
+            showLoading();
+
+            accessCredentials = {
+                name: name,
+                email: email,
+                oldPassword: oldPassword,
+                newPassword: newPassword,
+                csrfToken: csrf_token,
+                statusChangePassword: statusChangePassword.checked
+            }
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '../controllers/edit_profile_controller.php',
+                async: true,
+                data: accessCredentials,
+
+                success: function (response) {
+                    if (response.error) {
+                        hideLoading();
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.message,
+                        })
+                    }
+                    if (response.success) {
+                        hideLoading();
+                        Swal.fire({
+                            icon: 'success',
+                            text: response.message,
+                        })
+                    }
+                },
+                error: function (response) {
+                    hideLoading();
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Erro ao tentar alterar os dados.',
+                    })
+                }
+            });
+
+        }
+    } else {
+        if (email === '' || name === '' || name.length < 2) {
+            Swal.fire({
+                icon: 'error',
+                title: "Atenção!",
+                text: 'Preencha todos os campos.',
+            })
+        }
+
+        if (!emailValidation(email)) {
+            Swal.fire({
+                icon: 'error',
+                title: "Atenção!",
+                text: 'E-mail inválido.',
+            })
+        }
+
+        else {
+
+            showLoading();
+
+            accessCredentials = {
+                name: name,
+                email: email,
+                csrfToken: csrf_token,
+                statusChangePassword: statusChangePassword.checked
+            }
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '../controllers/edit_profile_controller.php',
+                async: true,
+                data: accessCredentials,
+
+                success: function (response) {
+                    if (response.error) {
+                        hideLoading();
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.message,
+                        })
+                    }
+                    if (response.success) {
+                        hideLoading();
+                        Swal.fire({
+                            icon: 'success',
+                            text: response.message,
+                        })
+                    }
+                },
+                error: function (response) {
+                    hideLoading();
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Erro ao tentar alterar os dados.',
+                    })
+                }
+            });
+
+        }
+    }
 });
 
 

@@ -35,3 +35,9 @@ function cpfValidation(cpf) {
         return false;
     return true;
 }
+
+//validação de email
+function emailValidation(email) {
+    let re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
