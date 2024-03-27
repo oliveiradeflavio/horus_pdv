@@ -11,13 +11,29 @@
 
 [![tela inicial][product-screenshot]]()
 
+O Sistema de Ponto de Venda (PDV) é uma solução completa para gestão de vendas e operações comerciais. Ele oferece uma ampla gama de recursos para facilitar o gerenciamento de vendas, clientes, produtos, fornecedores e relatórios. Abaixo estão os principais aspectos e funcionalidades do sistema:
 
-O Hórus PDV é um sistema de gestão de produtos e serviços que tem como objetivo facilitar o controle de estoque, aumentar a produtividade e a segurança de seus funcionários.
+    Cadastro de Cliente, Produto e Fornecedor:
+        O sistema permite o cadastro detalhado de clientes, produtos e fornecedores. Para clientes, é possível armazenar informações como nome, endereço, e-mail e telefone entre outras informações. Para produtos, são registrados detalhes como nome, descrição, preço, código de barras e estoque. Para fornecedores, são mantidos dados como nome, contato e informações de pagamento.
 
-Cadastre clientes, fornecedores, produtos. Cadastre funcionários e faça suas vendas. Gere relatórios de vendas e estoque.
+    Geração de Relatórios:
+        O sistema gera relatórios detalhados em formatos Excel e PDF. Os relatórios são essenciais para uma análise abrangente do negócio e tomada de decisões estratégicas.
 
+    Histórico de Vendas:
+        O sistema mantém um histórico completo de todas as vendas realizadas. Isso inclui informações sobre os produtos vendidos, os clientes envolvidos, os valores das transações e as datas das vendas. 
 
-### VERSÃO 2 ESTA EM DESENVOLVIMENTO
+    Tela de Venda:
+        A tela de venda é a interface principal para realizar transações de vendas. Nesta tela, os usuários podem selecionar produtos, adicionar ao carrinho, aplicar descontos, escolher opções de pagamento e concluir a venda. A interface é intuitiva e fácil de usar, agilizando o processo de venda.
+
+    Autenticação e Segurança:
+        O sistema inclui uma tela de login segura para acesso aos usuários autorizados. Além disso, oferece funcionalidades de recuperação de senha para garantir o acesso contínuo aos usuários. 
+
+    Configurações e Gerenciamento de Contas de Usuário:
+        As configurações do sistema permitem o gerenciamento de contas de usuário, incluindo a criação, edição e exclusão de contas. Os administradores podem atribuir diferentes níveis de permissão aos usuários para controlar o acesso às funcionalidades do sistema. Além disso, os usuários têm a capacidade de editar seus perfis para manter informações pessoais atualizadas.
+
+    Licenciamento:
+        O sistema possui um sistema de licenciamento para garantir o uso adequado do software. 
+
 
 
 
