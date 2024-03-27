@@ -7,9 +7,7 @@
 
 <h3 align="center">SISTEMA DE VENDAS - HÓRUS PDV</h3>
 
-### Sobre 
-
-[![tela inicial][product-screenshot]]()
+### Sobre o Projeto
 
 O Sistema de Ponto de Venda (PDV) é uma solução completa para gestão de vendas e operações comerciais. Ele oferece uma ampla gama de recursos para facilitar o gerenciamento de vendas, clientes, produtos, fornecedores e relatórios. Abaixo estão os principais aspectos e funcionalidades do sistema:
 
@@ -54,6 +52,12 @@ O sistema possui um sistema de licenciamento para garantir o uso adequado do sof
 * [Font Awesome](https://fontawesome.com/)
 * [Google Fonts](https://fonts.google.com/)
 * [PHPspreadsheet](https://phpspreadsheet.readthedocs.io/en/latest/)
+
+
+#### Screenshots
+
+![Product Name Screen Shot][product-screenshot]
+
 
 
 
