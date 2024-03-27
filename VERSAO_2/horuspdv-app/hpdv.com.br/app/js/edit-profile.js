@@ -99,7 +99,7 @@ formEditProfile.addEventListener('submit', function (e) {
             })
         }
 
-        if (!emailValidation(email)) {
+        if (!emailValidation(email.value)) {
             Swal.fire({
                 icon: 'error',
                 title: "Atenção!",
@@ -113,7 +113,7 @@ formEditProfile.addEventListener('submit', function (e) {
 
             accessCredentials = {
                 name: name,
-                email: email,
+                email: email.value,
                 oldPassword: oldPassword,
                 newPassword: newPassword,
                 csrfToken: csrf_token,
@@ -162,7 +162,7 @@ formEditProfile.addEventListener('submit', function (e) {
             })
         }
 
-        if (!emailValidation(email)) {
+        if (!emailValidation(email.value)) {
             Swal.fire({
                 icon: 'error',
                 title: "Atenção!",
@@ -176,7 +176,7 @@ formEditProfile.addEventListener('submit', function (e) {
 
             accessCredentials = {
                 name: name,
-                email: email,
+                email: email.value,
                 csrfToken: csrf_token,
                 statusChangePassword: statusChangePassword.checked
             }
