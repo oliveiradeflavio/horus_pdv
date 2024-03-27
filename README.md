@@ -41,7 +41,6 @@ O sistema possui um sistema de licenciamento para garantir o uso adequado do sof
 * [PHP](https://www.php.net/)
 * [Javascript](https://www.javascript.com/)
 * [MySQL](https://www.mysql.com/)
-* [Chart.js](https://www.chartjs.org/)
 * [Mpdf](https://mpdf.github.io/)
 * [PHPMailer](https://github.com/PHPMailer/PHPMailer)
 * [JQuery](https://jquery.com/)
