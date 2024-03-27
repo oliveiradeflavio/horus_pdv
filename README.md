@@ -56,7 +56,17 @@ O sistema possui um sistema de licenciamento para garantir o uso adequado do sof
 
 #### Screenshots
 
-(https://github.com/oliveiradeflavio/horus_pdv/blob/main/img/hpdv-img.png?raw=true)
+https://github.com/oliveiradeflavio/horus_pdv/blob/main/img/hpdv-img.png
+
+https://github.com/oliveiradeflavio/horus_pdv/blob/main/img/hpdv-img2.png
+
+https://github.com/oliveiradeflavio/horus_pdv/blob/main/img/hpdv-img3.png
+
+https://github.com/oliveiradeflavio/horus_pdv/blob/main/img/hpdv-img4.png
+
+https://github.com/oliveiradeflavio/horus_pdv/blob/main/img/hpdv-img5.png
+
+https://github.com/oliveiradeflavio/horus_pdv/blob/main/img/hpdv-img6.png
 
 
 
