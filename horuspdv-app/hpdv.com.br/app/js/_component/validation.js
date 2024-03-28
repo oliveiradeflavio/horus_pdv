@@ -42,3 +42,99 @@ function emailValidation(email) {
     return re.test(email);
 }
 
+//validação data de nascimento
+function birthDateValidation(date_id) {
+    const birthDateInput = document.querySelector(`#${date_id}`);
+
+    const ageInput = document.querySelector("#age");
+
+    //remover a formatação da dadata (dd/mm/yyyy) para (yyyymmdd)
+    const birthDateValue = birthDateInput.value.split('/').reverse().join('-');
+
+    if (isNaN(Date.parse(birthDateValue))) {
+        if (birthDateInput.value === "") {
+            ageInput.value = "";
+            return false;
+        }
+    } else {
+        if (birthDateInput.value === "") {
+            ageInput.value = "";
+            return false;
+        } else {
+
+            //calculo da idade
+            const today = new Date();
+            const birthDateSplit = birthDateValue.split('-'); //split para separar o ano, mês e dia
+            const birhDateObj = new Date(birthDateSplit[0], birthDateSplit[1] - 1, birthDateSplit[2]); //cria um objeto com a data de nascimento
+            let age = today.getFullYear() - birhDateObj.getFullYear(); //calculo da idade
+
+            //se a data de nascimento ainda não ocorreu, subtrai 1 da idade
+            if (today.getMonth() < birhDateObj.getMonth() || (today.getMonth() === birhDateObj.getMonth() && today.getDate() < birhDateObj.getDate())) {
+                age--;
+            }
+
+            //esse tá vivendo bem mais que a média
+            if (age > 130) {
+                ageInput.value = "";
+                return false;
+            }
+
+            //peenchendo o campo de idade
+            ageInput.value = age;
+            return true;
+        }
+    }
+}
+
+//VIACEP API
+function getAddressByCep(cepValue) {
+
+    let cep = cepValue.replace(/\D/g, ''); //remove tudo que não for número
+
+    if (cep != "") {
+
+        //validando o cep
+        let validateCep = /^[0-9]{8}$/;
+
+        if (validateCep.test(cep)) {
+
+            showLoading();
+
+            //criar um elemento js
+            let elementJs = document.createElement("script");
+
+            //adiciona o elemento js ao body
+            elementJs.src = `https://viacep.com.br/ws/${cep}/json/?callback=fillAddress`;
+
+            //adiciona o elemento js ao body
+            document.body.appendChild(elementJs);
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                text: 'CEP inválido',
+            });
+        }
+    } else {
+        Swal.fire({
+            icon: 'error',
+            text: 'Campo CEP não pode estar vazio',
+        });
+    }
+}
+
+function fillAddress(value) {
+    if (!("erro" in value)) {
+        document.querySelector("#address").value = value.logradouro;
+        document.querySelector("#neighborhood").value = value.bairro;
+        document.querySelector("#city").value = value.localidade;
+        document.querySelector("#state").value = value.uf;
+    } else {
+        Swal.fire({
+            icon: 'error',
+            text: 'CEP não encontrado',
+        });
+    }
+    hideLoading();
+}
+

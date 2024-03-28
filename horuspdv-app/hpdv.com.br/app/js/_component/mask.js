@@ -4,6 +4,28 @@ function cpfMask(cpf) {
     return cpf;
 }
 
+//mascara de celular
+function cellPhoneMask(phone) {
+    $(phone).mask('(00) 00000-0000');
+    return phone;
+}
+
+//mascara de telefone
+function telephoneMask(phone) {
+    $(phone).mask('(00) 0000-0000');
+    return phone;
+}
+
+function cepMask(cep) {
+    $(cep).mask('00000-000');
+    return cep;
+}
+
+function dateMask(date) {
+    $(date).mask('00/00/0000', { reverse: true });
+    return date;
+}
+
 //Máscara para campo onde somente será permitido a digitação de texto (campos como nome, sobrenome, etc)
 $('.text_only').on('keypress', function (e) {
     const str = (e.keyCode ? e.keyCode : e.which);

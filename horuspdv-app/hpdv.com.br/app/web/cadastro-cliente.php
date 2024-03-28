@@ -21,14 +21,14 @@
                                     <div class="container-box">
                                         <div class="col-md-6">
                                             <div class="col-md-4 card-box ">
-                                                <a href="#" onclick="exibir('modal-cad-cliente')">
+                                                <a href="#" onclick="display('modal-cad-client')">
                                                     <i class="fa-solid fa-user-plus"></i>
                                                     Novo Cliente</a>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="col-md-4 card-box">
-                                                <a href="#" onclick="exibir('modal-pesquisa-cliente')">
+                                                <a href="#" onclick="display('modal-search-client')">
                                                     <i class="fa-solid fa-magnifying-glass"></i>
                                                     Pesquisar Cliente</a>
                                             </div>
@@ -42,7 +42,7 @@
             </div>
             </div>
         </section>
-        <div class="modal fade bd-example-modal-lg show" data-bs-backdrop="static" data-bs-keyboard="false" id="modal-cad-cliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg show" data-bs-backdrop="static" data-bs-keyboard="false" id="modal-cad-client" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="container">
@@ -50,17 +50,18 @@
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="row">
-                            <form action="#" method="post">
-                                <input type="hidden" name="csrf_token">
+                            <form action="#" method="post" id="formAddNewClient">
+                                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>" tabindex="-1">
+                                <input type="hidden" name="action" value="add_client" tabindex="-1">
                                 <div class="row">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="nome-cliente" placeholder="Nome">
-                                        <label for="nome-cliente" class="required-field-label">Nome</label>
+                                        <input type="text" class="form-control text_only" id="customer-name" placeholder="Nome" minlength="3" required>
+                                        <label for="customer-name" class="required-field-label">Nome</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-floating col-md-4">
-                                        <input type="text" id="cpf" name="cpf" class="form-control" title="CPF" placeholder="CPF" onblur="validaCPF(this.value)" maxlength="14">
+                                        <input type="text" id="cpf" name="cpf" class="form-control" title="CPF" placeholder="CPF" minlength="14" maxlength="14" required>
                                         <label for="cpf" class="required-field-label" title="CPF">CPF</label>
                                     </div>
                                     <div class="form-floating col-md-3">
@@ -68,26 +69,26 @@
                                         <label for="rg" title="RG">RG</label>
                                     </div>
                                     <div class="form-floating col-md-3">
-                                        <input type="text" id="data-nascimento" name="data-nascimento" class="form-control" placeholder="Data de Nascimento" title="Data de Nascimento" onblur="validaDataNascimento(this.id)" required="" maxlength="10">
-                                        <label for="nascimento" class="required-field-label" title="Data de Nascimento">DN</label>
+                                        <input type="text" id="birth-date" name="birth-date" class="form-control" placeholder="Data de Nascimento" title="Data de Nascimento" onblur="birthDateValidation(this.id)" maxlength="10">
+                                        <label for="birth-date" class="required-field-label" title="Data de Nascimento">DN</label>
                                     </div>
                                     <div class="form-floating col-md-2">
-                                        <input type="text" id="idade" name="idade" title="Idade" class="form-control texto-input-num" placeholder="Idade">
-                                        <label for="idade" title="Idade">Idade</label>
+                                        <input type="text" id="age" name="age" title="Idade" class="form-control texto-input-num" placeholder="Idade" tabindex="-1" disabled>
+                                        <label for="age" title="Idade">Idade</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-floating col-md-4">
-                                        <input type="text" id="cep" name="cep" class="form-control" title="CEP" onchange="pesquisaCEP(this.value)" placeholder="CEP" maxlength="9">
+                                        <input type="text" id="cep" name="cep" class="form-control" title="CEP" onchange="getAddressByCep(this.value)" placeholder="CEP" maxlength="9" required>
                                         <label for="cep" class="required-field-label" title="CEP">CEP</label>
                                     </div>
 
                                     <div class="form-floating col-md-4">
-                                        <input type="text" id="cidade" name="cidade" title="Cidade" class="form-control texto-input" placeholder="Cidade">
-                                        <label for="cidade" class="required-field-label" title="Cidade">Cidade</label>
+                                        <input type="text" id="city" name="city" title="Cidade" class="form-control texto-input" placeholder="Cidade" required>
+                                        <label for="city" class="required-field-label" title="Cidade">Cidade</label>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <select id="uf" name="uf" class="form-select form-control" title="UF" required>
+                                        <select id="state" name="state" class="form-select form-control" title="UF" required>
                                             <option selected="">UF</option>
                                             <option value="AC">Acre</option>
                                             <option value="AL">Alagoas</option>
@@ -122,49 +123,49 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-floating col-md-6">
-                                        <input type="text" id="endereco" name="endereco" class="form-control" title="Endereço" placeholder="endereco">
-                                        <label for="endereco" class="required-field-label" title="Endereço">Endereço</label>
+                                        <input type="text" id="address" name="address" class="form-control" title="Endereço" placeholder="endereco" required>
+                                        <label for="address" class="required-field-label" title="Endereço">Endereço</label>
                                     </div>
                                     <div class="form-floating col-md-6">
-                                        <input type="text" id="bairro" name="bairro" class="form-control" title="Bairro" placeholder="Bairro">
-                                        <label for="bairro" class="required-field-label" title="Bairro">Bairro</label>
+                                        <input type="text" id="neighborhood" name="neighborhood" class="form-control" title="Bairro" placeholder="Bairro" required>
+                                        <label for="neighborhood" class="required-field-label" title="Bairro">Bairro</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-floating col-md-4">
-                                        <input type="text" id="complemento" name="complemento" title="Complemento" class="form-control" placeholder="Complemento">
-                                        <label for="complemento" title="Complemento">Complemento</label>
+                                        <input type="text" id="street-complement" name="street-complement" title="Complemento" class="form-control" placeholder="Complemento">
+                                        <label for="street-complement" title="Complemento">Complemento</label>
                                     </div>
 
                                     <div class="form-floating col-md-4">
-                                        <input type="text" id="numero" name="numero" title="Número" class="form-control texto-input-num" placeholder="Número">
-                                        <label for="numero" class="required-field-label" title="Número">Número</label>
+                                        <input type="text" id="number" name="number" title="Número" class="form-control texto-input-num" placeholder="Número" required>
+                                        <label for="number" class="required-field-label" title="Número">Número</label>
                                     </div>
 
                                     <div class="form-floating col-md-4">
-                                        <input type="text" id="ponto-de-referencia" name="ponto-de-referencia" title="Ponto de Referência" class="form-control" placeholder="Ponto de Referência">
-                                        <label for="ponto-de-referencia" title="Ponto de Referência">Ponto de Referência</label>
+                                        <input type="text" id="reference-point" name="reference-point" title="Ponto de Referência" class="form-control" placeholder="Ponto de Referência">
+                                        <label for="reference-point" title="Ponto de Referência">Ponto de Referência</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-floating col-md-4">
-                                        <input type="text" id="telefone" name="telefone" title="Telefone" class="form-control" placeholder="Telefone" maxlength="14">
-                                        <label for="telefone" title="Telefone">Telefone</label>
+                                        <input type="text" id="telephone" name="telephone" title="Telefone" class="form-control" placeholder="Telefone" minlength="14" maxlength="14">
+                                        <label for="telephone" title="Telefone">Telefone</label>
                                     </div>
 
                                     <div class="form-floating col-md-4">
-                                        <input type="text" id="celular" name="celular" class="form-control" title="Celular" placeholder="Celular" maxlength="15">
-                                        <label for="celular" class="required-field-label" title="Celular">Celular</label>
+                                        <input type="text" id="cellphone" name="cellphone" class="form-control" title="Celular" placeholder="Celular" minlength="15" maxlength="15" required>
+                                        <label for="cellphone" class="required-field-label" title="Celular">Celular</label>
                                     </div>
 
                                     <div class="form-floating col-md-4">
-                                        <input type="text" id="email" name="email" title="E-mail" class="form-control" placeholder="E-mail" onblur="validaEmail(this.value)">
+                                        <input type="text" id="email" name="email" title="E-mail" class="form-control" placeholder="E-mail">
                                         <label for="email" title="E-mail">E-mail</label>
                                     </div>
                                 </div>
 
                                 <div class="mt-3">
-                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                    <button class="btn btn-primary">Salvar</button>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                                 </div>
                             </form>
@@ -173,7 +174,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade bd-example-modal-lg show" data-bs-backdrop="static" data-bs-keyboard="false" id="modal-pesquisa-cliente" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg show" data-bs-backdrop="static" data-bs-keyboard="false" id="modal-search-client" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="container">
@@ -234,7 +235,8 @@
     </main>
 </body>
 
-<script src=" ../js/_component/modal.js"></script>
+<script src="../js/_component/validation.js"></script>
+<script src="../js/_component/mask.js"></script>
 <script src="../js/register.js"></script>
 
 </html>
