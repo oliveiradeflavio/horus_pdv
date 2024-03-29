@@ -26,6 +26,12 @@ function dateMask(date) {
     return date;
 }
 
+
+function rgMask(rg) {
+    $(rg).mask('00.000.000-0');
+    return rg;
+}
+
 //Máscara para campo onde somente será permitido a digitação de texto (campos como nome, sobrenome, etc)
 $('.text_only').on('keypress', function (e) {
     const str = (e.keyCode ? e.keyCode : e.which);

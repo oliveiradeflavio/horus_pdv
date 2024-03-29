@@ -165,7 +165,7 @@
                                 </div>
 
                                 <div class="mt-3">
-                                    <button class="btn btn-primary">Salvar</button>
+                                    <button class="btn btn-primary" id="btnSend">Salvar</button>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                                 </div>
                             </form>
@@ -183,11 +183,11 @@
                         </div>
                         <div class="row">
                             <form action="#" method="post" id="formSearchClient">
-                                <input type="hidden" name="csrf_token">
-                                <input type="hidden" name="action">
+                                <input type="hidden" name="csrf_token_search" value="<?= $_SESSION['csrf_token'] ?>" tabindex="-1">
+                                <input type="hidden" name="action_search" value="search_client" tabindex="-1">
                                 <div id="container-search">
-                                    <label for="pesquisar-cliente" class="label-search">
-                                        <input type="search" name="pesquisar-cliente" id="pesquisar-cliente" class="form-control" placeholder="Pesquise por cpf" required>
+                                    <label for="search-client" class="label-search">
+                                        <input type="search" name="search-client" id="search-client" class="form-control" placeholder="Pesquise por cpf" required>
                                         <div class="icon-search">
                                             <i class="fas fa-search"></i>
                                         </div>
@@ -196,37 +196,9 @@
                                 </div>
                             </form>
                             <div class="table-responsive">
-                                <table class="table table-hover mt-4">
-                                    <thead>
-                                        <tr>
-
-                                            <th scope="col">Nome</th>
-                                            <th scope="col">CPF</th>
-                                            <th scope="col">Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>
-                                                <i class="fas fa-edit"></i>
-                                                <i class="fas fa-trash-alt"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>
-                                                <i class="fas fa-edit"></i>
-                                                <i class="fas fa-trash-alt"></i>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
+                                <table class="table table-hover mt-4" id="result-search">
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>

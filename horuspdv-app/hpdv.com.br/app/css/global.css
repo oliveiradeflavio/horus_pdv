@@ -236,7 +236,7 @@ button:disabled {
 }
 
 .table {
-    background-color: #464aa3;
+    background-color: var(--text-primary)
 }
 
 
