@@ -236,7 +236,11 @@ button:disabled {
 }
 
 .table {
-    background-color: var(--text-primary)
+    background-color: var(--text-primary);
+}
+
+.table-responsive {
+    height: calc(100vh - 10rem);
 }
 
 

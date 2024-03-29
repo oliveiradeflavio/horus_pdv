@@ -1,5 +1,13 @@
 function display(modal) {
+    clearInputs();
     let exibirModal = document.getElementById(modal);
+    const form = document.querySelector("#formUpdateClient");
+    if (form) {
+        form.setAttribute("id", "formAddNewClient");
+        form.querySelector("#btnSend").innerHTML = "Salvar";
+        form.querySelector("#btnSend").setAttribute("class", "btn btn-primary");
+    }
+
     $(exibirModal).modal('show');
 }
 
@@ -55,7 +63,6 @@ cepMask(cepMask(document.querySelector("#cep")))
 cpfMask(cpfMask(document.querySelector("#cpf")))
 rgMask(rgMask(document.querySelector("#rg")))
 dateMask(dateMask(document.querySelector("#birth-date")))
-
 
 const formAddNewClient = document.querySelector("#formAddNewClient");
 formAddNewClient.addEventListener("submit", function (e) {
@@ -126,7 +133,15 @@ formAddNewClient.addEventListener("submit", function (e) {
     }
 });
 
+const blockModalSearch = document.querySelector("#modal-search-client");
 const formSearchClient = document.querySelector("#formSearchClient");
+blockModalSearch.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        if (document.querySelector("#search-client").value === "") {
+            e.preventDefault();
+        }
+    }
+})
 formSearchClient.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -134,6 +149,7 @@ formSearchClient.addEventListener("submit", function (e) {
     let action = document.querySelector('input[name="action_search"]').value;
     let csrf_token = document.querySelector('input[name="csrf_token_search"]').value;
     let result_search_table = document.querySelector("#result-search");
+    let table_responsive = document.querySelector(".table-responsive");
 
     if (valueSearch != "") {
         showLoading();
@@ -150,14 +166,16 @@ formSearchClient.addEventListener("submit", function (e) {
             success: function (response) {
                 hideLoading();
                 if (response.error) {
+                    clearInputs();
                     Swal.fire({
                         icon: 'error',
-                        text: response.message
+                        text: response.message,
+                        allowOutsideClick: false
                     });
                 }
                 else {
                     showLoading();
-
+                    table_responsive.classList.remove("d-none");
                     result_search_table.innerHTML = "";
                     let thead = document.createElement("thead");
                     thead.classList.add("text-center");
@@ -295,13 +313,15 @@ formSearchClient.addEventListener("submit", function (e) {
                                                 hideLoading();
                                                 Swal.fire({
                                                     icon: 'error',
-                                                    text: response.message
+                                                    text: response.message,
+                                                    allowOutsideClick: false
                                                 });
                                             } else {
                                                 hideLoading();
                                                 Swal.fire({
                                                     icon: 'success',
-                                                    text: response.message
+                                                    text: response.message,
+                                                    allowOutsideClick: false
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {
                                                         clearInputs();
@@ -314,7 +334,8 @@ formSearchClient.addEventListener("submit", function (e) {
                                             hideLoading();
                                             Swal.fire({
                                                 icon: 'error',
-                                                text: 'Erro ao atualizar cliente'
+                                                text: 'Erro ao atualizar cliente',
+                                                allowOutsideClick: false
                                             });
                                         }
                                     });
@@ -350,7 +371,8 @@ formSearchClient.addEventListener("submit", function (e) {
                 hideLoading();
                 Swal.fire({
                     icon: 'error',
-                    text: 'Erro ao buscar cliente'
+                    text: 'Erro ao buscar cliente',
+                    allowOutsideClick: false
                 });
             }
         });
@@ -365,6 +387,7 @@ function deleteClient(id) {
         showCancelButton: true,
         confirmButtonText: 'Sim',
         cancelButtonText: 'Não',
+        allowOutsideClick: false
     }).then((result) => {
         if (result.isConfirmed) {
             showLoading();
@@ -383,12 +406,14 @@ function deleteClient(id) {
                     if (response.error) {
                         Swal.fire({
                             icon: 'error',
-                            text: response.message
+                            text: response.message,
+                            allowOutsideClick: false
                         });
                     } else {
                         Swal.fire({
                             icon: 'success',
-                            text: response.message
+                            text: response.message,
+                            allowOutsideClick: false
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 document.querySelector("#formSearchClient").submit();
@@ -400,7 +425,8 @@ function deleteClient(id) {
                     hideLoading();
                     Swal.fire({
                         icon: 'error',
-                        text: 'Erro ao excluir cliente'
+                        text: 'Erro ao excluir cliente',
+                        allowOutsideClick: false
                     });
                 }
             });
@@ -441,6 +467,7 @@ function validateInputs() {
             html: `Preencha os campos obrigatórios, <br>
              eles estão identificados com *. <br><br>
              Verifique se preencheu corretamente os campos.`,
+            allowOutsideClick: false
         });
         return false;
     } else {
@@ -453,7 +480,8 @@ function validateInputs() {
         if (customer_name.length < 3) {
             Swal.fire({
                 icon: 'error',
-                text: 'O nome do cliente deve ter no mínimo 3 caracteres'
+                text: 'O nome do cliente deve ter no mínimo 3 caracteres',
+                allowOutsideClick: false
             });
             return false;
         }
@@ -461,7 +489,8 @@ function validateInputs() {
         if (cpf.length < 14 || cpfValidation(cpf) == false) {
             Swal.fire({
                 icon: 'error',
-                text: 'CPF inválido'
+                text: 'CPF inválido',
+                allowOutsideClick: false
             });
             return false;
         }
@@ -469,7 +498,8 @@ function validateInputs() {
         if (age === "") {
             Swal.fire({
                 icon: 'error',
-                text: 'Idade inválida'
+                text: 'Idade inválida',
+                allowOutsideClick: false
             });
             return false;
         }
@@ -478,7 +508,8 @@ function validateInputs() {
             if (emailValidation(document.querySelector('#email').value == false)) {
                 Swal.fire({
                     icon: 'error',
-                    text: 'E-mail inválido'
+                    text: 'E-mail inválido',
+                    allowOutsideClick: false
                 });
                 return;
             }
@@ -494,7 +525,7 @@ function clearInputs() {
     if (url_page === "cadastro-cliente") {
         let inputs = [
             'customer-name', 'cpf', 'rg', 'birth-date', 'age', 'cep', 'city', 'state', 'address',
-            'neighborhood', 'street-complement', 'number', 'reference-point', 'telephone', 'cellphone', 'email'
+            'neighborhood', 'street-complement', 'number', 'reference-point', 'telephone', 'cellphone', 'email', "search-client"
         ]
         for (let i = 0; i < inputs.length; i++) {
             document.querySelector(`#${inputs[i]}`).value = "";

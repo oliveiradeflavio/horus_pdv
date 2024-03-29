@@ -195,7 +195,7 @@
                                     </label>
                                 </div>
                             </form>
-                            <div class="table-responsive">
+                            <div class="table-responsive d-none">
                                 <table class="table table-hover mt-4" id="result-search">
                                 </table>
                             </div>
