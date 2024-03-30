@@ -4,6 +4,12 @@ function cpfMask(cpf) {
     return cpf;
 }
 
+// mascara para o campo de CNPJ
+function cnpjMask(cnpj) {
+    $(cnpj).mask('00.000.000/0000-00', { reverse: true });
+    return cnpj;
+}
+
 //mascara de celular
 function cellPhoneMask(phone) {
     $(phone).mask('(00) 00000-0000');
