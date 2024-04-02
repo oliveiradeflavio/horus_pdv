@@ -1,9 +1,17 @@
 function display(modal) {
     let exibirModal = document.getElementById(modal);
-    const form = document.querySelector("#formUpdateClient");
-    if (form) {
+    const formUpdateClient = document.querySelector("#formUpdateClient");
+    const formUpdateProvider = document.querySelector("#formUpdateProvider");
+    if (formUpdateClient) {
         clearInputs();
         form.setAttribute("id", "formAddNewClient");
+        form.querySelector("#btnSend").innerHTML = "Salvar";
+        form.querySelector("#btnSend").setAttribute("class", "btn btn-primary");
+    }
+
+    if (formUpdateProvider) {
+        clearInputs();
+        form.setAttribute("id", "formAddNewProvider");
         form.querySelector("#btnSend").innerHTML = "Salvar";
         form.querySelector("#btnSend").setAttribute("class", "btn btn-primary");
     }
@@ -661,7 +669,301 @@ if (formAddNewProvider) {
     });
 }
 
+// pesquisa fornecedor
+const blockModalSearchProvider = document.querySelector("#modal-search-provider");
+if (blockModalSearchProvider) {
+    blockModalSearchProvider.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            if (document.querySelector("#search-provider").value === "") {
+                e.preventDefault();
+            }
+        }
+    })
+}
+const formSearchProvider = document.querySelector("#formSearchProvider");
+if (formSearchProvider) {
+    formSearchProvider.addEventListener("submit", function (e) {
+        e.preventDefault();
 
+        let valueSearch = document.querySelector("#search-provider").value;
+        let action = document.querySelector('input[name="action_search"]').value;
+        let csrf_token = document.querySelector('input[name="csrf_token_search"]').value;
+        let result_search_table = document.querySelector("#result-search");
+        let table_responsive = document.querySelector(".table-responsive");
+
+        if (valueSearch != "") {
+            showLoading();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                url: '../controllers/register_provider_controller.php',
+                data: {
+                    valueSearch: valueSearch,
+                    action: action,
+                    csrfToken: csrf_token
+                },
+                success: function (response) {
+                    hideLoading();
+                    if (response.error) {
+                        clearInputs();
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.message,
+                            allowOutsideClick: false
+                        });
+                    } else {
+                        showLoading();
+                        table_responsive.classList.remove("d-none");
+                        result_search_table.innerHTML = "";
+                        let thead = document.createElement("thead");
+                        thead.classList.add("text-center");
+                        let tr = document.createElement("tr");
+                        let th = document.createElement("th");
+
+                        result_search_table.appendChild(thead);
+
+                        th.setAttribute("scope", "col");
+                        th.innerHTML = "Razão Social";
+                        tr.appendChild(th);
+
+                        th = document.createElement("th");
+                        th.setAttribute("scope", "col");
+                        th.innerHTML = "Nome Fantasia";
+                        tr.appendChild(th);
+
+                        th = document.createElement("th");
+                        th.setAttribute("scope", "col");
+                        th.innerHTML = "CNPJ";
+                        tr.appendChild(th);
+
+                        th = document.createElement("th");
+                        th.setAttribute("scope", "col");
+                        th.innerHTML = "Ações";
+                        tr.appendChild(th);
+
+                        thead.appendChild(tr);
+
+                        let tbody = document.createElement("tbody");
+
+                        for (let i = 0; i < response.length; i++) {
+                            //objeto fornecedor
+                            let providerObj = {
+                                id: response[i].id,
+                                company_name: response[i].razao_social,
+                                fantasy_name: response[i].nome_fantasia,
+                                cnpj: response[i].cnpj,
+                                cep: response[i].cep,
+                                city: response[i].cidade,
+                                state: response[i].uf,
+                                address: response[i].endereco,
+                                neighborhood: response[i].bairro,
+                                street_complement: response[i].complemento,
+                                number: response[i].numero,
+                                reference_point: response[i].ponto_referencia,
+                                telephone: response[i].telefone,
+                                cellphone: response[i].celular,
+                                email: response[i].email
+                            }
+
+                            tr = document.createElement("tr");
+                            let td = document.createElement("td");
+
+                            td.innerHTML = providerObj.company_name;
+                            tr.appendChild(td);
+                            td = document.createElement('td')
+
+                            td.innerHTML = providerObj.fantasy_name;
+                            tr.appendChild(td);
+                            td = document.createElement('td')
+
+                            td.innerHTML = providerObj.cnpj;
+                            tr.appendChild(td);
+
+                            let icon_edit = document.createElement("i");
+                            icon_edit.setAttribute("class", "fas fa-edit");
+                            icon_edit.style.cursor = "pointer";
+                            icon_edit.addEventListener("click", function () {
+                                //fechar o modal de pesquisa
+                                $('#modal-search-provider').modal('hide');
+                                //abrir o modal de cadastro de fornecedor
+                                display('modal-cad-provider');
+
+                                const btnUpdate = document.querySelector('#btnSend');
+                                btnUpdate.innerHTML = "Alterar";
+                                btnUpdate.setAttribute("class", "btn btn-warning");
+
+                                const formUpdateProvider = document.querySelector('#formAddNewProvider')
+                                formUpdateProvider.setAttribute("id", "formUpdateProvider");
+
+                                //preencher os campos do modal de cadastro
+                                document.querySelector('#company-name').value = providerObj.company_name;
+                                document.querySelector('#fantasy-name').value = providerObj.fantasy_name;
+                                document.querySelector('#cnpj').value = providerObj.cnpj;
+                                document.querySelector('#cep').value = providerObj.cep;
+                                document.querySelector('#city').value = providerObj.city;
+                                document.querySelector('#state').value = providerObj.state;
+                                document.querySelector('#address').value = providerObj.address;
+                                document.querySelector('#neighborhood').value = providerObj.neighborhood;
+                                document.querySelector('#street-complement').value = providerObj.street_complement;
+                                document.querySelector('#number').value = providerObj.number;
+                                document.querySelector('#reference-point').value = providerObj.reference_point;
+                                document.querySelector('#telephone').value = providerObj.telephone;
+                                document.querySelector('#cellphone').value = providerObj.cellphone;
+                                document.querySelector('#email').value = providerObj.email;
+
+                                formUpdateProvider.addEventListener("submit", function (e) {
+                                    e.preventDefault();
+
+                                    if (validateInputsProvider()) {
+                                        showLoading();
+
+                                        let action = document.querySelector('input[name="action"]').value = 'update';
+                                        let csrf_token = document.querySelector('input[name="csrf_token"]').value;
+                                        let id = providerObj.id;
+
+                                        newProviderValues = {
+                                            id: id,
+                                            company_name: document.querySelector('#company-name').value,
+                                            fantasy_name: document.querySelector('#fantasy-name').value,
+                                            cnpj: document.querySelector('#cnpj').value,
+                                            cep: document.querySelector('#cep').value,
+                                            city: document.querySelector('#city').value,
+                                            state: document.querySelector('#state').value,
+                                            address: document.querySelector('#address').value,
+                                            neighborhood: document.querySelector('#neighborhood').value,
+                                            street_complement: document.querySelector('#street-complement').value,
+                                            number: document.querySelector('#number').value,
+                                            reference_point: document.querySelector('#reference-point').value,
+                                            telephone: document.querySelector('#telephone').value,
+                                            cellphone: document.querySelector('#cellphone').value,
+                                            email: document.querySelector('#email').value,
+                                            csrfToken: csrf_token,
+                                            action: action
+                                        };
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            dataType: 'json',
+                                            url: '../controllers/register_provider_controller.php',
+                                            async: true,
+                                            data: newProviderValues,
+
+                                            success: function (response) {
+                                                if (response.error) {
+                                                    hideLoading();
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        text: response.message,
+                                                        allowOutsideClick: false
+                                                    });
+                                                } else {
+                                                    hideLoading();
+                                                    Swal.fire({
+                                                        icon: 'success',
+                                                        text: response.message,
+                                                        allowOutsideClick: false
+                                                    }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            clearInputs();
+                                                            document.querySelector("#formSearchProvider").submit();
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        })
+                                    }
+                                });
+                            });
+
+                            td = document.createElement("td");
+                            td.appendChild(icon_edit);
+                            tr.appendChild(td);
+
+                            let icon_delete = document.createElement("i");
+                            icon_delete.setAttribute("class", "fas fa-trash-alt");
+                            icon_delete.style.cursor = "pointer";
+                            icon_delete.setAttribute("data-id", providerObj.id);
+                            icon_delete.addEventListener("click", function () {
+                                deleteProvider(id = this.getAttribute("data-id"));
+                            });
+
+                            td = document.createElement("td");
+                            td.appendChild(icon_delete);
+                            tr.appendChild(td);
+
+                            tbody.appendChild(tr);
+                        }
+                        result_search_table.appendChild(tbody);
+                        hideLoading();
+                    }
+                },
+                error: function (response) {
+                    hideLoading();
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Erro ao buscar fornecedor',
+                        allowOutsideClick: false
+                    });
+                }
+            })
+        }
+    });
+}
+
+function deleteProvider(id) {
+    Swal.fire({
+        icon: 'warning',
+        text: 'Deseja realmente excluir esse fornecedor?',
+        showCancelButton: true,
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Não',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            showLoading();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '../controllers/register_provider_controller.php',
+                async: true,
+                data: {
+                    id: id,
+                    action: 'delete',
+                    csrfToken: document.querySelector('input[name="csrf_token_search"]').value
+                },
+                success: function (response) {
+                    hideLoading();
+                    if (response.error) {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.message,
+                            allowOutsideClick: false
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            text: response.message,
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                document.querySelector("#formSearchProvider").submit();
+                            }
+                        });
+                    }
+                },
+                error: function (response) {
+                    hideLoading();
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Erro ao excluir fornecedor',
+                        allowOutsideClick: false
+                    });
+                }
+            });
+        }
+    });
+}
 
 
 
@@ -686,14 +988,14 @@ if (formAddNewProvider) {
 // define o evento de clique do span com o X
 function excluirImagem() {
     document.getElementById("preview-img").src = "../assets/img/avatar/produto-sem-imagem.webp";
-    document.getElementById("imagem-produto").value = "";
-    if (document.querySelector("#excluir-img-preview")) {
-        document.querySelector("#excluir-img-preview").style.display = "none";
+    document.getElementById("img-product").value = "";
+    if (document.querySelector("#delete-img-preview")) {
+        document.querySelector("#delete-img-preview").style.display = "none";
     }
 }
 
-if (document.querySelector("#excluir-img-preview")) {
-    document.querySelector("#excluir-img-preview").addEventListener("click", excluirImagem);
+if (document.querySelector("#delete-img-preview")) {
+    document.querySelector("#delete-img-preview").addEventListener("click", excluirImagem);
 };
 
 function readImage() {
@@ -705,20 +1007,20 @@ function readImage() {
         };
         file.readAsDataURL(this.files[0]);
 
-        document.querySelector("#excluir-img-preview").style.display = "flex";
-        document.querySelector("#excluir-img-preview").innerHTML = "Remover imagem";
+        document.querySelector("#delete-img-preview").style.display = "flex";
+        document.querySelector("#delete-img-preview").innerHTML = "Remover imagem";
 
     }
 }
 
-if (document.getElementById("imagem-produto")) {
-    document.getElementById("imagem-produto").addEventListener("change", readImage, false);
+if (document.getElementById("img-product")) {
+    document.getElementById("img-product").addEventListener("change", readImage, false);
 };
 
 //função que ativa o Label, irá abrir a janela para escolher a imagem
 function selecionaImagem() {
-    let input = document.getElementById("imagem-produto");
-    let nome_arquivo = document.getElementById("nome-arquivo");
+    let input = document.getElementById("img-product");
+    let nome_arquivo = document.getElementById("file-name");
 
     if (input != null && nome_arquivo != null) {
         input.addEventListener("change", function () {

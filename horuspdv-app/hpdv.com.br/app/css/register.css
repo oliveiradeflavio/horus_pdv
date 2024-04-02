@@ -68,7 +68,7 @@ label {
     margin-top: -13px;
 }
 
-#excluir-img-preview {
+#delete-img-preview {
     background-color: transparent;
     color: var(--text-primary);
     font-size: 12px;
@@ -76,7 +76,7 @@ label {
     margin-bottom: 10px;
 }
 
-#excluir-img-preview:hover {
+#delete-img-preview:hover {
     cursor: pointer;
     color: var(--text-hover);
     transition: all .1s ease-in;
@@ -108,6 +108,6 @@ label {
     display: none;
 }
 
-#nome-arquivo {
+#img-product {
     display: none
 }

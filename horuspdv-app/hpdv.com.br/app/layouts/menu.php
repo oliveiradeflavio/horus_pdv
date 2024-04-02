@@ -23,8 +23,8 @@
                         </li>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li onclick="window.location.href='cadastro-cliente';"><a class="dropdown-item" href="cadastro-cliente"><i class="fa-solid fa-user-plus menu-icon"></i> Cliente</a></li>
-                            <li onclick="window.location.href='cadastro-produto';"><a class="dropdown-item" href="cadastro-produto"><i class="fa-solid fa-tags menu-icon"></i> Produto</a></li>
                             <li onclick="window.location.href='cadastro-fornecedor';"><a class="dropdown-item" href="cadastro-fornecedor"><i class="fa-solid fa-truck-fast menu-icon"></i> Fornecedor</a></li>
+                            <li onclick="window.location.href='cadastro-produto';"><a class="dropdown-item" href="cadastro-produto"><i class="fa-solid fa-tags menu-icon"></i> Produto</a></li>
                         </ul>
                     </div>
                     <li class="menu-box" onclick="window.location.href='historico-de-vendas';">

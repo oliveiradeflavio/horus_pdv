@@ -176,8 +176,8 @@
                         </div>
                         <div class="row">
                             <form action="#" method="post" id="formSearchProvider">
-                                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>" tabindex="-1">
-                                <input type="hidden" name="action" value="search_provider" tabindex="-1">
+                                <input type="hidden" name="csrf_token_search" value="<?= $_SESSION['csrf_token'] ?>" tabindex="-1">
+                                <input type="hidden" name="action_search" value="search_provider" tabindex="-1">
                                 <div id="container-search">
                                     <label for="pesquisar-produto" class="label-search">
                                         <input type="search" name="search-provider" id="search-provider" class="form-control" placeholder="Pesquise pelo nome ou cnpj do fornecedor" required>
