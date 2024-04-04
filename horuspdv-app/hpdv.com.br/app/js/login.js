@@ -69,7 +69,7 @@ formLogin.addEventListener('submit', function (e) {
                 hideLoading();
                 Swal.fire({
                     icon: 'error',
-                    text: 'Erro ao tentar fazer login. Tente novamente.'
+                    text: 'Erro ao tentar fazer login. Veriquei a sua conexão com a internet e tente novamente.'
                 })
             }
         });

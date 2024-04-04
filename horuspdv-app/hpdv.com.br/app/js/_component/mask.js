@@ -38,6 +38,23 @@ function rgMask(rg) {
     return rg;
 }
 
+function unitPriceMask(price) {
+    $(price).mask('#.##0,00', { reverse: true });
+    return price;
+}
+
+function salePriceMask(price) {
+    $(price).mask('#.##0,00', { reverse: true });
+    return price;
+}
+
+function priceTotalMask(price) {
+    $(price).mask('#.##0,00', { reverse: true });
+    return price;
+}
+
+
+
 //Máscara para campo onde somente será permitido a digitação de texto (campos como nome, sobrenome, etc)
 $('.text_only').on('keypress', function (e) {
     const str = (e.keyCode ? e.keyCode : e.which);
@@ -47,3 +64,13 @@ $('.text_only').on('keypress', function (e) {
     e.preventDefault();
     return false;
 });
+
+// Máscara para campo onde somente será permitido a digitação de números inteiro
+$('.number_only').on('keypress', function (e) {
+    const str = (e.keyCode ? e.keyCode : e.which);
+    if (str > 47 && str < 58) {
+        return true;
+    }
+    e.preventDefault();
+    return false;
+})

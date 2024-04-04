@@ -2,18 +2,26 @@ function display(modal) {
     let exibirModal = document.getElementById(modal);
     const formUpdateClient = document.querySelector("#formUpdateClient");
     const formUpdateProvider = document.querySelector("#formUpdateProvider");
+    const formUpdateProduct = document.querySelector("#formUpdateProduct");
     if (formUpdateClient) {
         clearInputs();
-        form.setAttribute("id", "formAddNewClient");
-        form.querySelector("#btnSend").innerHTML = "Salvar";
-        form.querySelector("#btnSend").setAttribute("class", "btn btn-primary");
+        formUpdateClient.setAttribute("id", "formAddNewClient");
+        formUpdateClient.querySelector("#btnSend").innerHTML = "Salvar";
+        formUpdateClient.querySelector("#btnSend").setAttribute("class", "btn btn-primary");
     }
 
     if (formUpdateProvider) {
         clearInputs();
-        form.setAttribute("id", "formAddNewProvider");
-        form.querySelector("#btnSend").innerHTML = "Salvar";
-        form.querySelector("#btnSend").setAttribute("class", "btn btn-primary");
+        formUpdateProvider.setAttribute("id", "formAddNewProvider");
+        formUpdateProvider.querySelector("#btnSend").innerHTML = "Salvar";
+        formUpdateProvider.querySelector("#btnSend").setAttribute("class", "btn btn-primary");
+    }
+
+    if (formUpdateProduct) {
+        clearInputs();
+        formUpdateProduct.setAttribute("id", "formCadProduct");
+        formUpdateProduct.querySelector("#btnSend").innerHTML = "Salvar";
+        formUpdateProduct.querySelector("#btnSend").setAttribute("class", "btn btn-primary");
     }
 
     $(exibirModal).modal('show');
@@ -42,6 +50,19 @@ function clearInputs() {
         for (let i = 0; i < inputs.length; i++) {
             document.querySelector(`#${inputs[i]}`).value = "";
         }
+    }
+
+    if (url_page === "cadastro-produto") {
+        let inputs = [
+            'product-name', 'product-code', 'product-supplier', 'product-description', 'product-qnt',
+            'product-unit-price', 'product-sale-price', 'total-price-on-product', 'img-product', 'file-name', 'search-product'
+        ]
+        for (let i = 0; i < inputs.length; i++) {
+            document.querySelector(`#${inputs[i]}`).value = "";
+        }
+        document.getElementById("preview-img").src = "../assets/img/products/produto-sem-imagem.webp";
+        document.getElementById("delete-img-preview").style.display = "none";
+
     }
 }
 
@@ -207,8 +228,75 @@ function validateInputsProvider() {
             }
         }
         return true;
+    }
+}
 
+function validateInputsProduct() {
+    let requiredInputs = [
+        'product-name',
+        'product-code',
+        'product-supplier',
+        'product-description',
+        'product-qnt',
+        'product-unit-price',
+        'product-sale-price',
+        'total-price-on-product',
+    ]
 
+    let isValid = true;
+
+    for (let i = 0; i < requiredInputs.length; i++) {
+        let input = document.querySelector(`#${requiredInputs[i]}`);
+        if (input.value == "") {
+            isValid = false;
+            break;
+        }
+    }
+
+    if (!isValid) {
+
+        Swal.fire({
+            icon: 'error',
+            html: `Preencha os campos obrigatórios, <br>
+             eles estão identificados com *. <br><br>
+             Verifique se preencheu corretamente os campos.`,
+            allowOutsideClick: false
+        });
+        return false;
+    } else {
+        let product_name = document.querySelector('#product-name').value;
+        let product_qnt = document.querySelector('#product-qnt');
+        let product_supplier = document.querySelector('#product-supplier')
+        product_supplier = product_supplier.options[product_supplier.selectedIndex];
+
+        if (product_name.length < 3) {
+            Swal.fire({
+                icon: 'error',
+                text: 'O nome do produto deve ter no mínimo 3 caracteres',
+                allowOutsideClick: false
+            });
+            return false;
+        }
+
+        if (product_qnt.value < 1) {
+            Swal.fire({
+                icon: 'error',
+                text: 'A quantidade do produto deve ser maior que 0',
+                allowOutsideClick: false
+            });
+            return false;
+        }
+
+        if (product_supplier.value === "") {
+            Swal.fire({
+                icon: 'error',
+                text: 'Selecione um fornecedor',
+                allowOutsideClick: false
+            });
+            return false;
+        }
+
+        return true;
     }
 }
 
@@ -221,6 +309,10 @@ rgMask(rgMask(document.querySelector("#rg")))
 dateMask(dateMask(document.querySelector("#birth-date")))
 cnpjMask(cnpjMask(document.querySelector("#cnpj")))
 
+//mascaras dos inputs da página de cadastro de produto
+unitPriceMask(unitPriceMask(document.querySelector("#product-unit-price")))
+salePriceMask(salePriceMask(document.querySelector("#product-sale-price")))
+priceTotalMask(priceTotalMask(document.querySelector("#total-price-on-product")))
 
 // forms da pagina de cadastro de cliente
 const formAddNewClient = document.querySelector("#formAddNewClient")
@@ -965,29 +1057,12 @@ function deleteProvider(id) {
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // pagina de cadastro de produto
 
 //preview  imagem no input, quando o usuário carregar uma image, logo irá aparecer uma prewiew da mesma
 // define o evento de clique do span com o X
 function excluirImagem() {
-    document.getElementById("preview-img").src = "../assets/img/avatar/produto-sem-imagem.webp";
+    document.getElementById("preview-img").src = "../assets/img/products/produto-sem-imagem.webp";
     document.getElementById("img-product").value = "";
     if (document.querySelector("#delete-img-preview")) {
         document.querySelector("#delete-img-preview").style.display = "none";
@@ -1029,3 +1104,395 @@ function selecionaImagem() {
     }
 }
 selecionaImagem();
+
+//form de página de cadastro de produto
+function previewSumPriceTotal() {
+
+    let qnt = document.querySelector("#product-qnt").value;
+    let unit_price = document.querySelector("#product-unit-price").value;
+    let total_price = document.querySelector("#total-price-on-product");
+
+    unit_price = unit_price.replace(/[^0-9]/g, '');
+
+    if (unit_price != "" && qnt != "") {
+        total_price = parseFloat((unit_price) * qnt);
+        total_price = total_price + '';
+        total_price = parseInt(total_price.replace(/[^0-9]/g, ''));
+        total_price = total_price + "";
+        total_price = total_price.replace(/(\d{2})$/, ',$1');
+
+        if (total_price.length > 6) {
+            total_price = total_price.replace(/(\d{3}),(\d{2}$)/, '.$1,$2');
+        }
+
+        total_price.value = total_price;;
+        if (total_price === "NaN") {
+            total_price = "0,00";
+        }
+        document.querySelector("#total-price-on-product").value = total_price;
+    }
+
+}
+const formCadProduct = document.querySelector("#formCadProduct");
+const btnSend = document.querySelector("#btnSend");
+if (formCadProduct) {
+
+    btnSend.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (validateInputsProduct()) {
+            showLoading();
+            formCadProduct.action = "../controllers/register_product_controller.php";
+            formCadProduct.submit();
+        }
+
+    });
+}
+//bloquear a ação do enter
+const blockModalSearchProduct = document.querySelector("#modal-search-product");
+if (blockModalSearchProduct) {
+    blockModalSearchProduct.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            if (document.querySelector("#search-product").value === "") {
+                e.preventDefault();
+            }
+        }
+    })
+}
+
+const formSearchProduct = document.querySelector("#formSearchProduct");
+if (formSearchProduct) {
+    formSearchProduct.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let valueSearch = document.querySelector("#search-product").value;
+        let action = document.querySelector('input[name="action_search"]').value;
+        let csrf_token = document.querySelector('input[name="csrf_token_search"]').value;
+        let result_search_table = document.querySelector("#result-search");
+        let table_responsive = document.querySelector(".table-responsive");
+
+        if (valueSearch != "") {
+            showLoading();
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                //url: '../controllers/search_product_controller.php',
+                url: '../controllers/register_product_controller.php',
+                data: {
+                    valueSearch: valueSearch,
+                    action: action,
+                    csrfToken: csrf_token
+                },
+                success: function (response) {
+                    hideLoading();
+                    if (response.error) {
+                        clearInputs();
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.message,
+                            allowOutsideClick: false
+                        });
+                    } else {
+                        showLoading();
+                        table_responsive.classList.remove("d-none");
+                        result_search_table.innerHTML = "";
+                        let thead = document.createElement("thead");
+                        thead.classList.add("text-center");
+                        let tr = document.createElement("tr");
+                        let th = document.createElement("th");
+
+                        result_search_table.appendChild(thead);
+
+                        th.setAttribute("scope", "col");
+                        th.innerHTML = "Nome do Produto";
+                        tr.appendChild(th);
+
+                        th = document.createElement("th");
+                        th.setAttribute("scope", "col");
+                        th.innerHTML = "Código do Produto";
+                        tr.appendChild(th);
+
+                        th = document.createElement("th");
+                        th.setAttribute("scope", "col");
+                        th.innerHTML = "QNT";
+                        tr.appendChild(th);
+
+                        th = document.createElement("th");
+                        th.setAttribute("scope", "col");
+                        th.innerHTML = "Preço Unitário";
+                        tr.appendChild(th);
+
+                        th = document.createElement("th");
+                        th.setAttribute("scope", "col");
+                        th.innerHTML = "Preço Venda";
+                        tr.appendChild(th);
+
+                        th = document.createElement("th");
+                        th.setAttribute("scope", "col");
+                        th.innerHTML = "Ações";
+                        tr.appendChild(th);
+
+                        thead.appendChild(tr);
+
+                        let tbody = document.createElement("tbody");
+                        tbody.classList.add("text-center");
+
+                        for (let i = 0; i < response.length; i++) {
+                            //objeto produto
+
+                            let productObj = {
+                                id: response[i].id,
+                                product_name: response[i].nome_produto,
+                                product_code: response[i].codigo_produto,
+                                product_supplier: response[i].fornecedor,
+                                product_description: response[i].descricao_produto,
+                                product_qnt: response[i].quantidade_produto,
+                                product_unit_price: response[i].preco_unitario_produto,
+                                product_sale_price: response[i].preco_venda_produto,
+                                product_total_price: response[i].preco_total_em_produto,
+                                img_product: response[i].imagem_produto
+                            }
+
+                            tr = document.createElement("tr");
+                            let td = document.createElement("td");
+                            td.innerHTML = productObj.product_name;
+                            tr.appendChild(td);
+
+
+                            td = document.createElement('td')
+                            td.innerHTML = productObj.product_code;
+                            tr.appendChild(td);
+
+                            td = document.createElement('td')
+                            td.innerHTML = productObj.product_qnt;
+                            tr.appendChild(td);
+
+                            td = document.createElement('td')
+                            td.innerHTML = productObj.product_unit_price;
+                            tr.appendChild(td);
+
+                            td = document.createElement('td')
+                            td.innerHTML = productObj.product_sale_price;
+                            tr.appendChild(td);
+
+                            let icon_edit = document.createElement("i");
+                            icon_edit.setAttribute("class", "fas fa-edit");
+                            icon_edit.style.cursor = "pointer";
+                            icon_edit.addEventListener("click", function () {
+                                //fechar o modal de pesquisa
+                                $('#modal-search-product').modal('hide');
+                                //abrir o modal de cadastro de produto
+                                display('modal-cad-product');
+
+                                const btnUpdate = document.querySelector('#btnSend');
+                                btnUpdate.innerHTML = "Alterar";
+                                btnUpdate.setAttribute("class", "btn btn-warning");
+
+                                const formCadProduct = document.querySelector('#formCadProduct')
+                                if (formCadProduct) {
+                                    formCadProduct.setAttribute("id", "formUpdateProduct");
+                                    document.querySelector('input[name="action"]').value = 'update';
+                                    //criar um input hidden id
+                                    let inputHidden = document.createElement("input");
+                                    inputHidden.setAttribute("type", "hidden");
+                                    inputHidden.setAttribute("name", "id");
+                                    inputHidden.setAttribute("value", productObj.id);
+                                    formCadProduct.appendChild(inputHidden);
+                                }
+
+                                //preencher os campos do modal de cadastro (que agora irá fazer o update)
+                                document.querySelector('#product-name').value = productObj.product_name;
+                                document.querySelector('#product-code').value = productObj.product_code;
+                                document.querySelector('#product-supplier').value = productObj.product_supplier;
+                                document.querySelector('#product-description').value = productObj.product_description;
+                                document.querySelector('#product-qnt').value = productObj.product_qnt;
+                                document.querySelector('#product-unit-price').value = productObj.product_unit_price;
+                                document.querySelector('#product-sale-price').value = productObj.product_sale_price;
+                                document.querySelector("#total-price-on-product").value = productObj.product_total_price;
+                                document.querySelector("#preview-img").src = "../assets/img/products/" + productObj.img_product;
+
+                                const btnSend = document.querySelector("#btnSend");
+                                btnSend.addEventListener("click", function (e) {
+                                    e.preventDefault();
+                                    if (validateInputsProduct()) {
+                                        showLoading();
+                                        formCadProduct.action = "../controllers/register_product_controller.php";
+                                        formCadProduct.submit();
+                                    }
+
+                                });
+
+                            });
+                            td = document.createElement("td");
+                            td.appendChild(icon_edit);
+                            tr.appendChild(td);
+
+                            let icon_delete = document.createElement("i");
+                            icon_delete.setAttribute("class", "fas fa-trash-alt");
+                            icon_delete.style.cursor = "pointer";
+                            icon_delete.setAttribute("data-id", productObj.id);
+                            icon_delete.addEventListener("click", function () {
+                                deleteProduct(id = this.getAttribute("data-id"));
+                            });
+
+                            td = document.createElement("td");
+                            td.appendChild(icon_delete);
+                            tr.appendChild(td);
+
+                            tbody.appendChild(tr);
+
+                        }
+                        result_search_table.appendChild(tbody);
+                        hideLoading();
+                    }
+                },
+                error: function (response) {
+                    hideLoading();
+                    clearInputs();
+                    console.log(response);
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Erro ao buscar produto',
+                        allowOutsideClick: false
+                    });
+                }
+            });
+        }
+    });
+}
+
+function deleteProduct(id) {
+
+    Swal.fire({
+        icon: 'warning',
+        text: 'Deseja realmente excluir esse produto?',
+        showCancelButton: true,
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Não',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            showLoading();
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '../controllers/register_product_controller.php',
+                async: true,
+                data: {
+                    id: id,
+                    action: 'delete',
+                    csrfToken: document.querySelector('input[name="csrf_token_search"]').value
+                },
+                success: function (response) {
+                    hideLoading();
+                    if (response.error) {
+                        Swal.fire({
+                            icon: 'error',
+                            text: response.message,
+                            allowOutsideClick: false
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            text: response.message,
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                document.querySelector("#formSearchProduct").submit();
+                            }
+                        });
+                    }
+                },
+                error: function (response) {
+                    hideLoading();
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Erro ao excluir produto',
+                        allowOutsideClick: false
+                    });
+                }
+            });
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+// formCadProduct.addEventListener("submit", function (e) {
+//     e.preventDefault();
+
+//     if (validateInputsProduct()) {
+//         showLoading();
+
+//         let csrf_token = document.querySelector('input[name="csrf_token"]').value;
+//         let action = document.querySelector('input[name="action"]').value;
+
+//         // transformar o valor da imagem em Stringify
+//         let img_product_base64 = document.querySelector("#img-product").files[0];
+//         let reader = new FileReader();
+//         reader.readAsDataURL(img_product_base64);
+//         newProductValues = {};
+//         reader.onload = function () {
+//             img_product_base64 = reader.result;
+//             console.log(img_product_base64);
+
+//             newProductValues = {
+//                 product_name: document.querySelector('#product-name').value,
+//                 product_code: document.querySelector('#product-code').value,
+//                 product_supplier: document.querySelector('#product-supplier').value,
+//                 product_description: document.querySelector('#product-description').value,
+//                 product_qnt: document.querySelector('#product-qnt').value,
+//                 product_unit_price: document.querySelector('#product-unit-price').value,
+//                 product_sale_price: document.querySelector('#product-sale-price').value,
+//                 total_price_on_product: document.querySelector('#total-price-on-product').value,
+//                 img_product: img_product_base64,
+//                 csrfToken: csrf_token,
+//                 action: action
+//             };
+//         }
+
+//         $.ajax({
+//             type: 'POST',
+//             dataType: "json",
+//             url: "../controllers/register_product_controller.php",
+//             async: true,
+//             data: newProductValues,
+
+//             success: function (response) {
+//                 if (response.error) {
+//                     hideLoading();
+//                     Swal.fire({
+//                         icon: 'error',
+//                         text: response.message
+//                     });
+//                 } else {
+//                     hideLoading();
+//                     console.log(response);
+//                     Swal.fire({
+//                         icon: 'success',
+//                         text: response.message
+//                     }).then((result) => {
+//                         if (result.isConfirmed) {
+//                             clearInputs();
+//                         }
+//                     });
+//                 }
+//             },
+//             error: function (response) {
+//                 hideLoading();
+//                 console.log(response);
+//                 Swal.fire({
+//                     icon: 'error',
+//                     text: 'Erro ao cadastrar produto'
+//                 });
+//             }
+//         });
+//     }
+// });
+

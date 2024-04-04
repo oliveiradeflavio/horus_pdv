@@ -1,4 +1,12 @@
-<?php require "../layouts/session.php" ?>
+<?php require "../layouts/session.php";
+require_once '../controllers/db_connection.php';
+$connect = new DbConnection();
+$connect = $connect->getConnection();
+$query_supplier = "SELECT * FROM tb_fornecedores ORDER BY nome_fantasia";
+$stmt = $connect->prepare($query_supplier);
+$stmt->execute();
+$result_supplier = $stmt->fetchAll(PDO::FETCH_OBJ);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -49,13 +57,13 @@
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="row">
-                            <form action="#" method="post" id="formCadProduct">
+                            <form method="post" id="formCadProduct" enctype="multipart/form-data">
                                 <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>" tabindex="-1">
                                 <input type="hidden" name="action" value="add_product" tabindex="-1">
                                 <div class="row">
                                     <div class="container-img col-md-12">
                                         <span id="delete-img-preview" title="Remover imagem"></span>
-                                        <img id="preview-img" src="../assets/img/avatar/produto-sem-imagem.webp" width="200" height="200" alt="Avatar" class="img-fluid">
+                                        <img id="preview-img" src="../assets/img/products/produto-sem-imagem.webp" width="200" height="200" alt="Avatar" class="img-fluid">
                                         <label for="img-product">Cadastre a imagem do seu produto</label>
                                         <input id="img-product" type="file" name="img-product" class="input-file">
                                         <span id="file-name"></span>
@@ -63,52 +71,55 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-floating col-md-6">
-                                        <input type="text" class="form-control" id="product-name" placeholder="Nome do Produto" required>
+                                        <input type="text" class="form-control" id="product-name" name="product-name" placeholder="Nome do Produto" required>
                                         <label for="product-name" class="required-field-label">Nome do Produto</label>
                                     </div>
 
                                     <div class="form-floating col-md-6">
-                                        <input type="text" class="form-control" id="product-code" placeholder="Código do Produto" required>
+                                        <input type="text" class="form-control" id="product-code" name="product-code" placeholder="Código do Produto" required>
                                         <label for="product-code" class="required-field-label">Código do Produto</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <select id="product-supplier" name="product-supplier" class="form-select form-control" title="Fornecedor do Produto" required>
-                                            <option selected="">Fornecedor do Produto</option>
+                                            <option selected value="">Selecionar Fornecedor</option>
+                                            <?php
+                                            foreach ($result_supplier as $supplier) {
+                                                echo "<option value='$supplier->id'>$supplier->nome_fantasia</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-floating col-md-12">
-                                        <input type="text" class="form-control" id="product-description" placeholder="Descrição do Produto" required>
+                                        <input type="text" class="form-control" id="product-description" name="product-description" placeholder="Descrição do Produto" required>
                                         <label for="product-description" class="required-field-label">Descrição do Produto</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-floating col-md-6">
-                                        <input type="text" class="form-control" id="product-qnt" placeholder="Quantidade do Produto" required>
+                                        <input type="number" class="form-control number_only" id="product-qnt" name="product-qnt" onfocus="previewSumPriceTotal()" onchange="previewSumPriceTotal()" placeholder="Quantidade do Produto" required>
                                         <label for="product-qnt" class="required-field-label">Quantidade do Produto</label>
                                     </div>
                                     <div class="form-floating col-md-6">
-                                        <input type="text" class="form-control" id="product-unit-price" placeholder="Preço Unitário do Produto" required>
+                                        <input type="text" class="form-control" id="product-unit-price" name="product-unit-price" onblur="previewSumPriceTotal()" onchange="previewSumPriceTotal()" placeholder="Preço Unitário do Produto" required>
                                         <label for="product-unit-price" class="required-field-label">Preço Unitário do Produto</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-floating col-md-6">
-                                        <input type="text" class="form-control" id="product-sale-price" placeholder="Preço de Venda do Produto" required>
+                                        <input type="text" class="form-control" id="product-sale-price" name="product-sale-price" placeholder="Preço de Venda do Produto" required>
                                         <label for="product-sale-price" class="required-field-label">Preço de Venda do Produto</label>
                                     </div>
                                     <div class="form-floating col-md-6">
-                                        <input type="text" class="form-control" id="total-price-on-product" placeholder="Preço Total em Produto" required>
-                                        <label for="total-price-on-product" class="required-field-label">Preço Total em Produto</label>
+                                        <input type="text" class="form-control" id="total-price-on-product" name="total-price-on-product" placeholder="Preço Total em Produto" required readonly>
+                                        <label for="total-price-on-product">Preço Total em Produto</label>
                                     </div>
                                 </div>
-
-
                                 <div class="mt-3">
-                                    <button type="submit" class="btn btn-primary" id="btnSend">Salvar</button>
+                                    <button class="btn btn-primary" id="btnSend">Salvar</button>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                                 </div>
                             </form>
@@ -148,6 +159,36 @@
             </div>
         </div>
     </main>
+
+
+    <?php
+    // retorno de mensagem vinda do backend
+    //exemplo: horuspdv-app/hpdv.com.br/app/web/cadastro-produto?success=sucesso&message=Produto+cadastrado+com+sucesso
+    if (!empty($_GET) && !isset($_GET['error']) || !isset($_GET['success'])) {
+        if (isset($_GET['error'])) {
+            $message = $_GET['message'];
+            echo "<script>
+            Swal.fire({
+                            icon: 'error',
+                            text: '$message',
+                            allowOutsideClick: false
+              });
+
+        </script>";
+        }
+
+        if (isset($_GET['success'])) {
+            $message = $_GET['message'];
+            echo "<script>        
+              Swal.fire({
+                            icon: 'success',
+                            text: '$message',
+                            allowOutsideClick: false
+              });
+        </script>";
+        }
+    }
+    ?>
 </body>
 
 <script src="../js/_component/validation.js"></script>
