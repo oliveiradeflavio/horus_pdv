@@ -53,8 +53,6 @@ function priceTotalMask(price) {
     return price;
 }
 
-
-
 //Máscara para campo onde somente será permitido a digitação de texto (campos como nome, sobrenome, etc)
 $('.text_only').on('keypress', function (e) {
     const str = (e.keyCode ? e.keyCode : e.which);

@@ -106,7 +106,7 @@ if ($service_user->recoverPassword()) {
 
         $mensagem .= "
                                 <p>Para alterar sua senha, clique no link abaixo:</p>
-                                <p><a  href=\"http://localhost/horuspdv-app/hpdv.com.br/app/web/alterar-senha?u=$user_crypt&t=$token_crypt\">Alterar senha</a></p>
+                                <p><a  href=\"http://seudominio.com.br/hpdv.com.br/app/web/alterar-senha?u=$user_crypt&t=$token_crypt\">Alterar senha</a></p>
                                 <p>O link é válido por 10 minutos</p>
                                 <p>Atenciosamente,</p>
                                 <p>Equipe Hórus PDV</p>     
@@ -120,16 +120,16 @@ if ($service_user->recoverPassword()) {
         $mail->isSMTP(); // Não modifique
         $mail->Host       = 'smtp.titan.email';  // SEU HOST (HOSPEDAGEM) - nesse caso deixei para o gmail
         $mail->SMTPAuth   = true;                        // Manter em true
-        $mail->Username   = 'contato@flaviodeoliveira.com.br';
-        $mail->Password   = 'contato@flavio#2023.,';
+        $mail->Username   = 'seuemail@aqui.com.br';
+        $mail->Password   = 'suasenha';
         $mail->SMTPSecure = 'ssl';    //TLS OU SSL-VERIFICAR COM A HOSPEDAGEM
         $mail->Port       = 465;     //TCP PORT, VERIFICAR COM A HOSPEDAGEM
         $mail->CharSet = 'UTF-8';    //DEFINE O CHARSET UTILIZADO
 
         //Recipients
-        $mail->setFrom('contato@flaviodeoliveira.com.br', 'Hórus PDV');  //DEVE SER O MESMO EMAIL DO USERNAME
+        $mail->setFrom('seuemail@aqui.com.br', 'Hórus PDV');  //DEVE SER O MESMO EMAIL DO USERNAME
         $mail->addAddress($email_recover);     // QUAL EMAIL RECEBERÁ A MENSAGEM!
-        //$mail->addBCC('contato@flaviodeoliveira.com.br'); //ADICIONANDO BCC
+        //$mail->addBCC(''); //ADICIONANDO BCC
 
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML

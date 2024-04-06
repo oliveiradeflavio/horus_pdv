@@ -66,6 +66,7 @@ function clearInputs() {
     }
 }
 
+
 //validação dos campos de inputs da página de cadastro de cliente
 function validateInputs() {
 
