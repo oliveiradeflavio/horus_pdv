@@ -162,6 +162,24 @@
 
 }
 
+/* tela 1280x800 macbook pro 2011 */
+@media (min-width: 1280px) and (max-height: 800px) {
+
+    .card-report {
+        height: inherit !important;
+        margin-top: 0.625rem;
+    }
+
+    .center {
+        margin-bottom: 50px;
+    }
+
+    .card {
+        height: 100vh;
+        margin-top: 80px;
+    }
+}
+
 @media (min-width: 800px) and (max-height: 1370px) {
 
     .menu-container {

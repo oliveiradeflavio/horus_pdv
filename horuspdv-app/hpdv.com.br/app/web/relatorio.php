@@ -43,7 +43,7 @@ $result_payment_option = $stmt_payment_option->fetchAll(PDO::FETCH_OBJ);
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 center">
-                        <div class="card">
+                        <div class="card card-report">
                             <ul id='tab_report' class="nav nav-tabs nav-pills nav-fill">
                                 <li class="nav-item">
                                     <a class="active" data-bs-toggle="pill" data-bs-target="#tab_client_report"> <i class="fa-solid fa-user-plus"></i>
