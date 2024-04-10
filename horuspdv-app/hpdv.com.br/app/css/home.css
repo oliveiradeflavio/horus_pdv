@@ -66,64 +66,6 @@
     margin-bottom: 0.625rem
 }
 
-personalizar o offcanvas
-/* .offcanvas {
-    background: var(--bg-card);
-    box-shadow: var(--shadow);
-    color: var(--text-primary);
-    border-radius: 0.9375rem;
-}
-
-.offcanvas-header button {
-    color: var(--text-primary) !important;
-
-} */
-
-/* .offcanvas-header {
-    background: var(--bg-card);
-    border-bottom: 1px solid var(--text-primary);
-    border-radius: 15px 15px 0 0;
-} */
-
-/* .offcanvas-body {
-    background: var(--bg-card);
-    border-radius: 0 0 15px 15px;
-} */
-
-/* .menu-container {
-    display: flex;
-    justify-content: center;
-}
-
-.menu-container i {
-    text-align: center;
-}
-
-.menu-box {
-    margin-right: 1.875rem;
-    border: 0.0625rem solid transparent;
-    border-radius: 0.9375rem;
-    padding: 0.9375rem;
-    background: var(--bg-main);
-    text-align: center;
-}
-
-.menu-box:hover {
-    transition: all .3s ease-in;
-    box-shadow: var(--shadow);
-    background: var(--bg-hover);
-
-}
-
-.dropdown-menu {
-    background: var(--bg-main);
-    border-radius: 0.9375rem;
-    box-shadow: var(--shadow);
-    color: var(--text-primary);
-    font-size: 1.25rem;
-    line-height: 3.375rem;
-} */
-
 .btn-close {
     font-size: 1.875rem;
     margin-right: 2rem !important;

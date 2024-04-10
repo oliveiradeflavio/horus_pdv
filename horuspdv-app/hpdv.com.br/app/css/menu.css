@@ -129,6 +129,7 @@
 
     .card-box {
         width: 80vw !important;
+        margin: auto;
     }
 
     .card-box a {
