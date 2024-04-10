@@ -38,7 +38,6 @@ $result_product = $stmt->fetchAll(PDO::FETCH_OBJ);
                         <div class="product-list">
                             <select name="" id="select_client" class="form-select" required>
                                 <option value="">Selecione um cliente</option>
-                                <option value="Consumidor(sem cadastro realizado)">Consumidor (sem cadastro realizado)</option>
                                 <?php foreach ($result_client as $client) : ?>
                                     <option value="<?php echo $client->id ?>"><?php echo $client->nome ?></option>
                                 <?php endforeach; ?>
@@ -106,7 +105,6 @@ $result_product = $stmt->fetchAll(PDO::FETCH_OBJ);
                                     <table class="table table-hover" id="table_product">
                                         <thead>
                                             <tr>
-                                                <!-- <th scope="col">Nº PEDIDO</th> -->
                                                 <th scope="col">CÓDIGO</th>
                                                 <th scope="col">PRODUTO</th>
                                                 <th scope="col">VLR. UN.</th>
@@ -188,7 +186,7 @@ $result_product = $stmt->fetchAll(PDO::FETCH_OBJ);
                     <div class="row">
                         <form action="#" method="post" id="formCloseOrder">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
-                            <input type="hidden" name="action" value="sale">
+                            <input type="hidden" name="action" value="register_sale">
                             <div>
                                 <div class="row">
                                     <div class="form-floating mb-3">

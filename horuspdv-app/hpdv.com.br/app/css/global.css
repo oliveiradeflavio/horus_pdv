@@ -128,7 +128,8 @@ button:disabled {
     transform: scale(1.2);
 }
 
-.fa-trash-alt:hover {
+.fa-trash-alt:hover,
+.fa-file-pdf:hover {
     color: #ff4d4d;
     transition: 0.3s;
     transform: scale(1.2);

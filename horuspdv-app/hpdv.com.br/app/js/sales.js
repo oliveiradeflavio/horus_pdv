@@ -37,7 +37,7 @@ $(document).ready(function () {
 });
 
 
-//seleção do produot, pegando o valor unitário do produto e setando no campo unit_price. configura também a imagem do produto
+//seleção do produto, pegando o valor unitário do produto e setando no campo unit_price. configura também a imagem do produto
 $('#select_product').on('change', function () {
     $('#product_quantity').val('1');
     let unit_price = $('#select_product option:selected').data('price');
@@ -51,24 +51,6 @@ $('#select_product').on('change', function () {
     }
 });
 
-
-// $("#product_quantity").on('change', function () {
-//     if ($('#product_quantity').val() > 0) {
-//         let unit_price = $('#unit_price').val();
-//         let qnt = $('#product_quantity').val();
-//         unit_price = unit_price.replace(/[^0-9]/g, "");
-
-//         let total_price = unit_price * qnt;
-//         total_price = parseInt(total_price.toString().replace(/[\D]+/g, ""));
-//         total_price = total_price.toString().replace(/([0-9]{2})$/g, "$1");
-//         if (total_price.length > 6) {
-//             total_price = total_price.toString().replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-//         }
-//         $('#total_price').val(total_price);
-//     } else {
-//         $('#product_quantity').val('1');
-//     }
-// });
 
 $("#product_quantity").on('input', function () {
     let quantity = parseInt($(this).val());
@@ -100,7 +82,6 @@ function checkProductRepeated() {
 
 //adicionando produto na tabela
 function addProductTable() {
-    // let selectedClient = $('#select_client').val();
     let selectedProductID = $('#select_product').val();
     let selectedProduct = document.querySelector('#select_product option:checked').text;
     let selectedUnitPrice = $('#unit_price').val();
@@ -252,7 +233,7 @@ function closeSale() {
         let total_sale = document.getElementById('total_sale');
         total_sale.value = subtotal[0].value;
 
-        //se pamento for em cartão liberar o campo de codigo de transação
+        //se pagamento for em cartão liberar o campo de codigo de transação
         $('#payment_type').on('change', function () {
             if ($('#payment_type').val() != 'dinheiro') {
                 //habilita o campo de transação
@@ -271,16 +252,17 @@ function closeSale() {
         //calcular o valor total da venda com desconto (desconto em %)
         inputDiscount.addEventListener('input', function () {
             let discount = inputDiscount.value;
-            let total = subtotal[0].value.replace(/[^0-9]/g, "");
+            let total = parseFloat(subtotal[0].value.replace(/[^0-9]/g, "")) / 100; // Converte o total para número, assumindo que ele já está em centavos.
             let totalDiscount = total - (total * discount / 100);
-            totalDiscount = totalDiscount.toString().replace(/([0-9]{2})$/g, ",$1");
 
-            if (totalDiscount.length > 6) {
-                totalDiscount = totalDiscount.toString().replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-            }
-            //adicionado R$ ao valor total
-            totalDiscount = "R$ " + totalDiscount;
-            inputDisconuntedPrice.value = totalDiscount;
+            // Formatação usando Intl.NumberFormat
+            let formatter = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            });
+
+            let formattedTotalDiscount = formatter.format(totalDiscount);
+            inputDisconuntedPrice.value = formattedTotalDiscount;
         });
 
         //verificar se o desconto digitado é maior do que 100%
@@ -346,11 +328,74 @@ if (formCloseOrder) {
         let amount_paid = document.getElementById('amount_paid').value;
         let cd_transaction_pix = document.getElementById('cd_transaction_pix').value;
 
-        console.log(client, products, subtotal, payment_type, discount, disconunted_price, amount_paid, cd_transaction_pix);
+        let csrfToken = document.querySelector('input[name="csrf_token"]').value;
+        let action = document.querySelector('input[name="action"]').value;
+
+        //console.log(client, products, subtotal, payment_type, discount, disconunted_price, amount_paid, cd_transaction_pix);
+
+        //enviar os dados para o backend
+        showLoading();
+        values_sale = {
+            client: client,
+            products: products,
+            subtotal: subtotal,
+            payment_type: payment_type,
+            discount: discount,
+            disconunted_price: disconunted_price,
+            amount_paid: amount_paid,
+            cd_transaction_pix: cd_transaction_pix,
+            csrf_token: csrfToken,
+            action: action
+        }
+        $.ajax({
+            type: 'POST',
+            url: '../controllers/sales_controller.php',
+            dataType: 'json',
+            data: values_sale,
+            async: true,
+
+            success: function (response) {
+                hideLoading();
+                if (response.error) {
+                    hideLoading();
+                    Swal.fire({
+                        icon: 'error',
+                        text: response.message
+                    });
+                } else {
+                    hideLoading();
+                    const numberSale = response.id;
+                    Swal.fire({
+                        icon: 'question',
+                        title: 'Venda realizada com sucesso! Imprimir cupom?',
+                        showCancelButton: true,
+                        confirmButtonText: 'Sim',
+                        cancelButtonText: 'Não'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            //imprimir o cupom
+                            window.open('../report/sales_report.php?action=print_sale&id=' + numberSale, '_blank');
+                            window.location.href = 'vendas.php';
+                        } else {
+                            window.location.href = 'vendas.php';
+                        }
+                    });
+                }
+            },
+            error: function () {
+                hideLoading();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Erro ao realizar a venda!',
+                });
+            }
+        });
 
     });
 }
 
+//no modal de pagamento voltar para a tela de venda zerando todos os campos
 function backToSale() {
     //limpar os campos do modal de pagamento
     let inputPaymentType = document.getElementById('payment_type');

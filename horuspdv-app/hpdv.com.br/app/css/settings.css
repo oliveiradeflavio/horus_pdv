@@ -4,6 +4,10 @@
     color: var(--text-primary);
 }
 
+.card-license {
+    height: 40% !important;
+}
+
 form input {
     margin-top: 10px;
     margin-bottom: 10px;

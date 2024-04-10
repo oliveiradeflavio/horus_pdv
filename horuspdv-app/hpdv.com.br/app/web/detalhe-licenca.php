@@ -16,7 +16,6 @@ $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 <head>
     <?php require '../layouts/head.php' ?>
     <link rel="stylesheet" href="../css/settings.css">
-
 </head>
 
 <body>
@@ -26,14 +25,12 @@ $result = $stmt->fetchAll(PDO::FETCH_OBJ);
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 center">
-                        <div class="card">
-                            <div class="mt-2">
-                                <h5>Usuário de acesso: <?= $user_logged->usuario_acesso ?></h5>
-                            </div>
+                        <div class="card card-license">
                             <div class="table-responsive">
                                 <table class="table table-hover mt-2">
                                     <thead>
                                         <tr>
+                                            <th scope="col">Usuário da Licença</th>
                                             <th scope="col">Data de Ativação do Sistema</th>
                                             <th scope="col">Data da Última Renovação</th>
                                             <th scope="col">Data da Próxima Renovação</th>
@@ -44,6 +41,7 @@ $result = $stmt->fetchAll(PDO::FETCH_OBJ);
                                         foreach ($result as $license) : ?>
 
                                             <tr>
+                                                <td><?= $user_logged->usuario_acesso ?></td>
                                                 <td><?= date('d/m/Y H:m:s', strtotime($license->data_ativacao_sistema)) ?></td>
                                                 <td><?= date('d/m/Y H:m:s', strtotime($license->data_ultima_renovacao)) ?></td>
                                                 <td><?= date('d/m/Y H:m:s', strtotime($license->data_proxima_renovacao)) ?></td>
@@ -54,14 +52,11 @@ $result = $stmt->fetchAll(PDO::FETCH_OBJ);
                             </div>
                             <div class="mt-2">
                                 <h5>Para renovar sua licença. Clique no botão gerar chave pix.</h5>
-
                                 <div>
-                                    <button type="button" class="btn btn-lg btn-primary" onclick="">Gerar chave pix</button>
+                                    <button type="button" class="btn btn-lg btn-primary" onclick="keyPix()">Gerar chave pix</button>
                                 </div>
-                                <div id="modalChavePix"></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -69,5 +64,6 @@ $result = $stmt->fetchAll(PDO::FETCH_OBJ);
     </main>
 
 </body>
+<script src="../js/license.js"></script>
 
 </html>

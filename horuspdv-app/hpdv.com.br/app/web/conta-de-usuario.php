@@ -2,10 +2,6 @@
 require_once '../controllers/db_connection.php';
 $connect = new DbConnection();
 $conenct = $connect->getConnection();
-// $query = 'SELECT id, usuario_acesso FROM tb_usuarios ORDER BY usuario_acesso';
-// $stmt = $conenct->prepare($query);
-// $stmt->execute();
-// $result_users_and_id = $stmt->fetchAll(PDO::FETCH_OBJ);
 $query_list_users = 'SELECT * FROM tb_usuarios ORDER BY nome';
 $stmt_list_users = $conenct->prepare($query_list_users);
 $stmt_list_users->execute();
@@ -160,6 +156,7 @@ $result_list_users = $stmt_list_users->fetchAll(PDO::FETCH_OBJ);
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Nome</th>
+                                                            <th scope="col">CPF</th>
                                                             <th scope="col">Usuário de Acesso</th>
                                                             <th scope="col">Tipo de Permissão</th>
                                                         </tr>
@@ -169,6 +166,7 @@ $result_list_users = $stmt_list_users->fetchAll(PDO::FETCH_OBJ);
                                                         foreach ($result_list_users as $user) { ?>
                                                             <tr>
                                                                 <td><?php echo $user->nome ?></td>
+                                                                <td><?php echo $user->cpf ?></td>
                                                                 <td><?php echo $user->usuario_acesso ?></td>
                                                                 <td><?php echo $user->tipo_permissao ?></td>
                                                             </tr>
@@ -178,10 +176,8 @@ $result_list_users = $stmt_list_users->fetchAll(PDO::FETCH_OBJ);
                                                     </tbody>
                                                 </table>
                                             </div>
-
                                         </form>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -190,8 +186,6 @@ $result_list_users = $stmt_list_users->fetchAll(PDO::FETCH_OBJ);
             </div>
         </section>
     </main>
-
-
     <script src="../js/_component/validation.js"></script>
     <script src="../js/_component/mask.js"></script>
     <script src="../js/user-account.js"></script>
