@@ -53,6 +53,12 @@ O sistema possui um sistema de licenciamento para garantir o uso adequado do sof
 * [PHPspreadsheet](https://phpspreadsheet.readthedocs.io/en/latest/)
 
 
+#### Demonstração
+
+Para acessar a demonstração do sistema em funcionamento entre no site
+* [Acessar demonstração](https://www.flaviodeoliveira.com.br/hpdv.com.br/app/web/)
+
+
 #### Screenshots
 
 ![](https://github.com/oliveiradeflavio/horus_pdv/blob/main/img/telacadastroproduto.png)
