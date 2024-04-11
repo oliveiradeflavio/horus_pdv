@@ -27,7 +27,16 @@ if (!isset($csrf_token) || $csrf_token !== $_SESSION['csrf_token']) {
         $search = $values_decode->search;
         //remover os espaços em branco no final e no inicio da string
         $search = trim($search);
-        $query = "SELECT v.*, c.nome, c.cpf, p.nome_produto, p.id FROM tb_vendas v JOIN tb_clientes c ON v.cliente = c.id JOIN tb_produtos p ON v.cliente = c.id WHERE v.numero_da_venda LIKE :search OR c.cpf LIKE :search GROUP BY v.id ORDER BY v.id ASC";
+        $query = "SELECT v.*, 
+                    c.nome, c.cpf,
+                    p.nome_produto, 
+                    p.id 
+                    FROM tb_vendas v 
+                    JOIN tb_clientes c ON v.cliente = c.id 
+                    JOIN tb_produtos p ON v.produto = p.id 
+                    WHERE v.numero_da_venda LIKE :search OR c.cpf LIKE :search
+                    GROUP BY v.id 
+                    ORDER BY v.id ASC;";
         $stmt = $connect->prepare($query);
         $stmt->bindValue(':search', '%' . $search . '%');
         $stmt->execute();

@@ -511,7 +511,10 @@ if (formSearchClient) {
                                 document.querySelector('#customer-name').value = clientObj.name;
                                 document.querySelector('#cpf').value = clientObj.cpf;
                                 document.querySelector('#rg').value = clientObj.rg;
-                                document.querySelector('#birth-date').value = clientObj.birth_date;
+                                //formatando a data para o padrão brasileiro dd/mm/yyyy
+                                let date = clientObj.birth_date.split("-");
+                                let birth_date = date[2] + "/" + date[1] + "/" + date[0];
+                                document.querySelector('#birth-date').value = birth_date;
                                 document.querySelector('#age').value = clientObj.age;
                                 document.querySelector('#cep').value = clientObj.cep;
                                 document.querySelector('#city').value = clientObj.city;
