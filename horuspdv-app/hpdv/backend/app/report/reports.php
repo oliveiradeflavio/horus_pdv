@@ -302,7 +302,12 @@ if ($csrf_token != $_SESSION['csrf_token']) {
 
             $reportingPeriod = $_GET['reporting_period'];
 
-            $query = "SELECT p.*, f.nome_fantasia FROM tb_produtos p JOIN tb_fornecedores f WHERE YEAR(p.data_criacao) = :reportingPeriod GROUP BY p.id ORDER BY p.nome_produto ASC;";
+            $query = "SELECT p.*, f.nome_fantasia 
+            FROM tb_produtos p 
+            JOIN tb_fornecedores f ON p.fornecedor = f.id 
+            WHERE YEAR(p.data_criacao) = :reportingPeriod 
+            GROUP BY p.id 
+            ORDER BY p.nome_produto ASC;";
             $stmt = $connect->prepare($query);
             $stmt->bindValue(':reportingPeriod', $reportingPeriod);
             $stmt->execute();
